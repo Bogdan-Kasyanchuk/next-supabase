@@ -1,0 +1,19 @@
+.c-badge {
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+
+    padding: 5px 10px;
+    border-radius: 26px;
+
+    font-size: var(--text-sm);
+    font-weight: 700;
+    line-height: 1;
+
+    &__dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: currentcolor;
+    }
+}

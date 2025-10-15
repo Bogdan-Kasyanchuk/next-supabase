@@ -1,0 +1,57 @@
+*,
+*::before,
+*::after {
+    transition-timing-function: linear;
+    transition-duration: 150ms;
+    transition-property: none;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    scroll-behavior: smooth;
+
+    display: flex;
+    flex-direction: column;
+
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.25;
+    color: var(--color-secondary);
+    text-size-adjust: 100%;
+    text-rendering: optimizelegibility !important;
+
+    background-color: var(--color-primary);
+
+    -webkit-tap-highlight-color:#000;
+}
+
+main {
+    display: flex;
+    flex-grow: 1;
+    max-height: calc(100vh - 60px - 60px);
+}
+
+button {
+    cursor: pointer;
+}
+
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}

@@ -1,0 +1,12 @@
+.c-footer {
+    padding-block: 20px;
+    color: var(--color-primary);
+    background-color: var(--color-secondary);
+
+    &__container {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        justify-content: center;
+    }
+}

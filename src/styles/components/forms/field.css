@@ -1,0 +1,112 @@
+:root {
+    --f-field-height: 50px;
+    --f-field-border-width: 1px;
+    --f-field-border-color: var(--color-gray-300);
+    --f-field-border-radius: 4px;
+    --f-field-px: 20px;
+    --f-field-bg: var(--color-primary);
+    --f-field-line-height: 24px;
+    --f-field-font-size: var(--text-sm);
+    --f-field-font-weight: 700;
+    --f-field-color: var(--color-secondary);
+    --f-field-placeholder-color: var(--color-gray-300);
+    --f-field-icon-size: 20px;
+}
+
+.f-field {
+    display: block;
+
+    width: 100%;
+    min-height: var(--f-field-height);
+    padding-block: calc(var(--f-field-height) / 2 - var(--f-field-border-width) -
+    var(--f-field-line-height) / 2);
+    padding-inline-start: var(--f-field-px);
+    padding-inline-end: var(--textarea-pe, var(--f-field-px));
+    border: var(--f-field-border-width) solid var(--f-field-border-color);
+    border-radius: var(--f-field-border-radius);
+
+    font-size: var(--f-field-font-size);
+    font-weight: var(--f-field-font-weight);
+    line-height: var(--f-field-line-height);
+    color: var(--f-field-color);
+
+    background-color: var(--f-field-bg);
+    outline: 2px solid transparent;
+
+    transition-property: border-color, outline;
+
+    &::placeholder {
+        color: var(--f-field-placeholder-color);
+    }
+
+    &--input {
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            appearance: none;
+        }
+
+        &:-webkit-autofill {
+            background-color: transparent;
+
+            -webkit-text-fill-color: var(--color-black);
+        }
+
+        &[type='number'] {
+            appearance: textfield;
+        }
+    }
+
+    &--textarea {
+        resize: none;
+        height: calc(var(--f-field-height) * 3.5);
+    }
+
+    &:has(~ .f-field__section) {
+        padding-inline-end: var(--f-field-height);
+    }
+
+    .f-field__section ~ & {
+        padding-inline-start: var(--f-field-height);
+    }
+
+    &:not(&--error):focus {
+        --f-field-border-color: var(--color-secondary);
+
+        outline-color: var(--f-field-border-color);
+    }
+
+    &__wrapper {
+        position: relative;
+    }
+
+    &__section {
+        position: absolute;
+        top: 0;
+        inset-inline-start: var(--f-field-border-width);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        min-width: var(--f-field-height);
+        height: var(--f-field-height);
+
+        text-decoration: none;
+
+        opacity: 0.5;
+
+        i {
+            width: var(--f-field-icon-size);
+            height: var(--f-field-icon-size);
+        }
+
+        .f-field + & {
+            inset-inline-start: initial;
+            inset-inline-end: var(--f-field-border-width);
+        }
+    }
+
+    &--error {
+        --f-field-border-color: var(--color-danger);
+    }
+}

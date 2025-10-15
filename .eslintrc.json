@@ -1,0 +1,79 @@
+{
+  "extends": [
+    "@tarik02/eslint-config-type-1",
+    "@tarik02/eslint-config-type-1-react",
+    "@tarik02/eslint-config-type-1-import"
+  ],
+  "settings": {
+    "react": {
+      "version": "19"
+    }
+  },
+  "env": {
+    "node": true
+  },
+  "rules": {
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          [
+            "builtin",
+            "external"
+          ],
+          "internal",
+          [
+            "parent",
+            "sibling",
+            "index"
+          ],
+          "unknown",
+          "object",
+          "type"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "@/**",
+            "group": "internal"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": [],
+        "alphabetize": {
+          "order": "asc"
+        },
+        "newlines-between": "always"
+      }
+    ],
+    "import/extensions": [
+      "error",
+      "never",
+      {
+        "pattern": {
+          "json": "always",
+          "svg": "always",
+          "jpg": "always",
+          "png": "always",
+          "css": "always"
+        }
+      }
+    ],
+    "import/no-useless-path-segments": [
+      "error",
+      {
+        "noUselessIndex": true
+      }
+    ],
+    "react/jsx-curly-newline": [
+      "error",
+      {
+        "multiline": "require"
+      }
+    ],
+    "react/display-name": [
+      "error",
+      {
+        "checkContextObjects": true
+      }
+    ]
+  }
+}

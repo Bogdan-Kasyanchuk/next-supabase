@@ -1,0 +1,96 @@
+@utility u-link {
+    text-decoration: none;
+    transition-property: opacity;
+
+    @media (any-hover: hover) {
+        &:hover {
+            opacity: 0.75;
+        }
+    }
+}
+
+@utility u-link-overlay {
+    transition-property: opacity;
+
+    &::before {
+        content: '';
+
+        position: absolute;
+        z-index: 1;
+        inset: 0;
+
+        display: block;
+    }
+
+    @media (any-hover: hover) {
+        &:hover {
+            opacity: 0.75;
+        }
+    }
+}
+
+@utility u-hide-scroll-bar {
+    scrollbar-color: transparent transparent;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    &::-webkit-scrollbar-track {
+        display: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        display: none;
+    }
+}
+
+@utility u-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    display: flex;
+
+    width: calc(100% + 40px);
+    margin-inline: -20px;
+
+    &::after,
+    &::before {
+        content: '';
+        display: block;
+        flex-shrink: 0;
+        width: 20px;
+    }
+}
+
+@utility u-spiner {
+    isolation: isolate;
+    position: relative;
+    z-index: 1;
+
+    &::after {
+        content: '';
+
+        position: absolute;
+        z-index: -1;
+        inset: 0;
+        transform-origin: center center;
+
+        width: var(--spinner-size, 40px);
+        height: var(--spinner-size, 40px);
+        margin: auto;
+        border-top: var(--spinner-width, 6px) solid var(--spinner-color, #222);
+        border-right: var(--spinner-width, 6px) solid transparent;
+        border-bottom: var(--spinner-width, 6px) solid var(--spinner-color, #222);
+        border-left: var(--spinner-width, 6px) solid var(--spinner-color, #222);
+        border-radius: 50%;
+
+        animation: spinner 0.8s linear infinite;
+    }
+}
+
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}

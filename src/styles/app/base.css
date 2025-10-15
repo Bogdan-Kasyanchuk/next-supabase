@@ -1,0 +1,32 @@
+/* Tailwind */
+@import 'tailwindcss';
+@import '../theme/base.css';
+@import '../theme/utilities.css';
+
+/* Base */
+@import '../base/reset.css' layer(base);
+
+/* Components */
+@import '../components/logo.css' layer(base);
+@import '../components/loader.css' layer(base);
+@import '../components/button.css' layer(base);
+@import '../components/error-404.css' layer(base);
+@import '../components/data-not-found' layer(base);
+@import '../components/badge.css' layer(base);
+@import '../components/companies-table.css' layer(base);
+@import '../components/promotions-list.css' layer(base);
+@import '../components/forms/base.css' layer(base);
+@import '../components/forms/field.css'layer(base);
+@import '../components/form-block.css' layer(base);
+
+/* Cards */
+@import '../components/cards/promotion-card.css' layer(base);
+
+/* Parts */
+@import '../parts/header/header.css' layer(base);
+@import '../parts/sidebar/sidebar.css' layer(base);
+@import '../parts/toolbar/toolbar.css' layer(base);
+@import '../parts/footer/footer.css' layer(base);
+
+/* Layouts */
+@import '../layouts/container.css' layer(base);

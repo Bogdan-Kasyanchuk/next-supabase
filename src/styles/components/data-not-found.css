@@ -1,0 +1,24 @@
+.c-data-not-found {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+
+    font-size: var(--text-9xl);
+    line-height: 1.25;
+    color: var(--color-secondary);
+    text-align: center;
+
+    &__title {
+        font-size: var(--text-5xl);
+        font-weight: 700;
+    }
+
+    &__text {
+        font-size: var(--text-md);
+        opacity: 0.75;
+    }
+}

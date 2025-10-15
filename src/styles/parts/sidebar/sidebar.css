@@ -1,0 +1,57 @@
+.c-sidebar {
+    flex-shrink: 0;
+    width: 190px;
+    background-color: var(--color-secondary);
+
+    &__navigation {
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+
+        height: 100%;
+        padding-block: 40px;
+        padding-inline: 15px;
+
+        &-list {
+            display: flex;
+            flex-direction: column;
+            row-gap: 20px;
+        }
+
+        &-item {
+            font-weight: 700;
+            color: var(--color-primary);
+            transition-property: opacity, color;
+
+            a {
+                display: flex;
+                gap: 8px;
+                align-items: center;
+                height: 36px;
+
+                &::before {
+                    content: '';
+
+                    height: 100%;
+                    margin-inline-end: 4px;
+                    border: 2px solid transparent;
+                    border-radius: 4px;
+                }
+            }
+
+            &--active {
+                color: var(--color-accent-thirth);
+
+                a::before {
+                    border-color: currentcolor;
+                }
+            }
+
+            @media (any-hover: hover) {
+                &:hover {
+                    opacity: 0.75;
+                }
+            }
+        }
+    }
+}

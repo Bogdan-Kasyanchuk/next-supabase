@@ -1,0 +1,104 @@
+.c-button {
+    --icon-size: 18px;
+
+    cursor: pointer;
+
+    display: inline-flex;
+    column-gap: 10px;
+    align-items: center;
+    justify-content: center;
+
+    width: fit-content;
+    min-height: var(--button-min-height);
+    padding: var(--button-py) var(--button-px);
+    border-color: var(--button-border-color);
+    border-style: solid;
+    border-width: var(--button-border-width, 1px);
+    border-radius: var(--button-border-radius, 4px);
+
+    font-size: var(--button-fs);
+    font-weight: 700;
+    line-height: 24px;
+    color: var(--button-color);
+
+    background-color: var(--button-bg);
+
+    transition-property: color, border-color, background-color, opacity;
+
+    &:disabled,
+    &--disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
+    &--small {
+        --button-fs: var(--text-sm);
+        --button-py: 2px;
+        --button-px: 14px;
+        --button-min-height: 30px;
+        --spinner-size: 20px;
+        --spinner-width: 4px;
+    }
+
+    &--medium {
+        --button-fs: var(--text-md);
+        --button-py: 7px;
+        --button-px: 20px;
+        --button-min-height: 40px;
+        --spinner-size: 26px;
+        --spinner-width: 5px;
+    }
+
+    &--large {
+        --button-fs: var(--text-md);
+        --button-py: 12px;
+        --button-px: 26px;
+        --button-min-height: 50px;
+        --spinner-size: 34px;
+        --spinner-width: 7px;
+    }
+
+    &--dark {
+        --button-border-color: var(--color-secondary);
+        --button-color: var(--color-primary);
+        --button-bg: var(--color-secondary);
+        --spinner-color: var(--color-primary);
+
+        @media (any-hover: hover) {
+            &:hover {
+                opacity: 0.75;
+            }
+        }
+    }
+
+    &--lite {
+        --button-border-color: var(--color-primary);
+        --button-color: var(--color-secondary);
+        --button-bg: var(--color-primary);
+        --spinner-color: var(--color-secondary);
+
+        @media (any-hover: hover) {
+            &:hover {
+                opacity: 0.75;
+            }
+        }
+    }
+
+    &--outline-dark {
+        --button-border-color: var(--color-secondary);
+        --button-color: var(--color-secondary);
+        --button-bg: var(--color-primary);
+        --spinner-color: var(--color-secondary);
+
+        &:hover {
+            --button-color: var(--color-primary);
+            --button-bg: var(--color-secondary);
+        }
+    }
+
+    &--loading {
+        --button-color: transparent;
+
+        @apply u-spiner;
+    }
+}

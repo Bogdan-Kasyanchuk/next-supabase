@@ -1,0 +1,86 @@
+.c-companies-table {
+    table-layout: auto;
+    border-spacing: 0 8px;
+    border-collapse: separate;
+    width: 100%;
+
+    &__head tr {
+        white-space: nowrap;
+    }
+
+    &__head th {
+        padding: 14px;
+        font-size: var(--text-md);
+        font-weight: 700;
+        line-height: 22px;
+
+        &:nth-child(3n+1) {
+            color: var(--color-primary);
+            background-color: var(--color-accent-first);
+        }
+
+        &:nth-child(3n+2) {
+            color: var(--color-secondary);
+            background-color: var(--color-accent-second);
+        }
+
+        &:nth-child(3n+3) {
+            color: var(--color-secondary);
+            background-color: var(--color-accent-thirth);
+        }
+    }
+
+    &__body tr {
+        font-size: var(--text-sm);
+        color: var(--color-secondary);
+        text-align: center;
+        white-space: nowrap;
+
+        background-color: var(--color-primary);
+    }
+
+    &__body td {
+        height: 40px;
+        line-height: 1.05;
+
+        &:not(:last-child) {
+            padding-block: 4px;
+            padding-inline: 10px;
+        }
+
+        &:first-child {
+            padding-inline-start: 14px;
+        }
+    }
+
+    &__name {
+        position: relative;
+
+        border-inline-start-style: solid;
+        border-inline-start-width: 4px;
+
+        font-weight: 700;
+        text-align: start;
+
+        &-inner {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+
+            img {
+                flex-shrink: 0;
+
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+
+                object-fit: cover;
+            }
+        }
+    }
+
+    &__remove {
+        width: 40px;
+        min-width: 40px;
+    }
+}

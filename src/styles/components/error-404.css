@@ -1,0 +1,32 @@
+.c-error-404 {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+
+    margin-inline: auto;
+
+    color: var(--color-secondary);
+
+    &__title {
+        font-size: 128px;
+        font-weight: 700;
+        line-height: 1;
+    }
+
+    &__subtitle {
+        margin-top: 20px;
+
+        font-size: var(--text-5xl);
+        font-weight: 700;
+        line-height: 1.25;
+        text-align: center;
+    }
+
+    &__text {
+        font-size: var(--text-md);
+        line-height: 1.25;
+        text-align: center;
+    }
+}

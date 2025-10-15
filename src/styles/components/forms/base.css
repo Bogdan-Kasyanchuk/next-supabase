@@ -1,0 +1,33 @@
+.f-group {
+    position: relative;
+
+    &--disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+}
+
+.f-label {
+    display: inline-block;
+
+    margin-bottom: 10px;
+
+    font-size: var(--text-md);
+    font-weight: 700;
+    line-height: 1;
+
+    &__asterix {
+        color: var(--color-danger);
+    }
+}
+
+.f-error {
+    position: absolute;
+    inset-inline-start: 0;
+
+    margin-top: 1px;
+
+    font-size: var(--text-xs);
+    line-height: 1.2;
+    color: var(--color-danger);
+}
