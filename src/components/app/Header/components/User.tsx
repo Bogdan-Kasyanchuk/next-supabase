@@ -1,24 +1,31 @@
+/* eslint-disable no-console */
 import Image from 'next/image';
 
-import { createClient } from '@/lib/supabase/server';
+import createSupabaseServerClient from '@/lib/supabase/server';
+import { ProfileMapper } from '@/types';
 
 type Props = {
     id: string
 };
 
 export default async function User(props: Props) {
-    const supabase = await createClient();
+    const supabase = await createSupabaseServerClient();
 
-    const { data } = await supabase.from('profiles').select().eq('id', props.id);
+    const { data, error } = await supabase
+        .from('profiles')
+        .select('avatar_url, first_name, last_name')
+        .eq('id', props.id)
+        .single();
 
-    if (!data) {
-        return;
+    if (error || !data) {
+        console.error('Failed to load user', error);
+        return null;
     }
 
-    const user = data[ 0 ];
+    const user = data as ProfileMapper;
 
     const fullName = user.last_name
-        ? user.first_name + ' ' + user.last_name
+        ? `${ user.first_name } ${ user.last_name }`
         : user.first_name;
 
     return (
@@ -33,17 +40,7 @@ export default async function User(props: Props) {
 
             <p className="c-header__user-title">
                 { fullName }
-            </p>
-
-            { /* <div className="c-header__user-info">
-                <p className="c-header__user-title">
-                    { fullName }
-                </p>
-
-                <p className="c-header__user-email">
-                    { user.email }
-                </p>
-            </div> */ }
+            </p> 
         </div>
     );
 }

@@ -47,19 +47,11 @@
             object-fit: cover;
         }
 
-        /* &-info {
-            @apply text-primary leading-[1.25];
-        } */
-
         &-title {
             font-size: var(--text-sm);
-            line-height: 1.25;
+            line-height: 1.2;
             color: var(--color-primary);
         }
-
-        /* &-email {
-            @apply text-xs opacity-75;
-        } */
     }
 
     &__auth-buttons {

@@ -1,19 +1,26 @@
 import { ReactNode } from 'react';
 
+import cn from '@/utils/cn';
+
 import Search from './components/Search';
 
 type Props = {
     actions?: ReactNode,
-    searchPlaceholder?: string,
-    hasSearch: boolean
+    className?: string,
+    searchProps?: {
+        placeholder?: string,
+        disabled?: boolean
+
+    },
+    hasSearch?: boolean
 };
 
 export default function Toolbar(props: Props) {
     return (
-        <div className="c-toolbar">
+        <div className={ cn('c-toolbar', props.className) }>
             {
                 props.hasSearch &&
-                <Search placeholder={ props.searchPlaceholder || 'Search' } />
+                <Search { ...props.searchProps } />
             }
 
             {

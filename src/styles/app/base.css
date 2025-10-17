@@ -13,14 +13,16 @@
 @import '../components/error-404.css' layer(base);
 @import '../components/data-not-found' layer(base);
 @import '../components/badge.css' layer(base);
-@import '../components/companies-table.css' layer(base);
-@import '../components/promotions-list.css' layer(base);
 @import '../components/forms/base.css' layer(base);
 @import '../components/forms/field.css'layer(base);
 @import '../components/form-block.css' layer(base);
+@import '../components/companies-table.css' layer(base);
+@import '../components/promotions-list.css' layer(base);
 
 /* Cards */
+@import '../components/cards/company-details-card.css' layer(base);
 @import '../components/cards/promotion-card.css' layer(base);
+@import '../components/cards/promotion-details-card.css' layer(base);
 
 /* Parts */
 @import '../parts/header/header.css' layer(base);

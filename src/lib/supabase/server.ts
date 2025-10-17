@@ -9,7 +9,7 @@ import { Database } from '@/shemas';
  * global variable. Always create a new client within each function when using
  * it.
  */
-export async function createClient() {
+export default async function createSupabaseServerClient() {
     const cookieStore = await cookies();
 
     return createServerClient<Database>(

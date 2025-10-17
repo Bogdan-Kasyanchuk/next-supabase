@@ -2,8 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { PropsWithChildren } from 'react';
 
-import cn from '@/lib/utils';
 import { pagesHomeUrl } from '@/routes';
+import cn from '@/utils/cn';
 
 type Props = {
     className?: string

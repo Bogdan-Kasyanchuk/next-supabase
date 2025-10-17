@@ -9,6 +9,7 @@
     justify-content: center;
 
     width: fit-content;
+    min-width: fit-content;
     min-height: var(--button-min-height);
     padding: var(--button-py) var(--button-px);
     border-color: var(--button-border-color);
@@ -54,8 +55,8 @@
         --button-py: 12px;
         --button-px: 26px;
         --button-min-height: 50px;
-        --spinner-size: 34px;
-        --spinner-width: 7px;
+        --spinner-size: 32px;
+        --spinner-width: 6px;
     }
 
     &--dark {
@@ -76,6 +77,19 @@
         --button-color: var(--color-secondary);
         --button-bg: var(--color-primary);
         --spinner-color: var(--color-secondary);
+
+        @media (any-hover: hover) {
+            &:hover {
+                opacity: 0.75;
+            }
+        }
+    }
+
+    &--danger {
+        --button-border-color: var(--color-danger);
+        --button-color: var(--color-primary);
+        --button-bg: var(--color-danger);
+        --spinner-color: var(--color-primary);
 
         @media (any-hover: hover) {
             &:hover {

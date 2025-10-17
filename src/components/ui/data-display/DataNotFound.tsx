@@ -1,8 +1,14 @@
 import { Database } from 'lucide-react';
 
-export default function DataNotFound() {
+import cn from '@/utils/cn';
+
+type Props = {
+    className?: string 
+};
+
+export default function DataNotFound(props: Props) {
     return (
-        <div className="c-data-not-found">
+        <div className={ cn('c-data-not-found', props.className) }>
             <Database size={ 80 } />
 
             <p className="c-data-not-found__title">

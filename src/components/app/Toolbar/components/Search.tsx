@@ -4,8 +4,11 @@ import { useDebouncedCallback } from '@mantine/hooks';
 import { Search as SearchIcon } from 'lucide-react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
+import cn from '@/utils/cn';
+
 type Props = {
-    placeholder: string
+    placeholder?: string,
+    disabled?: boolean
 };
 
 export default function Search(props: Props) {
@@ -21,16 +24,24 @@ export default function Search(props: Props) {
         } else {
             params.delete('query');
         }
+        
         replace(`${ pathname }?${ params.toString() }`);
-    }, 300);
+    }, 250);
 
     return (
-        <div className="c-toolbar__search">
+        <div
+            className={
+                cn('c-toolbar__search', {
+                    'c-toolbar__search--disabled': props.disabled
+                })
+            }
+        >
             <input
                 type="text"
                 defaultValue={ searchParams.get('query')?.toString() }
-                placeholder={ props.placeholder }
+                placeholder={ props.placeholder || 'Search' }
                 className="c-toolbar__search-input"
+                disabled={ props.disabled }
                 onChange={
                     e => {
                         handleSearch(e.target.value);

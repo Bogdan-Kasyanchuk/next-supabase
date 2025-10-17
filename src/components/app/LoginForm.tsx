@@ -4,23 +4,24 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 
-import createClient from '@/lib/supabase/client';
+import createSupabaseBrowserClient from '@/lib/supabase/client';
 import { pagesAuthForgotPasswordUrl, pagesAuthSignUpUrl, pagesDashboardUrl } from '@/routes';
 
 import Button from '../ui/buttons/Button';
 import Input from '../ui/inputs/Input';
 
 export default function LoginForm() {
+    const router = useRouter();
+
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
     const [ error, setError ] = useState<string | undefined>(undefined);
     const [ isLoading, setIsLoading ] = useState(false);
-    const router = useRouter();
 
     const handleLogin = async (e: FormEvent) => {
         e.preventDefault();
 
-        const supabase = createClient();
+        const supabase = createSupabaseBrowserClient();
 
         setIsLoading(true);
         setError(undefined);
@@ -61,7 +62,7 @@ export default function LoginForm() {
                     error={ error }
                     onChange={ 
                         e => {
-                            setEmail(e.target.value);
+                            setEmail(e.target.value.trim());
                         } 
                     }
                 />
@@ -75,7 +76,7 @@ export default function LoginForm() {
                     error={ error }
                     onChange={ 
                         e => {
-                            setPassword(e.target.value);
+                            setPassword(e.target.value.trim());
                         } 
                     }
                 />
@@ -90,7 +91,7 @@ export default function LoginForm() {
                     type="submit"
                     className="w-full mt-2.5"
                     size="large"
-                    disabled={ isLoading }
+                    disabled={ isLoading || !email || !password }
                     loading={ isLoading }
                 >
                     Login

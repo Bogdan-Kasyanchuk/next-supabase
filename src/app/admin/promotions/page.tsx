@@ -21,15 +21,19 @@ export default async function Page(props: Props) {
     const promotions = await getPromotions(query);
 
     return (
-        <div className="w-full flex flex-col min-w-px">
+        <div className="p-promotions flex flex-col w-full">
             <Toolbar
-                searchPlaceholder="Search promotion"
+                searchProps={
+                    {
+                        placeholder: 'Search promotion'
+                    }
+                }
                 hasSearch
             />
 
-            <div className="p-5 grow overflow-auto">
+            <div className="p-5 grow overflow-y-auto">
                 {
-                    promotions?.length
+                    promotions.length
                         ? <PromotionsList promotions={ promotions } />
                         : <DataNotFound />
                 }

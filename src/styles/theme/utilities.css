@@ -68,6 +68,9 @@
     position: relative;
     z-index: 1;
 
+    width: var(--spinner-size, 40px);
+    height: var(--spinner-size, 40px);
+
     &::after {
         content: '';
 

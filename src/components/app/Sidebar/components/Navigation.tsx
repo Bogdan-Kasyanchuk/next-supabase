@@ -4,8 +4,8 @@ import { BadgePercent, BriefcaseBusiness, LayoutGrid } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import cn from '@/lib/utils';
 import { pagesCompaniesUrl, pagesDashboardUrl, pagesPromotionsUrl } from '@/routes';
+import cn from '@/utils/cn';
 
 const links = [
     {

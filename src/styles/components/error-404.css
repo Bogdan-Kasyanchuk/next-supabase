@@ -20,13 +20,13 @@
 
         font-size: var(--text-5xl);
         font-weight: 700;
-        line-height: 1.25;
+        line-height: 1.2;
         text-align: center;
     }
 
     &__text {
         font-size: var(--text-md);
-        line-height: 1.25;
+        line-height: 1.2;
         text-align: center;
     }
 }

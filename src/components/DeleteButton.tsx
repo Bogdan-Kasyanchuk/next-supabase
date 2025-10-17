@@ -7,7 +7,7 @@ import Button from '@/components/ui/buttons/Button';
 
 type Props<T> = {
     actionProps: T,
-    className: string,
+    className?: string,
     action: (args: T) => Promise<void>
 };
 
@@ -17,6 +17,7 @@ export default function DeleteButton<T>(props: Props<T>) {
     return (
         <Button
             type="button"
+            variant="danger"
             className={ props.className }
             disabled={ isPending }
             loading={ isPending }

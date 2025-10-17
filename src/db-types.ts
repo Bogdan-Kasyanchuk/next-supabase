@@ -37,7 +37,7 @@ export type Database = {
                     id?: string,
                     income?: number | null,
                     joined_at?: string,
-                    logo_url?: string,
+                    logo_url: string,
                     name: string,
                     sold?: number | null,
                     status: string,
@@ -95,29 +95,32 @@ export type Database = {
                 Row: {
                     company_id: string,
                     cover_url: string,
-                    created_at: string,
                     description: string,
                     discount: number,
+                    end_at: string,
                     id: string,
-                    name: string
+                    name: string,
+                    start_at: string
                 },
                 Insert: {
                     company_id: string,
                     cover_url: string,
-                    created_at?: string,
                     description: string,
                     discount: number,
+                    end_at: string,
                     id?: string,
-                    name: string
+                    name: string,
+                    start_at?: string
                 },
                 Update: {
                     company_id?: string,
                     cover_url?: string,
-                    created_at?: string,
                     description?: string,
                     discount?: number,
+                    end_at?: string,
                     id?: string,
-                    name?: string
+                    name?: string,
+                    start_at?: string
                 },
                 Relationships: [
                     {

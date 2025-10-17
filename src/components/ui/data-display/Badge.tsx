@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 
 import { BadgeStatusType } from '@/enums';
-import cn from '@/lib/utils';
+import cn from '@/utils/cn';
 
 const typeClasses = {
     [ BadgeStatusType.SUCCESS ]: 'text-success bg-success/10',

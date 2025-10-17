@@ -8,7 +8,9 @@ export default function Error() {
             <body>
                 <main>
                     <Container className="flex items-center justify-center">
-                        <p className="text-5xl">Something globally went wrong</p>
+                        <p className="text-5xl font-bold leading-[1.2]">
+                            Something globally went wrong
+                        </p>
                     </Container>
                 </main>
             </body>

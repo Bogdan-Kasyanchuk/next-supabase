@@ -58,6 +58,8 @@
 
         border-inline-start-style: solid;
         border-inline-start-width: 4px;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
 
         font-weight: 700;
         text-align: start;
@@ -79,8 +81,12 @@
         }
     }
 
-    &__remove {
+    &__delete {
         width: 40px;
         min-width: 40px;
+
+        .c-button {
+            padding-inline: 7px;
+        }
     }
 }

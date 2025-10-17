@@ -4,10 +4,10 @@ import Link from 'next/link';
 import { deleteCompany } from '@/app/admin/companies/actions';
 import Badge from '@/components/ui/data-display/Badge';
 import { BadgeStatusType, CompanyStatusType } from '@/enums';
-import cn from '@/lib/utils';
 import { pagesCompanyUrl } from '@/routes';
 import { CompanyMapper } from '@/types';
-import formatDate from '@/utils/formateDate';
+import cn from '@/utils/cn';
+import formateDate from '@/utils/formateDate';
 
 import DeleteButton from '../../DeleteButton';
 
@@ -87,12 +87,11 @@ export default function Row(props: Props) {
             <td>{ props.company.country.label }</td>
 
             <td>
-                { formatDate(props.company.joined_at, 'DD.MM.YYYY') }
+                { formateDate(props.company.joined_at, 'DD.MM.YYYY') }
             </td>
             
-            <td className="c-companies-table__remove">
+            <td className="c-companies-table__delete">
                 <DeleteButton
-                    className="py-0 px-[7px]"
                     actionProps={ props.company.id }
                     action={ deleteCompany }
                 />

@@ -27,7 +27,8 @@ export type CompanyShema = {
 export type PromotionShema = {
     company_id: string,
     cover_url: string,
-    created_at: string,
+    start_at: string,
+    end_at: string,
     description: string,
     discount: number,
     id: string,
@@ -50,11 +51,11 @@ export type Database = MergeDeep<
               companies: {
                   Row: CompanyShema
               },
-              //   profiles: {
-              //       Row: CompanyStatusType
-              //   },
-              promotions: {
+              profiles: {
                   Row: ProfileShema
+              },
+              promotions: {
+                  Row: PromotionShema
               }
           }
       }

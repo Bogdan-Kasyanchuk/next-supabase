@@ -3,42 +3,52 @@ import Link from 'next/link';
 
 import { deletePromotion } from '@/app/admin/promotions/actions';
 import DeleteButton from '@/components/DeleteButton';
-import cn from '@/lib/utils';
+import { pagesPromotionUrl } from '@/routes';
 import { PromotionMapper } from '@/types';
+import cn from '@/utils/cn';
+import formateDate from '@/utils/formateDate';
 
 type Props = {
     promotion: PromotionMapper,
     className?: string
 };
 
-export default function Promotion(props: Props) {
+export default function PromotionCard(props: Props) {
     return (
-        <div className={ cn('relative isolate', props.className) }>
-            <Link href={ `/promotions/${ props.promotion.id }` }>
-                <div className="rounded overflow-hidden	bg-gray-100">
-                    <div className="relative w-full h-[200px] bg-gray-300">
-                        <Image
-                            fill
-                            src={ props.promotion.cover_url }
-                            alt={ props.promotion.name }
-                        />
-                        <div className="w-14 h-14 absolute top-0 left-px rounded-br-full bg-lime-200" />
-                        <div className="w-14 h-14 absolute inset-0 py-3 pr-3 pl-0.5 rounded-br-full bg-gray-900">
-                            <p className="text-center text-xs font-bold text-lime-200">{ `-${ props.promotion.discount }%` }</p>
-                        </div>
-                    </div>
-                    <div className="flex flex-col p-5 gap-3">
-                        <p className="text-base font-semibold text-gray-900">
-                            { props.promotion.name }
-                        </p>
-                        <p className="text-sm text-gray-900">{ props.promotion.description }</p>
-                    </div>
-
+        <div className={ cn('c-promotion-card', props.className) }>
+            <div className="c-promotion-card__inner">
+                <div className="c-promotion-card__cover">
+                    <Image
+                        src={ props.promotion.cover_url }
+                        alt={ props.promotion.name }
+                        fill
+                    />
                 </div>
-            </Link>
+
+                <div className="c-promotion-card__discount">
+                    <p className="c-promotion-card__discount-inner">
+                        { `-${ props.promotion.discount }%` }
+                    </p>
+                </div>
+
+                <div className="c-promotion-card__content">
+                    <Link
+                        href={ pagesPromotionUrl(props.promotion.id) }
+                        className="c-promotion-card__title"
+                    >
+                        { props.promotion.name }
+                    </Link>
+
+                    <p>
+                        { formateDate(props.promotion.start_at, 'DD.MM.YYYY') }
+                        { ' - ' }
+                        { formateDate(props.promotion.end_at, 'DD.MM.YYYY') }
+                    </p>
+                </div>
+            </div>
 
             <DeleteButton
-                className="!p-2 absolute top-0 right-0 z-[1]"
+                className="c-promotion-card__delete"
                 actionProps={ props.promotion.id }
                 action={ deletePromotion }
             />

@@ -2,31 +2,30 @@
 
 import { revalidatePath } from 'next/cache';
 
-import { createClient } from '@/lib/supabase/server';
-import { pagesPromotionsUrl } from '@/routes';
+import createSupabaseServerClient from '@/lib/supabase/server';
+import { PromotionMapper } from '@/types';
 
 export async function getPromotions(query: string) {
-    const supabase = await createClient();
+    const supabase = await createSupabaseServerClient();
     
     const { data, error } = await supabase.from('promotions').select(`
         cover_url,
-        created_at,
-        description,
+        start_at,
+        end_at,
         discount,
         id,
         name
         `).ilike('name', `%${ query }%`);
 
-    if (error) {
-        window.console.error('Error loading promotions:', error);
-        throw new Error('Failed to load promotions');
+    if (error || !data) {
+        throw new Error('Error loading promotions:', error);
     }
 
-    return data;
+    return data as PromotionMapper[];
 }
 
 export async function deletePromotion(id: string) {
-    const supabase = await createClient();
+    const supabase = await createSupabaseServerClient();
 
     const { error } = await supabase
         .from('promotions')
@@ -34,9 +33,8 @@ export async function deletePromotion(id: string) {
         .eq('id', id);
 
     if (error) {
-        window.console.error('Error deleting promotion:', error);
-        throw new Error('Failed to remove promotion');
+        throw new Error('Error deleting promotion:', error);
     }
 
-    revalidatePath(pagesPromotionsUrl());
+    revalidatePath('/admin');
 }

@@ -23,21 +23,25 @@ export default async function Page(props: Props) {
     const companies = await getCompanies(query);
 
     return (
-        <div className="w-full flex flex-col min-w-px">
+        <div className="flex flex-col w-full">
             <Toolbar
-                searchPlaceholder="Search company"
+                searchProps={
+                    {
+                        placeholder: 'Search company'
+                    }
+                }
                 actions={
                     <ActionButton
                         rout={ pagesCompanyNewUrl() }
                         label="Add company"
                     />
                 }
-                hasSearch
+                // hasSearch
             />
 
             <div className="p-5 grow overflow-auto">
                 {
-                    companies?.length
+                    companies.length
                         ? <CompaniesTable companies={ companies } />
                         : <DataNotFound />
                 }

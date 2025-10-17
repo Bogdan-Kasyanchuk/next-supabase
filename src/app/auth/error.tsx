@@ -9,12 +9,17 @@ type Props = {
 
 export default function ErrorComponent(props: Props) {
     return (
-        <div className="flex flex-col gap-10 items-center justify-center w-full h-full">
-            <p>{ `Something went wrong. ${ props.error.message }` }</p>
+        <div className="flex flex-col gap-5 items-center justify-center w-full">
+            <p className="text-5xl font-bold leading-[1.2]">
+                Something went wrong 
+            </p>
+
+            <p className="text-md leading-[1.2]">
+                { props.error.message }
+            </p>
 
             <Button
                 type="button"
-                size="large"
                 onClick={
                     () => {
                         props.reset();

@@ -1,5 +1,36 @@
 .c-promotions-list {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 20px;
+
+    .p-promotions & {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        @variant min-lg {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        @variant min-xl {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        @variant min-xxxl {
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+        }
+    }
+
+    .p-company & {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+
+        @variant min-lg {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        @variant min-xxl {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        @variant min-xxxl {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+    }
 }

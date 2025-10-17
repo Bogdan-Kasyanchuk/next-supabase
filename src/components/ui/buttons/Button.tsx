@@ -1,14 +1,16 @@
 import { createPolymorphicComponent } from '@mantine/utils';
 import { VariantProps, cva } from 'class-variance-authority';
+import Link from 'next/link';
 import { ComponentPropsWithRef } from 'react';
 
-import cn from '@/lib/utils';
+import cn from '@/utils/cn';
 
 const buttonVariants = cva('c-button', {
     variants: {
         variant: {
             'dark': 'c-button--dark',
             'lite': 'c-button--lite',
+            'danger': 'c-button--danger',
             'outline-dark': 'c-button--outline-dark'
         },
         size: {
@@ -40,7 +42,7 @@ function Button(props: Props) {
         ...rest
     } = props;
 
-    const isLoading = loading && Component !== 'a';
+    const isLoading = loading && Component !== 'a' && Component !== Link;
 
     return (
         <Component

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { FormEvent, useState } from 'react';
 
-import createClient from '@/lib/supabase/client';
+import createSupabaseBrowserClient from '@/lib/supabase/client';
 import { pagesAuthLoginUrl, pagesAuthUpdatePasswordUrl } from '@/routes';
 
 import Button from '../ui/buttons/Button';
@@ -12,13 +12,13 @@ import Input from '../ui/inputs/Input';
 export default function ForgotPasswordForm() {
     const [ email, setEmail ] = useState('');
     const [ error, setError ] = useState<string | undefined>(undefined);
-    const [ success, setSuccess ] = useState(false);
+    const [ isSuccess, setIsSuccess ] = useState(false);
     const [ isLoading, setIsLoading ] = useState(false);
 
     const handleForgotPassword = async (e: FormEvent) => {
         e.preventDefault();
 
-        const supabase = createClient();
+        const supabase = createSupabaseBrowserClient();
 
         setIsLoading(true);
         setError(undefined);
@@ -33,7 +33,7 @@ export default function ForgotPasswordForm() {
                 throw error;
             }
 
-            setSuccess(true);
+            setIsSuccess(true);
         } catch (error: unknown) {
             setError(error instanceof Error ? error.message : 'An error occurred');
         } finally {
@@ -44,7 +44,7 @@ export default function ForgotPasswordForm() {
     return (
         <div className="c-form-block">
             {
-                success
+                isSuccess
                     ? <>
                         <h2 className="c-form-block__title">Check Your Email</h2>
 
@@ -72,7 +72,7 @@ export default function ForgotPasswordForm() {
                                 error={ error }
                                 onChange={ 
                                     e => {
-                                        setEmail(e.target.value);
+                                        setEmail(e.target.value.trim());
                                     } 
                                 }
                             />
@@ -81,7 +81,7 @@ export default function ForgotPasswordForm() {
                                 type="submit"
                                 className="w-full mt-2.5"
                                 size="large"
-                                disabled={ isLoading }
+                                disabled={ isLoading || !email }
                                 loading={ isLoading }
                             >
                                 Send reset email

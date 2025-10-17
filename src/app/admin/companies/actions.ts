@@ -2,11 +2,11 @@
 
 import { revalidatePath } from 'next/cache';
 
-import { createClient } from '@/lib/supabase/server';
-import { pagesCompaniesUrl } from '@/routes';
+import createSupabaseServerClient from '@/lib/supabase/server';
+import { CompanyMapper } from '@/types';
 
 export async function getCompanies(query: string) {
-    const supabase = await createClient();
+    const supabase = await createSupabaseServerClient();
     
     const { data, error } = await supabase.from('companies').select(`
         category,
@@ -19,16 +19,15 @@ export async function getCompanies(query: string) {
         status
         `).ilike('name', `%${ query }%`);
 
-    if (error) {
-        window.console.error('Error loading companies:', error);
-        throw new Error('Failed to load companies');
+    if (error || !data) {
+        throw new Error('Error loading companies:', error);
     }
 
-    return data;
+    return data as CompanyMapper[];
 }
 
 export async function deleteCompany(id: string) {
-    const supabase = await createClient();
+    const supabase = await createSupabaseServerClient();
 
     const { error } = await supabase
         .from('companies')
@@ -36,9 +35,8 @@ export async function deleteCompany(id: string) {
         .eq('id', id);
 
     if (error) {
-        window.console.error('Error deleting company:', error);
-        throw new Error('Failed to remove company');
+        throw new Error('Error deleting company:', error);
     }
 
-    revalidatePath(pagesCompaniesUrl());
+    revalidatePath('/admin');
 }

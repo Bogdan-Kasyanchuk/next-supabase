@@ -3,22 +3,23 @@
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 
-import createClient from '@/lib/supabase/client';
+import createSupabaseBrowserClient from '@/lib/supabase/client';
 import { pagesDashboardUrl } from '@/routes';
 
 import Button from '../ui/buttons/Button';
 import Input from '../ui/inputs/Input';
 
 export default function UpdatePasswordForm() {
+    const router = useRouter();
+    
     const [ password, setPassword ] = useState('');
     const [ error, setError ] = useState<string | undefined>(undefined);
     const [ isLoading, setIsLoading ] = useState(false);
-    const router = useRouter();
 
     const handleForgotPassword = async (e: FormEvent) => {
         e.preventDefault();
 
-        const supabase = createClient();
+        const supabase = createSupabaseBrowserClient();
 
         setIsLoading(true);
         setError(undefined);
@@ -56,7 +57,7 @@ export default function UpdatePasswordForm() {
                     error={ error }
                     onChange={ 
                         e => {
-                            setPassword(e.target.value);
+                            setPassword(e.target.value.trim());
                         } 
                     }
                 />
@@ -65,7 +66,7 @@ export default function UpdatePasswordForm() {
                     type="submit"
                     className="w-full mt-2.5"
                     size="large"
-                    disabled={ isLoading }
+                    disabled={ isLoading || !password }
                     loading={ isLoading }
                 >
                     Save new password

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 
 import { PARAMETERS } from '@/helpers/parameters';
-import createClient from '@/lib/supabase/client';
+import createSupabaseBrowserClient from '@/lib/supabase/client';
 import { pagesAuthLoginUrl, pagesAuthSignUpSuccessUrl, pagesDashboardUrl } from '@/routes';
 import normalizeUrl from '@/utils/normalizeUrl';
 
@@ -13,6 +13,7 @@ import Button from '../ui/buttons/Button';
 import Input from '../ui/inputs/Input';
 
 export default function SignUpForm() {
+    const router = useRouter();
     const [ email, setEmail ] = useState('');
     const [ firstName, setFirstName ] = useState('');
     const [ lastName, setLastName ] = useState('');
@@ -21,7 +22,6 @@ export default function SignUpForm() {
     const [ error, setError ] = useState<string | undefined>(undefined);
     const [ passwordMatchError, setPasswordMatchError ] = useState<string | undefined>(undefined);
     const [ isLoading, setIsLoading ] = useState(false);
-    const router = useRouter();
 
     const handleSignUp = async (e: FormEvent) => {
         e.preventDefault();
@@ -32,7 +32,7 @@ export default function SignUpForm() {
             return;
         }
         
-        const supabase = createClient();
+        const supabase = createSupabaseBrowserClient();
 
         setIsLoading(true);
         setError(undefined);
@@ -84,7 +84,7 @@ export default function SignUpForm() {
                         error={ error }
                         onChange={ 
                             e => {
-                                setFirstName(e.target.value);
+                                setFirstName(e.target.value.trim());
                             } 
                         }
                     />
@@ -97,7 +97,7 @@ export default function SignUpForm() {
                         error={ error }
                         onChange={ 
                             e => {
-                                setLastName(e.target.value);
+                                setLastName(e.target.value.trim());
                             } 
                         }
                     />
@@ -112,7 +112,7 @@ export default function SignUpForm() {
                     error={ error }
                     onChange={ 
                         e => {
-                            setEmail(e.target.value);
+                            setEmail(e.target.value.trim());
                         } 
                     }
                 />
@@ -126,7 +126,8 @@ export default function SignUpForm() {
                     error={ passwordMatchError || error }
                     onChange={ 
                         e => {
-                            setPassword(e.target.value);
+                            setPassword(e.target.value.trim());
+                            setPasswordMatchError(undefined);
                         } 
                     }
                 />
@@ -140,7 +141,8 @@ export default function SignUpForm() {
                     error={ passwordMatchError }
                     onChange={ 
                         e => {
-                            setRepeatPassword(e.target.value);
+                            setRepeatPassword(e.target.value.trim());
+                            setPasswordMatchError(undefined);
                         } 
                     }
                 />
@@ -149,7 +151,7 @@ export default function SignUpForm() {
                     type="submit"
                     className="w-full mt-2.5"
                     size="large"
-                    disabled={ isLoading }
+                    disabled={ isLoading || !firstName || !email || !password }
                     loading={ isLoading }
                 >
                     Sign up

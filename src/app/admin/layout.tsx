@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation';
 import { PropsWithChildren, ReactNode } from 'react';
 
 import Sidebar from '@/components/app/Sidebar';
-import { createClient } from '@/lib/supabase/server';
+import createSupabaseServerClient from '@/lib/supabase/server';
 import { pagesAuthLoginUrl } from '@/routes';
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 };
 
 export default async function Layout(props: PropsWithChildren<Props>) {
-    const supabase = await createClient();
+    const supabase = await createSupabaseServerClient();
     
     const { data, error } = await supabase.auth.getUser();
 
@@ -23,7 +23,9 @@ export default async function Layout(props: PropsWithChildren<Props>) {
             <div className="flex w-full">
                 <Sidebar />
 
-                { props.children }
+                <div className="flex grow relative min-w-px">
+                    { props.children }
+                </div>
             </div>
 
             { props.modal }

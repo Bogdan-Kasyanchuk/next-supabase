@@ -1,6 +1,6 @@
 import { PromotionMapper } from '@/types';
 
-import Promotion from '../ui/cards/PromotionCard';
+import PromotionCard from '../ui/cards/PromotionCard';
 
 type Props = {
     promotions: PromotionMapper[]
@@ -12,7 +12,7 @@ export default async function PromotionsList(props: Props) {
             {
                 props.promotions.map(
                     promotion => (
-                        <Promotion
+                        <PromotionCard
                             key={ promotion.id }
                             promotion={ promotion }
                         />

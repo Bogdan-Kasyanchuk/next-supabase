@@ -2,14 +2,14 @@ import { PropsWithChildren } from 'react';
 
 import Logo from '@/components/ui/data-display/Logo';
 import Container from '@/components/ui/layouts/Container';
-import { createClient } from '@/lib/supabase/server';
+import createSupabaseServerClient from '@/lib/supabase/server';
 
 import AuthButtons from './components/AuthButtons';
 import LogoutButton from './components/LogoutButton';
 import User from './components/User';
 
 export default async function Header(props: PropsWithChildren) {
-    const supabase = await createClient();
+    const supabase = await createSupabaseServerClient();
     
     const { data } = await supabase.auth.getUser();
 
