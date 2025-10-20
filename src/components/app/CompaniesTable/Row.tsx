@@ -9,7 +9,7 @@ import { CompanyMapper } from '@/types';
 import cn from '@/utils/cn';
 import formateDate from '@/utils/formateDate';
 
-import DeleteButton from '../../DeleteButton';
+import DeleteButton from '../DeleteButton';
 
 const statusTypes = {
     [ CompanyStatusType.ACTIVE ]: {

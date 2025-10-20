@@ -1,3 +1,4 @@
+import { MantineProvider } from '@mantine/core';
 import { redirect } from 'next/navigation';
 import { PropsWithChildren, ReactNode } from 'react';
 
@@ -19,7 +20,7 @@ export default async function Layout(props: PropsWithChildren<Props>) {
     }
     
     return (
-        <>
+        <MantineProvider>
             <div className="flex w-full">
                 <Sidebar />
 
@@ -29,6 +30,6 @@ export default async function Layout(props: PropsWithChildren<Props>) {
             </div>
 
             { props.modal }
-        </>
+        </MantineProvider>
     );
 }

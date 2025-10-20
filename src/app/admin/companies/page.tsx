@@ -36,7 +36,7 @@ export default async function Page(props: Props) {
                         label="Add company"
                     />
                 }
-                // hasSearch
+                hasSearch
             />
 
             <div className="p-5 grow overflow-auto">

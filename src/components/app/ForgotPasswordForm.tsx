@@ -79,8 +79,8 @@ export default function ForgotPasswordForm() {
 
                             <Button
                                 type="submit"
-                                className="w-full mt-2.5"
                                 size="large"
+                                className="w-full mt-2.5"
                                 disabled={ isLoading || !email }
                                 loading={ isLoading }
                             >

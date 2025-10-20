@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { deletePromotion } from '@/app/admin/promotions/actions';
-import DeleteButton from '@/components/DeleteButton';
+import DeleteButton from '@/components/app/DeleteButton';
 import { pagesPromotionUrl } from '@/routes';
 import { PromotionMapper } from '@/types';
 import cn from '@/utils/cn';

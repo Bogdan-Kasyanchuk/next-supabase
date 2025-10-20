@@ -1,0 +1,81 @@
+.c-modal {
+    .mantine-Modal-overlay {
+        position: fixed;
+        z-index: var(--overlay-z-index);
+        inset: 0;
+
+        width: 100%;
+        height: 100%;
+
+        background-color: rgba(0, 0, 0, 0.25);
+    }
+
+    .mantine-Modal-inner {
+        pointer-events: none;
+
+        position: fixed;
+        z-index: var(--mb-z-index);
+        inset: 0;
+
+        overflow-y: auto;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+    }
+
+    .mantine-Modal-content {
+        pointer-events: all;
+        touch-action: manipulation;
+
+        overflow: hidden;
+        display: block;
+
+        width: 100%;
+        max-width: var(--modal-max-width, 728px);
+        margin-block: auto;
+        padding: 20px;
+        border-radius: 12px;
+
+        background-color: var(--color-primary);
+        outline: 0;
+        box-shadow: 0 2px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .mantine-Modal-header {
+        display: flex;
+        column-gap: 20px;
+        justify-content: space-between;
+        margin-bottom: 20px
+    }
+
+    .mantine-Modal-title {
+        @apply font-bold leading-[1.1] text-5xl;
+    }
+
+    .mantine-Modal-close {
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: center;
+
+        width: 30px;
+        height: 30px;
+        border-radius: 4px;
+
+        color: var(--color-primary);
+
+        background-color:  var(--color-secondary);
+
+        transition-property: opacity;
+
+        @media (any-hover: hover) {
+            &:hover {
+                opacity: 0.75;
+            }
+        }
+    }
+}

@@ -18,6 +18,7 @@
 @import '../components/form-block.css' layer(base);
 @import '../components/companies-table.css' layer(base);
 @import '../components/promotions-list.css' layer(base);
+@import '../components/modal.css' layer(base);
 
 /* Cards */
 @import '../components/cards/company-details-card.css' layer(base);

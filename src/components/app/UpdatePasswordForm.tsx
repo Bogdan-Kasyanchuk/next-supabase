@@ -64,8 +64,8 @@ export default function UpdatePasswordForm() {
 
                 <Button
                     type="submit"
-                    className="w-full mt-2.5"
                     size="large"
+                    className="w-full mt-2.5"
                     disabled={ isLoading || !password }
                     loading={ isLoading }
                 >

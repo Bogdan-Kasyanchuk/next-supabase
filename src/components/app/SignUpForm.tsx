@@ -149,8 +149,8 @@ export default function SignUpForm() {
                 
                 <Button
                     type="submit"
-                    className="w-full mt-2.5"
                     size="large"
+                    className="w-full mt-2.5"
                     disabled={ isLoading || !firstName || !email || !password }
                     loading={ isLoading }
                 >
