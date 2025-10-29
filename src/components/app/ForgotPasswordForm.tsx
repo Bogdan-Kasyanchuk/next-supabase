@@ -42,13 +42,13 @@ export default function ForgotPasswordForm() {
     };
 
     return (
-        <div className="c-form-block">
+        <div className="c-auth-form-block">
             {
                 isSuccess
                     ? <>
-                        <h2 className="c-form-block__title">Check Your Email</h2>
+                        <h2 className="c-auth-form-block__title">Check Your Email</h2>
 
-                        <div className="c-form-block__text">
+                        <div className="c-auth-form-block__text">
                             <p>Password reset instructions sent.</p>
 
                             <p>
@@ -57,11 +57,11 @@ export default function ForgotPasswordForm() {
                         </div> 
                     </>
                     : <>
-                        <h2 className="c-form-block__title">Reset your password</h2>
+                        <h2 className="c-auth-form-block__title">Reset your password</h2>
 
                         <form
                             onSubmit={ handleForgotPassword }
-                            className="c-form-block__form"
+                            className="c-auth-form-block__form"
                         >
                             <Input
                                 type="email"
@@ -88,7 +88,7 @@ export default function ForgotPasswordForm() {
                             </Button>
                         </form>
                         
-                        <div className="c-form-block__text">
+                        <div className="c-auth-form-block__text">
                             Already have an account?{ ' ' }
 
                             <Link href={ pagesAuthLoginUrl() }>

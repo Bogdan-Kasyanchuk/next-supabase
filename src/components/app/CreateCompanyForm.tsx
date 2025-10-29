@@ -1,136 +1,122 @@
-// import Image from 'next/image';
+import Form from 'next/form';
+import Image from 'next/image';
 
 import { createCompany } from '@/app/admin/companies/company-new/actions';
+import { categories, countries, statuses } from '@/mock/data';
+import { randomImage } from '@/mock/randomImage';
 
 import SubmitButton from './SubmitButton';
-// import { CompanyStatusType } from '@/enums';
-// import { categories, countries } from '@/mock/data';
-// import { randomImage } from '@/mock/randomImage';
-// import { CodeCategory, CodeCountry } from '@/types';
-// import InputField from '@/ui/input-field';
-// import SelectField from '@/ui/select-field';
+import DatePicker from '../ui/inputs/DatePicker';
+import Input from '../ui/inputs/Input';
+import Select from '../ui/inputs/Select';
+import TextArea from '../ui/inputs/TextArea';
 
 export default function CreateCompanyForm() {
-    // const logo = randomImage(200, 200);
+    const logo = randomImage(200, 200);
 
     return (
-        <form
+        <Form
             action={ createCompany }
-            className="flex flex-col gap-10"
+            className="c-company-form-block"
         >
-            { /* <div className="flex gap-6">
-                <div className="flex flex-col flex-1 gap-5">
+            <div className="c-company-form-block__form">
+                <div className="c-company-form-block__inner md:pe-2.5">
                     <div>
-                        <label className="text-base color-gray-900">
+                        <label
+                            className="f-label"
+                            htmlFor="logo"
+                        >
                             Logo
+                            <span className="f-label__asterix">&nbsp;*</span>
                         </label>
+
                         <Image
-                            className="rounded-full w-[148px] h-[148px] mx-auto"
-                            width={ 160 }
-                            height={ 160 }
+                            className="rounded-full w-[160px] h-[160px] mx-auto md:w-[199px] md:h-[199px]"
+                            width={ 200 }
+                            height={ 200 }
                             src={ logo }
                             alt="Logo"
                         />
+
                         <input
+                            id="logo"
                             type="text"
-                            name="logo"
+                            name="logo_url"
                             defaultValue={ logo }
                             className="hidden"
                         />
                     </div>
 
-                    <SelectField
+                    <Input
+                        type="text"
+                        name="name"
+                        label="Name"
+                        placeholder="Name"
+                        autoComplete="off"
+                        minLength={ 3 }
                         required
-                        defaultValue={ props.initialValues?.status }
-                        label="Status"
-                        name="status"
-                        className="capitalize"
-                    >
-                        {
-                            (Object.values(CompanyStatusType) as CompanyStatusType[]).map(
-                                status => (
-                                    <option
-                                        key={ status }
-                                        value={ status }
-                                    >
-                                        { status }
-                                    </option>
-                                )
-                            )
-                        }
-                    </SelectField>
+                    />
 
-                    <SelectField
+                    <Select
+                        name="status"
+                        label="Status"
+                        placeholder="Select status"
+                        options={ statuses }
                         required
-                        defaultValue={ props.initialValues?.codeCountry }
+                    />
+
+                    <Select
+                        name="country"
                         label="Country"
-                        name="codeCountry"
-                    >
-                        {
-                            (Object.keys(countries) as CodeCountry[]).map(
-                                code => (
-                                    <option
-                                        key={ code }
-                                        value={ code }
-                                    >
-                                        { countries[ code ] }
-                                    </option>
-                                )
-                            )
-                        }
-                    </SelectField>
+                        placeholder="Select country"
+                        options={ countries }
+                        required
+                    />
                 </div>
 
-                <div className="flex flex-col flex-1 gap-5">
-                    <InputField
-                        required
-                        defaultValue={ props.initialValues?.title }
-                        label="Title"
-                        placeholder="Title"
-                        name="title"
-                    />
-
-                    <SelectField
-                        required
-                        defaultValue={ props.initialValues?.codeCategory }
+                <div className="c-company-form-block__inner md:ps-2.5">
+                    <Select
+                        name="category"
                         label="Category"
-                        name="codeCategory"
-                    >
-                        {
-                            (Object.keys(categories) as CodeCategory[]).map(
-                                code => (
-                                    <option
-                                        key={ code }
-                                        value={ code }
-                                    >
-                                        { categories[ code ] }
-                                    </option>
-                                )
-                            )
-                        }
-                    </SelectField>
-
-                    <InputField
+                        placeholder="Select category"
+                        options={ categories }
                         required
-                        defaultValue={ props.initialValues?.joinedAt }
-                        label="Joined date"
-                        type="date"
-                        name="joinedAt"
+                    />
+                    
+                    <Input
+                        type="number"
+                        name="income"
+                        label="Income"
+                        placeholder="Income"
+                        min={ 0 }
                     />
 
-                    <InputField
-                        defaultValue={ props.initialValues?.description }
+                    <Input
+                        type="number"
+                        name="sold"
+                        label="Sold"
+                        placeholder="Sold"
+                        min={ 0 }
+                    />
+
+                    <DatePicker
+                        name="joined_at"
+                        label="Joined date"
+                        placeholder="DD.MM.YYYY"
+                    />
+
+                    <TextArea
+                        name="description"
                         label="Description"
                         placeholder="Description"
-                        name="description"
+                        minLength={ 3 }
                     />
                 </div>
-            </div> */ }
+            </div>
 
             <SubmitButton>
                 Create company
             </SubmitButton>
-        </form>
+        </Form>
     );
 }
-

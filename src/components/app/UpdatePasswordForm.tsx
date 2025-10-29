@@ -41,12 +41,12 @@ export default function UpdatePasswordForm() {
     };
 
     return (
-        <div className="c-form-block">
-            <h2 className="c-form-block__title">Reset your password</h2>
+        <div className="c-auth-form-block">
+            <h2 className="c-auth-form-block__title">Reset your password</h2>
             
             <form
                 onSubmit={ handleForgotPassword }
-                className="c-form-block__form"
+                className="c-auth-form-block__form"
             >
                 <Input
                     type="password"

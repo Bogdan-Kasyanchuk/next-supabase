@@ -25,17 +25,25 @@ export default function PromotionDetailsCard(props: Props) {
             </div>
 
             <div className="c-promotion-details-card__content">
-                <p className="c-promotion-details-card__title">
+                <p className="c-promotion-details-card__content-title">
                     { props.promotion.name }
                 </p>
 
-                <p>
-                    { formateDate(props.promotion.start_at, 'DD.MM.YYYY') }
-                    { ' - ' }
-                    { formateDate(props.promotion.end_at, 'DD.MM.YYYY') }
-                </p>
+                <dl className="c-promotion-details-card__content-list">
+                    <div className="c-promotion-details-card__content-item">
+                        <dt>Start date:</dt>
+                        <dd>{ formateDate(props.promotion.start_at, 'DD.MM.YYYY') }</dd>
+                    </div>
+                    
+                    <div className="c-promotion-details-card__content-item">
+                        <dt>End date:</dt>
+                        <dd>{ formateDate(props.promotion.end_at, 'DD.MM.YYYY') }</dd>
+                    </div>
+                </dl>
 
-                <p>{ props.promotion.description }</p>
+                <p className="c-promotion-details-card__content-description">
+                    { props.promotion.description }
+                </p>
             </div>
         </div>
     );

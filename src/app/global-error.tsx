@@ -7,7 +7,7 @@ export default function Error() {
         <html lang="en">
             <body>
                 <main>
-                    <Container className="flex items-center justify-center">
+                    <Container className="flex-center">
                         <p className="text-5xl font-bold leading-[1.2]">
                             Something globally went wrong
                         </p>

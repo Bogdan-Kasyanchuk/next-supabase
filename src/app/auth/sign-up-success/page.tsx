@@ -6,12 +6,12 @@ export const metadata: Metadata = {
 
 export default function Page() {
     return (
-        <div className="c-form-block">
-            <h2 className="c-form-block__title">
+        <div className="c-auth-form-block">
+            <h2 className="c-auth-form-block__title">
                 Thank you for signing up!
             </h2>
 
-            <div className="c-form-block__text">
+            <div className="c-auth-form-block__text">
                 <p>You&apos;ve successfully signed up.</p>
                 
                 <p>

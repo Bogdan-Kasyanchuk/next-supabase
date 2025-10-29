@@ -16,7 +16,7 @@ export default function SubmitButton(props: Props) {
         <Button
             type="submit"
             size="large"
-            className="w-full"
+            className="w-full mt-2.5"
             disabled={ pending }
             loading={ pending }
         >

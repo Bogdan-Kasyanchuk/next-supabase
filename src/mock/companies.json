@@ -9,7 +9,7 @@
         "status": "active",
         "country": {
             "label": "Canada",
-            "value": "can"
+            "value": "CAN"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -28,8 +28,8 @@
         },
         "status": "notActive",
         "country": {
-            "label": "USA",
-            "value": "usa"
+            "label": "United States",
+            "value": "USA"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -49,7 +49,7 @@
         "status": "active",
         "country": {
             "label": "Germany",
-            "value": "deu"
+            "value": "DEU"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -69,7 +69,7 @@
         "status": "notActive",
         "country": {
             "label": "Canada",
-            "value": "can"
+            "value": "CAN"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -88,8 +88,8 @@
         },
         "status": "pending",
         "country": {
-            "label": "USA",
-            "value": "usa"
+            "label": "United States",
+            "value": "USA"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -109,7 +109,7 @@
         "status": "suspended",
         "country": {
             "label": "Italy",
-            "value": "ita"
+            "value": "ITA"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -129,7 +129,7 @@
         "status": "active",
         "country": {
             "label": "Ukraine",
-            "value": "ukr"
+            "value": "UKR"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -149,7 +149,7 @@
         "status": "notActive",
         "country": {
             "label": "Germany",
-            "value": "deu"
+            "value": "DEU"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -169,7 +169,7 @@
         "status": "pending",
         "country": {
             "label": "Canada",
-            "value": "can"
+            "value": "CAN"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -188,8 +188,8 @@
         },
         "status": "suspended",
         "country": {
-            "label": "USA",
-            "value": "usa"
+            "label": "United States",
+            "value": "USA"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -209,7 +209,7 @@
         "status": "active",
         "country": {
             "label": "Italy",
-            "value": "ita"
+            "value": "ITA"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -229,7 +229,7 @@
         "status": "notActive",
         "country": {
             "label": "Ukraine",
-            "value": "ukr"
+            "value": "UKR"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -249,7 +249,7 @@
         "status": "pending",
         "country": {
             "label": "Germany",
-            "value": "deu"
+            "value": "DEU"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -269,7 +269,7 @@
         "status": "suspended",
         "country": {
             "label": "Canada",
-            "value": "can"
+            "value": "CAN"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -288,8 +288,8 @@
         },
         "status": "active",
         "country": {
-            "label": "USA",
-            "value": "usa"
+            "label": "United States",
+            "value": "USA"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -309,7 +309,7 @@
         "status": "notActive",
         "country": {
             "label": "Italy",
-            "value": "ita"
+            "value": "ITA"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -329,7 +329,7 @@
         "status": "pending",
         "country": {
             "label": "Ukraine",
-            "value": "ukr"
+            "value": "UKR"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -349,7 +349,7 @@
         "status": "suspended",
         "country": {
             "label": "Germany",
-            "value": "deu"
+            "value": "DEU"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -369,7 +369,7 @@
         "status": "active",
         "country": {
             "label": "Canada",
-            "value": "can"
+            "value": "CAN"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -388,8 +388,8 @@
         },
         "status": "notActive",
         "country": {
-            "label": "USA",
-            "value": "usa"
+            "label": "United States",
+            "value": "USA"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -409,7 +409,7 @@
         "status": "pending",
         "country": {
             "label": "Italy",
-            "value": "ita"
+            "value": "ITA"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -429,7 +429,7 @@
         "status": "suspended",
         "country": {
             "label": "Ukraine",
-            "value": "ukr"
+            "value": "UKR"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -449,7 +449,7 @@
         "status": "active",
         "country": {
             "label": "Germany",
-            "value": "deu"
+            "value": "DEU"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -469,7 +469,7 @@
         "status": "notActive",
         "country": {
             "label": "Canada",
-            "value": "can"
+            "value": "CAN"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -488,8 +488,8 @@
         },
         "status": "pending",
         "country": {
-            "label": "USA",
-            "value": "usa"
+            "label": "United States",
+            "value": "USA"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -509,7 +509,7 @@
         "status": "suspended",
         "country": {
             "label": "Italy",
-            "value": "ita"
+            "value": "ITA"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -529,7 +529,7 @@
         "status": "active",
         "country": {
             "label": "Ukraine",
-            "value": "ukr"
+            "value": "UKR"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -549,7 +549,7 @@
         "status": "notActive",
         "country": {
             "label": "Germany",
-            "value": "deu"
+            "value": "DEU"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -569,7 +569,7 @@
         "status": "pending",
         "country": {
             "label": "Canada",
-            "value": "can"
+            "value": "CAN"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -588,8 +588,8 @@
         },
         "status": "suspended",
         "country": {
-            "label": "USA",
-            "value": "usa"
+            "label": "United States",
+            "value": "USA"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -609,7 +609,7 @@
         "status": "active",
         "country": {
             "label": "Italy",
-            "value": "ita"
+            "value": "ITA"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -629,7 +629,7 @@
         "status": "notActive",
         "country": {
             "label": "Ukraine",
-            "value": "ukr"
+            "value": "UKR"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -649,7 +649,7 @@
         "status": "pending",
         "country": {
             "label": "Germany",
-            "value": "deu"
+            "value": "DEU"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -669,7 +669,7 @@
         "status": "suspended",
         "country": {
             "label": "Canada",
-            "value": "can"
+            "value": "CAN"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -688,8 +688,8 @@
         },
         "status": "active",
         "country": {
-            "label": "USA",
-            "value": "usa"
+            "label": "United States",
+            "value": "USA"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -709,7 +709,7 @@
         "status": "notActive",
         "country": {
             "label": "Italy",
-            "value": "ita"
+            "value": "ITA"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -729,7 +729,7 @@
         "status": "pending",
         "country": {
             "label": "Ukraine",
-            "value": "ukr"
+            "value": "UKR"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -749,7 +749,7 @@
         "status": "suspended",
         "country": {
             "label": "Germany",
-            "value": "deu"
+            "value": "DEU"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -769,7 +769,7 @@
         "status": "active",
         "country": {
             "label": "Canada",
-            "value": "can"
+            "value": "CAN"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -788,8 +788,8 @@
         },
         "status": "notActive",
         "country": {
-            "label": "USA",
-            "value": "usa"
+            "label": "United States",
+            "value": "USA"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -809,7 +809,7 @@
         "status": "pending",
         "country": {
             "label": "Italy",
-            "value": "ita"
+            "value": "ITA"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -829,7 +829,7 @@
         "status": "suspended",
         "country": {
             "label": "Ukraine",
-            "value": "ukr"
+            "value": "UKR"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -849,7 +849,7 @@
         "status": "active",
         "country": {
             "label": "Germany",
-            "value": "deu"
+            "value": "DEU"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -869,7 +869,7 @@
         "status": "notActive",
         "country": {
             "label": "Canada",
-            "value": "can"
+            "value": "CAN"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -888,8 +888,8 @@
         },
         "status": "pending",
         "country": {
-            "label": "USA",
-            "value": "usa"
+            "label": "United States",
+            "value": "USA"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -909,7 +909,7 @@
         "status": "suspended",
         "country": {
             "label": "Italy",
-            "value": "ita"
+            "value": "ITA"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",
@@ -929,7 +929,7 @@
         "status": "notActive",
         "country": {
             "label": "Germany",
-            "value": "deu"
+            "value": "DEU"
         },
         "joined_at": "2025-10-14T13:21:38.220265+00",
         "user_id": "260380a0-4015-4ca8-959f-4be52eda2872",

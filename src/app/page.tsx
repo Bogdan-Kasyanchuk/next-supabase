@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
     return (
-        <Container className="flex flex-col items-center justify-center gap-10">
+        <Container className="flex-center flex-col gap-10">
             <p className="text-6xl text-center font-bold">
                 Welcome to CRM
                 <br />

@@ -15,7 +15,7 @@ export default async function Layout(props: PropsWithChildren) {
     }
         
     return (
-        <Container className="flex items-center justify-center">
+        <Container className="flex-center">
             { props.children }
         </Container>
     );

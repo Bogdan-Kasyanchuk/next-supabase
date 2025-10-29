@@ -1,7 +1,7 @@
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import { PropsWithChildren, ReactNode } from 'react';
 
-import Footer from '@/components/app/Footer';
+// import Footer from '@/components/app/Footer';
 import Header from '@/components/app/Header';
 
 import type { Metadata } from 'next';
@@ -33,7 +33,7 @@ export default function RootLayout(props: PropsWithChildren<Props>) {
                     { props.children }
                 </main>
                 
-                <Footer />
+                { /* <Footer /> */ }
             </body>
         </html>
     );

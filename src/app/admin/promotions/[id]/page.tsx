@@ -8,10 +8,12 @@ import { pagesPromotionUpdateUrl } from '@/routes';
 import { getPromotionById } from './actions';
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
-    const { id } = await props.params;
+    const params = await props.params;
+
+    const promotion = await getPromotionById(params.id);
 
     return {
-        title: id
+        title: promotion.name
     };
 }
 
@@ -20,16 +22,16 @@ type Props = {
 };
 
 export default async function Page(props: Props) {
-    const { id } = await props.params;
+    const params = await props.params;
 
-    const promotion = await getPromotionById(id);
+    const promotion = await getPromotionById(params.id);
 
     return (
         <div className="flex flex-col w-full">
             <Toolbar
                 actions={
                     <ActionButton
-                        rout={ pagesPromotionUpdateUrl(id) }
+                        rout={ pagesPromotionUpdateUrl(params.id) }
                         label="Update promotion"
                     />
                 }

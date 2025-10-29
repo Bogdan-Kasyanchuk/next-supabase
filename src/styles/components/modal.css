@@ -42,7 +42,7 @@
 
         background-color: var(--color-primary);
         outline: 0;
-        box-shadow: 0 2px 32px rgba(0, 0, 0, 0.1);
+        box-shadow: var(--shadow-custom);
     }
 
     .mantine-Modal-header {

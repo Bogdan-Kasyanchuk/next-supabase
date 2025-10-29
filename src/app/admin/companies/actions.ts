@@ -20,7 +20,7 @@ export async function getCompanies(query: string) {
         `).ilike('name', `%${ query }%`);
 
     if (error || !data) {
-        throw new Error('Error loading companies:', error);
+        throw new Error(`Error loading companies: ${ error.message }`);
     }
 
     return data as CompanyMapper[];
@@ -35,7 +35,10 @@ export async function deleteCompany(id: string) {
         .eq('id', id);
 
     if (error) {
-        throw new Error('Error deleting company:', error);
+        // eslint-disable-next-line no-console
+        console.error('Error deleting company:', error.message);
+
+        return;
     }
 
     revalidatePath('/admin');

@@ -1,4 +1,4 @@
-export enum StatisticCardType {
+export enum StatisticsCardType {
     DARK = 'dark',
     GRADIENT = 'gradient'
 }

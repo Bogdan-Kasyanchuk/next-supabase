@@ -3,7 +3,6 @@ import { ComponentPropsWithoutRef, ReactNode, useId } from 'react';
 import cn from '@/utils/cn';
 
 type Props = Omit<ComponentPropsWithoutRef<'input'>, 'className'> & {
-    slotAfter?: ReactNode,
     startSection?: ReactNode,
     endSection?: ReactNode,
     label?: string,
@@ -19,7 +18,7 @@ type Props = Omit<ComponentPropsWithoutRef<'input'>, 'className'> & {
 };
 
 export default function Input(props: Props) {
-    const { slotAfter, startSection, endSection, label, error, classNames, ...rest } = props;
+    const { startSection, endSection, label, error, classNames, ...rest } = props;
     
     const defaultId = useId();
 
@@ -79,8 +78,6 @@ export default function Input(props: Props) {
                         { endSection }
                     </div>
                 }
-
-                { slotAfter }
             </div>
 
             {

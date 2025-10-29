@@ -1,0 +1,27 @@
+.c-company-form-block {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+
+        @variant min-md {
+            flex-direction: row;
+        }
+    }
+
+    &__inner {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+
+        @variant min-md {
+            flex-shrink: 0;
+            width: 50%;
+        }
+    }
+}

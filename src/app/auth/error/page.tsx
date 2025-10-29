@@ -16,12 +16,12 @@ export default async function Page(props: Props) {
     const params = await props.searchParams;
 
     return (
-        <div className="c-form-block">
-            <h2 className="c-form-block__title">
+        <div className="c-auth-form-block">
+            <h2 className="c-auth-form-block__title">
                 Sorry, something went wrong.
             </h2>
 
-            <div className="c-form-block__text">
+            <div className="c-auth-form-block__text">
                 {
                     params.error 
                         ? <p>Code error: { params.error }</p>

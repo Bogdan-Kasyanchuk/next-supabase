@@ -67,8 +67,8 @@
             gap: 6px;
             align-items: center;
 
-            span:first-child {
-                opacity: 0.75;
+            dd {
+                font-weight: 500;
             }
         }
 

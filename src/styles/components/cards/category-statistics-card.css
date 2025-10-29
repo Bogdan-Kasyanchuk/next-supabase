@@ -1,0 +1,65 @@
+.c-category-statistics-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-between;
+
+    min-height: 92px;
+    padding: 10px;
+    border-radius: 4px;
+
+    background-color: var(--color-secondary);
+
+    &:nth-child(odd) {
+        color: var(--color-accent-second);
+    }
+
+    &:nth-child(even) {
+        color: var(--color-accent-thirth);
+    }
+
+    &--gradient {
+        background-size: cover;
+
+        &:nth-child(4n + 1) {
+            background-image: url('/svg/mesh-gradient-1.svg');
+        }
+
+        &:nth-child(4n + 2) {
+            background-image: url('/svg/mesh-gradient-2.svg');
+        }
+
+        &:nth-child(4n + 3) {
+            background-image: url('/svg/mesh-gradient-3.svg');
+        }
+
+        &:nth-child(4n + 4) {
+            background-image: url('/svg/mesh-gradient-4.svg');
+        }
+    }
+
+    &__label {
+        font-size: var(--text-sm);
+        line-height: 1.25;
+
+        &::before {
+            content: '';
+
+            display: block;
+
+            width: 16px;
+            height: 2px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+
+            background-color: currentcolor;
+        }
+    }
+
+    &__count {
+        font-size: var(--text-6xl);
+        font-weight: 700;
+        line-height: 1;
+        text-align: end;
+    }
+}

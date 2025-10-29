@@ -7,7 +7,7 @@ type Props = {
     companies: CompanyMapper[]
 };
 
-export default async function CompaniesTable(props: Props) {
+export default function CompaniesTable(props: Props) {
     return (
         <table className="c-companies-table">
             <thead className="c-companies-table__head">

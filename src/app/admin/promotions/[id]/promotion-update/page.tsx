@@ -1,43 +1,33 @@
-// import { notFound } from 'next/navigation';
+import UpdatePromotionForm from '@/components/app/UpdatePromotionForm';
 
-// import { actionUpdatePromotion } from '@/lib/actions';
-// import { fetchPromotion } from '@/lib/data';
-// import PromotionForm from '@/ui/promotion-form';
+import { getPromotionById } from '../actions';
 
-// type Props = {
-//     params: Promise<{ id: string }>
-// };
+type Props = {
+    params: Promise<{ id: string }>
+};
 
-// export default async function Page(props: Props) {
-//     const { id } = await props.params;
+export default async function Page(props: Props) {
+    const params = await props.params;
 
-//     const promotion = await fetchPromotion(id);
+    const promotion = await getPromotionById(params.id);
 
-//     if (!promotion) {
-//         notFound();
-//     }
-
-//     const actionUpdatePromotionWithId = actionUpdatePromotion.bind(null, id);
-
-//     return (
-//         <div className="l-page__content">
-//             <div className="col-span-12">
-//                 <PromotionForm
-//                     title="Update promotion"
-//                     action={ actionUpdatePromotionWithId }
-//                     initialValues={
-//                         {
-//                             title: promotion.title,
-//                             discount: promotion.discount,
-//                             description: promotion.description
-//                         }
-//                     }
-//                 />
-//             </div>
-//         </div>
-//     );
-// }
-
-export default async function Page() {
-    return <div className="font-bold text-10xl bg-amber-200 h-20">Promotion Update</div>;
+    return (
+        <div className="flex flex-col w-full justify-center-safe overflow-y-auto">
+            <div className="p-5 shadow-custom w-full mx-auto max-w-[768px]">
+                <UpdatePromotionForm
+                    id={ params.id } 
+                    initialValues={
+                        {
+                            name: promotion.name,
+                            discount: promotion.discount,
+                            start_at: promotion.start_at,
+                            end_at: promotion.end_at,
+                            description: promotion.description,
+                            cover_url: promotion.cover_url
+                        }
+                    }
+                />
+            </div>
+        </div>
+    );
 }

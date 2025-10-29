@@ -6,7 +6,7 @@ type Props = {
     promotions: PromotionMapper[]
 };
 
-export default async function PromotionsList(props: Props) {
+export default function PromotionsList(props: Props) {
     return (
         <div className="c-promotions-list">
             {

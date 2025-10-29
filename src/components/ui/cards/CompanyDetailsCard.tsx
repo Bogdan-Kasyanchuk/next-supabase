@@ -2,6 +2,7 @@ import Image from 'next/image';
 
 import { BadgeStatusType, CompanyStatusType } from '@/enums';
 import { CompanyDetailsMapper } from '@/types';
+import formatCurrency from '@/utils/formatCurrency';
 import formateDate from '@/utils/formateDate';
 
 import Badge from '../data-display/Badge';
@@ -54,22 +55,38 @@ export default function CompanyDetailsCard(props: Props) {
                     About company
                 </p>
 
-                <ul className="c-company-details-card__content-list">
-                    <li className="c-company-details-card__content-item">
-                        <span>Category:</span>
-                        <span>{ props.company.category.label }</span>
-                    </li>
+                <dl className="c-company-details-card__content-list">
+                    <div className="c-company-details-card__content-item">
+                        <dt>Category:</dt>
+                        <dd>{ props.company.category.label }</dd>
+                    </div>
 
-                    <li className="c-company-details-card__content-item">
-                        <span>Country:</span>
-                        <span>{ props.company.country.label }</span>
-                    </li>
+                    <div className="c-company-details-card__content-item">
+                        <dt>Country:</dt>
+                        <dd>{ props.company.country.label }</dd>
+                    </div>
 
-                    <li className="c-company-details-card__content-item">
-                        <span>Joined date:</span>
-                        <span>{ formateDate(props.company.joined_at, 'DD.MM.YYYY') }</span>
-                    </li>
-                </ul>
+                    <div className="c-company-details-card__content-item">
+                        <dt>Joined date:</dt>
+                        <dd>{ formateDate(props.company.joined_at, 'DD.MM.YYYY') }</dd>
+                    </div>
+
+                    {
+                        props.company.income &&
+                        <div className="c-company-details-card__content-item">
+                            <dt>Income:</dt>
+                            <dd>${ formatCurrency(props.company.income ) }</dd>
+                        </div>
+                    }
+
+                    {
+                        props.company.sold &&
+                        <div className="c-company-details-card__content-item">
+                            <dt>Sold:</dt>
+                            <dd>${ formatCurrency(props.company.sold ) }</dd>
+                        </div>
+                    }
+                </dl>
 
                 {
                     props.company.description &&

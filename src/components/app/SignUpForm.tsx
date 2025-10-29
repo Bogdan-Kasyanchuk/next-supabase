@@ -67,14 +67,14 @@ export default function SignUpForm() {
     };
 
     return (
-        <div className="c-form-block">
-            <h2 className="c-form-block__title">Sign up</h2>
+        <div className="c-auth-form-block">
+            <h2 className="c-auth-form-block__title">Sign up</h2>
   
             <form
                 onSubmit={ handleSignUp }
-                className="c-form-block__form"
+                className="c-auth-form-block__form"
             >
-                <div className="c-form-block__col-2">
+                <div className="c-auth-form-block__col-2">
                     <Input
                         type="text"
                         value={ firstName }
@@ -158,7 +158,7 @@ export default function SignUpForm() {
                 </Button>
             </form>
 
-            <div className="c-form-block__text">
+            <div className="c-auth-form-block__text">
                 Already have an account?{ ' ' }
 
                 <Link href={ pagesAuthLoginUrl() }>

@@ -3,6 +3,26 @@ import { MergeDeep } from 'type-fest';
 import { Database as DatabaseGenerated } from './db-types';
 import { CompanyStatusType } from './enums';
 
+export type CompanyInsertShema = {
+    category: {
+        label: string,
+        value: string
+    },
+    country: {
+        label: string,
+        value: string
+    },
+    description?: string,
+    has_promotions?: boolean,
+    income?: number,
+    joined_at?: string,
+    logo_url: string,
+    name: string,
+    sold?: number,
+    status: string,
+    user_id: string
+};
+
 export type CompanyShema = {
     category: {
         label: string,
@@ -22,6 +42,16 @@ export type CompanyShema = {
     sold: number | null,
     status: CompanyStatusType,
     user_id: string
+};
+
+export type PromotionInsertShema = {
+    company_id: string,
+    cover_url: string,
+    description: string,
+    discount: number,
+    end_at: string,
+    name: string,
+    start_at?: string
 };
 
 export type PromotionShema = {
@@ -49,6 +79,7 @@ export type Database = MergeDeep<
       public: {
           Tables: {
               companies: {
+                  Insert: CompanyInsertShema,   
                   Row: CompanyShema
               },
               profiles: {

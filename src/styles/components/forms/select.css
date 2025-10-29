@@ -1,0 +1,135 @@
+:root {
+    --f-select-height: 50px;
+    --f-select-border-width: 1px;
+    --f-select-border-color:var(--color-gray-300);
+    --f-select-border-radius: 4px;
+    --f-select-px: 20px;
+    --f-select-bg:  var(--color-primary);
+    --f-select-line-height: 24px;
+    --f-select-font-size: var(--text-sm);
+    --f-select-font-weight: 700;
+    --f-select-color: var(--color-secondary);
+    --f-select-placeholder-color: var(--color-gray-300);
+}
+
+.f-select {
+    display: block;
+
+    width: 100%;
+    min-height: var(--f-select-height);
+    padding: calc(var(--f-select-height) / 2 - var(--f-select-border-width) -
+    var(--f-select-line-height) / 2) var(--f-select-px);
+    border: var(--f-select-border-width) solid var(--f-select-border-color);
+    border-radius: var(--f-select-border-radius);
+
+    font-size: var(--f-select-font-size);
+    font-weight: var(--f-select-font-weight);
+    line-height: var(--f-select-line-height);
+    color: var(--f-select-color);
+
+    background-color: var(--f-select-bg);
+    outline: 2px solid transparent;
+
+    transition-property: border-color, outline;
+
+    &::placeholder {
+        color: var(--f-select-placeholder-color);
+    }
+
+    &:has(~ .f-select__section) {
+        padding-inline-end: var(--f-select-height);
+    }
+
+    .f-select__section ~ & {
+        padding-inline-start: var(--f-select-height);
+    }
+
+    &:not(&--error):focus {
+        --f-select-border-color: var(--color-secondary);
+
+        outline-color: var(--f-select-border-color);
+    }
+
+    &__wrapper {
+        position: relative;
+    }
+
+    &__section {
+        pointer-events: none;
+
+        position: absolute;
+        top: 0;
+        inset-inline-start: var(--f-select-border-width);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        min-width: var(--f-select-height);
+        height: var(--f-select-height);
+
+        text-decoration: none;
+
+        .f-select + & {
+            inset-inline-start: initial;
+            inset-inline-end: var(--f-select-border-width);
+        }
+    }
+
+    &--error {
+        --f-select-border-color: var(--color-danger);
+    }
+}
+
+.mantine-Select-dropdown {
+    position: absolute;
+
+    overflow-y: auto;
+
+    max-height: calc(var(--f-select-height) * 5);
+    border-radius: 4px;
+
+    font-size: var(--f-select-font-size);
+    font-weight: var(--f-select-font-weight);
+    color: var(--f-select-color);
+
+    background-color: var(--f-select-bg);
+    box-shadow: var(--shadow-custom);
+}
+
+.mantine-Select-option {
+    cursor: pointer;
+
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    min-height: var(--f-select-height);
+    padding: 12px 20px;
+
+    line-height: var(--f-select-line-height);
+
+    transition-property: background-color;
+
+    &[data-combobox-active='true'] {
+        background-color: var(--color-accent-second);
+    }
+
+    &[data-combobox-selected='true'] {
+        background-color: var(--color-accent-second);
+    }
+
+    @media (any-hover: hover) {
+        &:hover {
+            background-color: var(--color-accent-second);
+        }
+    }
+}
+
+.mantine-Select-empty {
+    min-height: var(--f-select-height);
+    padding: 12px 20px;
+    line-height: var(--f-select-line-height);
+}

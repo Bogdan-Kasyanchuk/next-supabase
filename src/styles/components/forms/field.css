@@ -58,7 +58,7 @@
 
     &--textarea {
         resize: none;
-        height: calc(var(--f-field-height) * 3.5);
+        height: calc(var(--f-field-height) * 2);
     }
 
     &:has(~ .f-field__section) {
@@ -92,13 +92,6 @@
         height: var(--f-field-height);
 
         text-decoration: none;
-
-        opacity: 0.5;
-
-        i {
-            width: var(--f-field-icon-size);
-            height: var(--f-field-icon-size);
-        }
 
         .f-field + & {
             inset-inline-start: initial;

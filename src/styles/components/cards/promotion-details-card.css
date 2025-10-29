@@ -40,17 +40,39 @@
     &__content {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 20px;
 
         padding: 20px;
 
-        font-size: var(--text-sm);
-        line-height: 1.2;
-        color: var(--color-secondary)
-    }
-
-    &__title {
         font-size: var(--text-md);
-        font-weight: 700;
+        line-height: 1.2;
+        color: var(--color-secondary);
+
+        &-title {
+            font-size: var(--text-lg);
+            font-weight: 700;
+        }
+
+        &-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        &-item {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+
+            dd {
+                font-weight: 500;
+            }
+        }
+
+        &-description {
+            padding-top: 20px;
+            border-top: 1px solid var(--color-gray-300);
+            line-height: 1.4;
+        }
     }
 }

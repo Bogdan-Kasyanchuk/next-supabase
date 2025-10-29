@@ -67,6 +67,27 @@ export type Database = {
                     }
                 ]
             },
+            coordinates_countries: {
+                Row: {
+                    code: string,
+                    id: string,
+                    lat: number,
+                    lng: number
+                },
+                Insert: {
+                    code: string,
+                    id?: string,
+                    lat: number,
+                    lng: number
+                },
+                Update: {
+                    code?: string,
+                    id?: string,
+                    lat?: number,
+                    lng?: number
+                },
+                Relationships: []
+            },
             profiles: {
                 Row: {
                     avatar_url: string,
@@ -134,7 +155,32 @@ export type Database = {
             }
         },
         Views: {
-            [_ in never]: never
+            companies_by_category: {
+                Row: {
+                    count: number | null,
+                    label: string | null
+                },
+                Relationships: []
+            },
+            companies_by_country: {
+                Row: {
+                    count: number | null,
+                    label: string | null,
+                    lat: number | null,
+                    lng: number | null
+                },
+                Relationships: []
+            },
+            general_statistics: {
+                Row: {
+                    new_companies: number | null,
+                    total_active_companies: number | null,
+                    total_categories: number | null,
+                    total_companies: number | null,
+                    total_promotions: number | null
+                },
+                Relationships: []
+            }
         },
         Functions: {
             [_ in never]: never

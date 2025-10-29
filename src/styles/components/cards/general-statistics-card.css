@@ -1,0 +1,59 @@
+.c-general-statistics-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-between;
+
+    min-height: 110px;
+    padding: 20px;
+    border-radius: 4px;
+
+    color: var(--color-secondary);
+
+    &--gradient {
+        background-size: cover;
+
+        &:nth-child(4n + 1) {
+            background-image: url('/svg/mesh-gradient-1.svg');
+        }
+
+        &:nth-child(4n + 2) {
+            background-image: url('/svg/mesh-gradient-2.svg');
+        }
+
+        &:nth-child(4n + 3) {
+            background-image: url('/svg/mesh-gradient-3.svg');
+        }
+
+        &:nth-child(4n + 4) {
+            background-image: url('/svg/mesh-gradient-4.svg');
+        }
+    }
+
+    &__label {
+        font-size: var(--text-xs);
+        line-height: 1.25;
+
+        &::before {
+            content: '';
+
+            display: inline-block;
+
+            width: 16px;
+            height: 2px;
+            margin-inline-end: 8px;
+            border-radius: 4px;
+
+            vertical-align: middle;
+
+            background-color: currentcolor;
+        }
+    }
+
+    &__count {
+        padding-inline-start: 24px;
+        font-size: var(--text-6xl);
+        font-weight: 700;
+        line-height: 1;
+    }
+}

@@ -18,7 +18,7 @@ export async function getPromotions(query: string) {
         `).ilike('name', `%${ query }%`);
 
     if (error || !data) {
-        throw new Error('Error loading promotions:', error);
+        throw new Error(`Error loading promotions: ${ error.message }`);
     }
 
     return data as PromotionMapper[];
@@ -33,7 +33,10 @@ export async function deletePromotion(id: string) {
         .eq('id', id);
 
     if (error) {
-        throw new Error('Error deleting promotion:', error);
+        // eslint-disable-next-line no-console
+        console.error('Error deleting promotion:', error.message);
+
+        return;
     }
 
     revalidatePath('/admin');

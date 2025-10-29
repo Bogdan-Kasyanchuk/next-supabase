@@ -39,4 +39,7 @@
     --breakpoint-xl: 1320px;
     --breakpoint-xxl: 1440px;
     --breakpoint-xxxl: 1600px;
+
+    /* Shadows */
+    --shadow-custom: 0 2px 32px rgba(0, 0, 0, 0.1);
 }

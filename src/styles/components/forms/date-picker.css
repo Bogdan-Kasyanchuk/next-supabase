@@ -1,0 +1,288 @@
+:root {
+    --f-date-picker-height: 50px;
+    --f-date-picker-border-width: 1px;
+    --f-date-picker-border-color:var(--color-gray-300);
+    --f-date-picker-border-radius: 4px;
+    --f-date-picker-px: 20px;
+    --f-date-picker-bg: var(--color-primary);
+    --f-date-picker-line-height: 24px;
+    --f-date-picker-font-size: var(--text-sm);
+    --f-date-picker-font-weight: 700;
+    --f-date-picker-color: var(--color-secondary);
+    --f-date-picker-placeholder-color: var(--color-gray-300);
+}
+
+.f-date-picker {
+    display: block;
+
+    width: 100%;
+    min-height: var(--f-date-picker-height);
+    padding: calc(var(--f-date-picker-height) / 2 - var(--f-date-picker-border-width) -
+    var(--f-date-picker-line-height) / 2) var(--f-date-picker-px);
+    border: var(--f-date-picker-border-width) solid var(--f-date-picker-border-color);
+    border-radius: var(--f-date-picker-border-radius);
+
+    font-size: var(--f-date-picker-font-size);
+    font-weight: var(--f-date-picker-font-weight);
+    line-height: var(--f-date-picker-line-height);
+    color: var(--f-date-picker-color);
+
+    background-color: var(--f-date-picker-bg);
+    outline: 2px solid transparent;
+
+    transition-property: border-color, outline;
+
+    &::placeholder {
+        color: var(--f-date-picker-placeholder-color);
+    }
+
+    &:has(~ .f-date-picker__section) {
+        padding-inline-end: var(--f-date-picker-height);
+    }
+
+    .f-date-picker__section ~ & {
+        padding-inline-start: var(--f-date-picker-height);
+    }
+
+    &:not(&--error):focus {
+        --f-date-picker-border-color: var(--color-secondary);
+
+        outline-color: var(--f-date-picker-border-color);
+    }
+
+    &__wrapper {
+        position: relative;
+    }
+
+    &__section {
+        position: absolute;
+        top: 0;
+        inset-inline-start: var(--f-date-picker-border-width);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        min-width: var(--f-date-picker-height);
+        height: var(--f-date-picker-height);
+
+        color: var(--f-date-picker-placeholder-color);
+        text-decoration: none;
+
+        .f-date-picker + & {
+            inset-inline-start: initial;
+            inset-inline-end: var(--f-date-picker-border-width);
+            color: var(--f-date-picker-color);
+        }
+    }
+
+    &--error {
+        --f-date-picker-border-color: var(--color-danger);
+    }
+}
+
+.f-date-picker__dropdown {
+    --f-date-picker-cell-size: 32px;
+    --f-date-picker-cell-p: 4px;
+
+    position: absolute;
+
+    min-width: 298px;
+    max-width: min(298px, calc(100vw - 20px));
+    padding: 16px;
+    border-radius: 4px;
+
+    font-size: var(--f-date-picker-font-size);
+    font-weight: var(--f-date-picker-font-weight);
+    color: var(--f-date-picker-color);
+
+    background-color: var(--f-date-picker-bg);
+    outline: 0;
+    box-shadow: var(--shadow-custom);
+
+    &-header {
+        display: flex;
+        column-gap: 10px;
+        align-self: center;
+        justify-content: space-between;
+
+        margin-bottom: 12px;
+
+        line-height: 1;
+
+        &-control {
+            display: flex;
+            flex-shrink: 0;
+            align-items: center;
+            justify-content: center;
+
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+
+            background-color: var(--color-accent-second);
+
+            transition-property: opacity;
+
+            &:disabled {
+                pointer-events: none;
+                opacity: 0.5;
+            }
+
+            svg {
+                min-width: 14px;
+                min-height: 14px;
+            }
+
+            &[data-direction='previous'] {
+                order: 1;
+
+                svg {
+                    transform: rotate(90deg);
+                }
+            }
+
+            &[data-direction='next'] {
+                order: 2;
+
+                svg {
+                    transform: rotate(-90deg);
+                }
+            }
+
+            @media (any-hover: hover) {
+                &:hover {
+                    opacity: 0.75;
+                }
+            }
+        }
+
+        &-level {
+            display: flex;
+            align-items: center;
+            order: 0;
+
+            margin-inline-end: auto;
+
+            font-size: var(--text-md);
+            font-weight: 700;
+            text-wrap: nowrap;
+
+            transition-property: opacity;
+
+            @media (any-hover: hover) {
+                &[type='button']:hover {
+                    opacity: 0.75;
+                }
+            }
+        }
+    }
+
+    &-weekday {
+        height: 20px;
+        font-size: var(--text-2xs);
+        color: rgba(34, 34, 34, 0.5);
+    }
+
+    &-day {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: var(--f-date-picker-cell-size);
+        height: var(--f-date-picker-cell-size);
+        padding: var(--f-date-picker-cell-p);
+
+        transition-property: background-color, opacity;
+
+        &[data-outside='true'] {
+            opacity: 0.5;
+        }
+
+        &[data-selected='true'] {
+            pointer-events: none;
+            background-color: var(--color-accent-second);
+        }
+
+        &[data-today='true'] {
+            color: var(--color-danger);
+        }
+
+        &[data-disabled='true'] {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        @media (any-hover: hover) {
+            &:not([data-disabled='true']):hover {
+                background-color: var(--color-accent-second);
+            }
+        }
+    }
+
+    &-month-cell {
+        padding: 3px;
+    }
+
+    &-months-list,
+    &-years-list {
+        width: 100%;
+    }
+
+    &-months-list-cell,
+    &-years-list-cell {
+        width: calc(100% / 3);
+        padding: 3px;
+        text-align: center;
+
+        button {
+            min-width: 50px;
+            height: var(--f-date-picker-cell-size);
+            transition-property: background-color, opacity;
+
+            &:disabled {
+                cursor: not-allowed;
+                opacity: 0.5;
+            }
+
+            @media (any-hover: hover) {
+                &:not([disabled]):hover {
+                    background-color: var(--color-accent-second);
+                }
+            }
+        }
+    }
+}
+
+.mantine-InputClearButton-root {
+    --cb-icon-size: 20px;
+
+    position: absolute;
+    top: 0;
+    inset-inline-start: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+
+    line-height: 1;
+
+    opacity: 0.5;
+
+    transition-property: opacity;
+
+    /* stylelint-disable-next-line no-descending-specificity */
+    i {
+        width: var(--cb-icon-size);
+        height: var(--cb-icon-size);
+    }
+
+    @media (any-hover: hover) {
+        &:hover {
+            opacity: 1;
+        }
+    }
+}

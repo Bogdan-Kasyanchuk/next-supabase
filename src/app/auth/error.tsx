@@ -9,7 +9,7 @@ type Props = {
 
 export default function ErrorComponent(props: Props) {
     return (
-        <div className="flex flex-col gap-5 items-center justify-center w-full">
+        <div className="flex-center flex-col gap-5 w-full">
             <p className="text-5xl font-bold leading-[1.2]">
                 Something went wrong 
             </p>
