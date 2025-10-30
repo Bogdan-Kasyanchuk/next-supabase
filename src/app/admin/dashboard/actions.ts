@@ -48,9 +48,9 @@ export async function getGeneralStatistics() {
 export async function getTradeStatistics() {
     const supabase = await createSupabaseServerClient();
     
-    const { data, error } = await supabase.from('companies').select(
-        'id, name, logo_url, sold, income'
-    );
+    const { data, error } = await supabase
+        .from('companies')
+        .select( 'id, name, logo_url, sold, income');
 
     if (error || !data) {
         // eslint-disable-next-line no-console
@@ -101,16 +101,7 @@ export async function getPromotionsStatistics() {
 
     const { data, error } = await supabase
         .from('promotions')
-        .select(`
-      id,
-      name,
-      discount,
-      company:companies (
-        id,
-        name,
-        logo_url
-      )
-    `);
+        .select('id, name, discount, company:companies (id, name, logo_url)');
 
     if (error || !data) {
         // eslint-disable-next-line no-console

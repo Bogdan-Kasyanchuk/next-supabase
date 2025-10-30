@@ -23,9 +23,9 @@ export async function createPromotion(companyId: string, formData: FormData) {
     
     newPromotion.company_id = companyId;
 
-    const { error } = await supabase.from('promotions').insert(
-        newPromotion as PromotionInsertShema
-    );
+    const { error } = await supabase
+        .from('promotions')
+        .insert( newPromotion as PromotionInsertShema);
 
     if (error) {
         // eslint-disable-next-line no-console

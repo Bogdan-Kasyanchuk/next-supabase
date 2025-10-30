@@ -8,14 +8,15 @@ import { PromotionMapper } from '@/types';
 export async function getPromotions(query: string) {
     const supabase = await createSupabaseServerClient();
     
-    const { data, error } = await supabase.from('promotions').select(`
-        cover_url,
-        start_at,
-        end_at,
-        discount,
-        id,
-        name
-        `).ilike('name', `%${ query }%`);
+    let request = supabase
+        .from('promotions')
+        .select('cover_url, start_at, end_at, discount, id, name');
+
+    if (query.trim()) {
+        request = request.ilike('name', `%${ query }%`);
+    }
+
+    const { data, error } = await request;
 
     if (error || !data) {
         throw new Error(`Error loading promotions: ${ error.message }`);

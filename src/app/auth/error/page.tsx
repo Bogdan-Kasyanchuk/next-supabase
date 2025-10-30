@@ -13,7 +13,7 @@ type Props = {
 };
 
 export default async function Page(props: Props) {
-    const params = await props.searchParams;
+    const searchParams = await props.searchParams;
 
     return (
         <div className="c-auth-form-block">
@@ -23,8 +23,8 @@ export default async function Page(props: Props) {
 
             <div className="c-auth-form-block__text">
                 {
-                    params.error 
-                        ? <p>Code error: { params.error }</p>
+                    searchParams.error 
+                        ? <p>Code error: { searchParams.error }</p>
                         : <p>An unspecified error occurred.</p>
                 }
             </div>

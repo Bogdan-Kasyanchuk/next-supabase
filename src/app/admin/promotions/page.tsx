@@ -15,8 +15,9 @@ type Props = {
 };
 
 export default async function Page(props: Props) {
-    const params = await props.searchParams;
-    const query = params?.query || '';
+    const searchParams = await props.searchParams;
+
+    const query = searchParams.query ?? '';
 
     const promotions = await getPromotions(query);
 

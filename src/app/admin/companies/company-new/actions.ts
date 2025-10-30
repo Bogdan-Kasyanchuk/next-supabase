@@ -42,7 +42,9 @@ export async function createCompany(formData: FormData) {
     
     newCompany.user_id = user.id;
 
-    const { error } = await supabase.from('companies').insert(newCompany as CompanyInsertShema);
+    const { error } = await supabase
+        .from('companies')
+        .insert(newCompany as CompanyInsertShema);
 
     if (error) {
         // eslint-disable-next-line no-console

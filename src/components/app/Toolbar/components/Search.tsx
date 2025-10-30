@@ -24,6 +24,8 @@ export default function Search(props: Props) {
         } else {
             params.delete('query');
         }
+
+        params.delete('page');
         
         replace(`${ pathname }?${ params.toString() }`);
     }, 250);

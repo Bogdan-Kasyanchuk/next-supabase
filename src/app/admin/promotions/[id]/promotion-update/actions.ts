@@ -21,9 +21,10 @@ export async function updatePromotion(id: string, formData: FormData) {
         newPromotion[ key as Key ] = value;
     }
 
-    const { error } = await supabase.from('promotions').update(
-        newPromotion as PromotionInsertShema
-    ).eq('id', id);
+    const { error } = await supabase
+        .from('promotions')
+        .update(newPromotion as PromotionInsertShema)
+        .eq('id', id);
 
     if (error) {
         // eslint-disable-next-line no-console

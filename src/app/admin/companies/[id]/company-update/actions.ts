@@ -31,9 +31,10 @@ export async function updateCompany(id: string, formData: FormData) {
         }
     }
     
-    const { error } = await supabase.from('companies').update(
-        newCompany as CompanyInsertShema
-    ).eq('id', id);
+    const { error } = await supabase
+        .from('companies')
+        .update(newCompany as CompanyInsertShema)
+        .eq('id', id);
 
     if (error) {
         // eslint-disable-next-line no-console
