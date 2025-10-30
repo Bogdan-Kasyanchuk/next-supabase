@@ -5,24 +5,35 @@ import { revalidatePath } from 'next/cache';
 import createSupabaseServerClient from '@/lib/supabase/server';
 import { PromotionMapper } from '@/types';
 
-export async function getPromotions(query: string) {
+export async function getPromotions(page: number, limit: number, query: string) {
+    const from = 0;
+    const to = (page - 1) * limit + limit - 1;
+    
     const supabase = await createSupabaseServerClient();
     
     let request = supabase
         .from('promotions')
-        .select('cover_url, start_at, end_at, discount, id, name');
+        .select(
+            'cover_url, start_at, end_at, discount, id, name',
+            { count: 'exact' }
+        )
+        .order('start_at', { ascending: false })
+        .range(from, to);
 
     if (query.trim()) {
         request = request.ilike('name', `%${ query }%`);
     }
 
-    const { data, error } = await request;
+    const { data, count, error } = await request;
 
     if (error || !data) {
         throw new Error(`Error loading promotions: ${ error.message }`);
     }
 
-    return data as PromotionMapper[];
+    return {
+        promotions: data as PromotionMapper[],
+        count
+    };
 }
 
 export async function deletePromotion(id: string) {

@@ -35,9 +35,10 @@ export default function UpdatePromotionForm(props: Props) {
 
                         <div className="h-[200px] relative">
                             <Image
-                                fill
                                 src={ props.initialValues.cover_url }
                                 alt="Image"
+                                sizes="690px"
+                                fill
                             />
                         </div>
                     </div>

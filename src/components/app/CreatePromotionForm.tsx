@@ -36,9 +36,10 @@ export default function CreatePromotionForm(props: Props) {
 
                         <div className="h-[200px] relative">
                             <Image
-                                fill
                                 src={ cover }
                                 alt="Image"
+                                sizes="690px"
+                                fill
                             />
                         </div>
 

@@ -21,6 +21,7 @@ export default function PromotionCard(props: Props) {
                     <Image
                         src={ props.promotion.cover_url }
                         alt={ props.promotion.name }
+                        sizes="400px"
                         fill
                     />
                 </div>

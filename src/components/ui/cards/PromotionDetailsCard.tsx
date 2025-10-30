@@ -12,9 +12,10 @@ export default function PromotionDetailsCard(props: Props) {
         <div className="c-promotion-details-card">
             <div className="c-promotion-details-card__cover">
                 <Image
-                    fill
                     src={ props.promotion.cover_url }
                     alt={ props.promotion.name }
+                    sizes="540px"
+                    fill
                 />
             </div>
 
