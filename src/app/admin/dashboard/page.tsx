@@ -15,11 +15,9 @@ export const metadata: Metadata = {
 export default function Page() {
     return (
         <div className="flex flex-col gap-5 w-full overflow-y-auto p-5">
-            <div className="">
-                <Suspense fallback={ <Loader /> }>
-                    <GeneralStatistics />
-                </Suspense>
-            </div>
+            <Suspense fallback={ <Loader /> }>
+                <GeneralStatistics />
+            </Suspense>
 
             <div className="flex flex-col gap-5 lg:flex-row">
                 <div className="max-h-[398px] grow">
@@ -28,11 +26,9 @@ export default function Page() {
                     </Suspense>
                 </div>
 
-                <div className="">
-                    <Suspense fallback={ <Loader /> }>
-                        <CategoriesStatistics />
-                    </Suspense>
-                </div>
+                <Suspense fallback={ <Loader /> }>
+                    <CategoriesStatistics />
+                </Suspense>
             </div>
 
             <div className="flex flex-col gap-5 xl:flex-row">
