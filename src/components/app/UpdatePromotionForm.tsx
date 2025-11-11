@@ -50,7 +50,6 @@ export default function UpdatePromotionForm(props: Props) {
                         placeholder="Name"
                         defaultValue={ props.initialValues.name }
                         autoComplete="off"
-                        minLength={ 3 }
                         required
                     />
 
@@ -93,7 +92,6 @@ export default function UpdatePromotionForm(props: Props) {
                                 field: 'md:h-[200px]'
                             }
                         }
-                        minLength={ 3 }
                         required
                     />
                 </div>

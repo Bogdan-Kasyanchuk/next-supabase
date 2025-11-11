@@ -45,10 +45,7 @@ export async function deletePromotion(id: string) {
         .eq('id', id);
 
     if (error) {
-        // eslint-disable-next-line no-console
-        console.error('Error deleting promotion:', error.message);
-
-        return;
+        throw new Error(error.message);
     }
 
     revalidatePath('/admin');

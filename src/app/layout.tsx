@@ -1,7 +1,7 @@
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import { PropsWithChildren, ReactNode } from 'react';
+import { Toaster } from 'sonner';
 
-// import Footer from '@/components/app/Footer';
 import Header from '@/components/app/Header';
 
 import type { Metadata } from 'next';
@@ -32,8 +32,18 @@ export default function RootLayout(props: PropsWithChildren<Props>) {
                 <main>
                     { props.children }
                 </main>
-                
-                { /* <Footer /> */ }
+
+                <Toaster
+                    richColors
+                    position="top-right"
+                    toastOptions={
+                        {
+                            style: {
+                                padding: '10px'
+                            }
+                        }
+                    }
+                />
             </body>
         </html>
     );

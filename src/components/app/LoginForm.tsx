@@ -6,6 +6,7 @@ import { FormEvent, useState } from 'react';
 
 import createSupabaseBrowserClient from '@/lib/supabase/client';
 import { pagesAuthForgotPasswordUrl, pagesAuthSignUpUrl, pagesDashboardUrl } from '@/routes';
+import cn from '@/utils/cn';
 
 import Button from '../ui/buttons/Button';
 import Input from '../ui/inputs/Input';
@@ -46,7 +47,15 @@ export default function LoginForm() {
     };
 
     return (
-        <div className="c-auth-form-block">
+        <div
+            className={
+                cn('c-auth-form-block',
+                    {
+                        'c-auth-form-block--error': error
+                    }
+                )
+            }
+        >
             <h2 className="c-auth-form-block__title">Login</h2>
 
             <form
@@ -59,10 +68,10 @@ export default function LoginForm() {
                     label="Email"
                     placeholder="email@example.com"
                     required
-                    error={ error }
                     onChange={ 
                         e => {
                             setEmail(e.target.value.trim());
+                            setError(undefined);
                         } 
                     }
                 />
@@ -73,13 +82,20 @@ export default function LoginForm() {
                     label="Password"
                     placeholder="Password"
                     required
-                    error={ error }
                     onChange={ 
                         e => {
                             setPassword(e.target.value.trim());
+                            setError(undefined);
                         } 
                     }
                 />
+
+                {
+                    error &&
+                    <div className="c-auth-form-block__error">
+                        { error }
+                    </div>
+                }
 
                 <div className="c-auth-form-block__text">
                     <Link href={ pagesAuthForgotPasswordUrl() }>

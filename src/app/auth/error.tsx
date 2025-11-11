@@ -11,7 +11,7 @@ export default function ErrorComponent(props: Props) {
     return (
         <div className="flex-center flex-col gap-5 w-full">
             <p className="text-5xl font-bold leading-[1.2]">
-                Something went wrong 
+                Sorry, something went wrong
             </p>
 
             <p className="text-md leading-[1.2]">

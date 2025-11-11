@@ -1,5 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { toast } from 'sonner';
 
 import { deleteCompany } from '@/app/admin/companies/actions';
 import Badge from '@/components/ui/data-display/Badge';
@@ -92,8 +95,19 @@ export default function Row(props: Props) {
             
             <td className="c-companies-table__delete">
                 <DeleteButton
-                    actionProps={ props.company.id }
-                    action={ deleteCompany }
+                    action={
+                        async () => {
+                            try {
+                                await deleteCompany(props.company.id);
+
+                                toast.success('Company deleted successfully');
+                            } catch (error) {
+                                toast.error('Error deleting company', {
+                                    description: (error as Error).message
+                                });
+                            }
+                        } 
+                    }
                 />
             </td>
         </tr>

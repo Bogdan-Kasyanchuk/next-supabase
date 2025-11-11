@@ -14,6 +14,21 @@ export type Database = {
     },
     public: {
         Tables: {
+            categories: {
+                Row: {
+                    label: string,
+                    value: string
+                },
+                Insert: {
+                    label: string,
+                    value: string
+                },
+                Update: {
+                    label?: string,
+                    value?: string
+                },
+                Relationships: []
+            },
             companies: {
                 Row: {
                     category: Json,
@@ -67,24 +82,24 @@ export type Database = {
                     }
                 ]
             },
-            coordinates_countries: {
+            countries: {
                 Row: {
-                    code: string,
-                    id: string,
+                    label: string,
                     lat: number,
-                    lng: number
+                    lng: number,
+                    value: string
                 },
                 Insert: {
-                    code: string,
-                    id?: string,
+                    label: string,
                     lat: number,
-                    lng: number
+                    lng: number,
+                    value: string
                 },
                 Update: {
-                    code?: string,
-                    id?: string,
+                    label?: string,
                     lat?: number,
-                    lng?: number
+                    lng?: number,
+                    value?: string
                 },
                 Relationships: []
             },
@@ -183,7 +198,7 @@ export type Database = {
             }
         },
         Functions: {
-            [_ in never]: never
+            user_email_exists: { Args: { check_email: string }, Returns: boolean }
         },
         Enums: {
             [_ in never]: never

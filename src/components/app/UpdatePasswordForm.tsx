@@ -5,6 +5,7 @@ import { FormEvent, useState } from 'react';
 
 import createSupabaseBrowserClient from '@/lib/supabase/client';
 import { pagesDashboardUrl } from '@/routes';
+import cn from '@/utils/cn';
 
 import Button from '../ui/buttons/Button';
 import Input from '../ui/inputs/Input';
@@ -41,7 +42,15 @@ export default function UpdatePasswordForm() {
     };
 
     return (
-        <div className="c-auth-form-block">
+        <div
+            className={
+                cn('c-auth-form-block',
+                    {
+                        'c-auth-form-block--error': error
+                    }
+                )
+            }
+        >
             <h2 className="c-auth-form-block__title">Reset your password</h2>
             
             <form
@@ -54,13 +63,19 @@ export default function UpdatePasswordForm() {
                     label="New password"
                     placeholder="Password"
                     required
-                    error={ error }
                     onChange={ 
                         e => {
                             setPassword(e.target.value.trim());
                         } 
                     }
                 />
+
+                {
+                    error &&
+                    <div className="c-auth-form-block__error">
+                        { error }
+                    </div>
+                }
 
                 <Button
                     type="submit"

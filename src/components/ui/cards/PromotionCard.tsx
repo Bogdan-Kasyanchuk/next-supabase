@@ -1,5 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { toast } from 'sonner';
 
 import { deletePromotion } from '@/app/admin/promotions/actions';
 import DeleteButton from '@/components/app/DeleteButton';
@@ -50,8 +53,19 @@ export default function PromotionCard(props: Props) {
 
             <DeleteButton
                 className="c-promotion-card__delete"
-                actionProps={ props.promotion.id }
-                action={ deletePromotion }
+                action={
+                    async () => {
+                        try {
+                            await deletePromotion( props.promotion.id);
+
+                            toast.success('Promotion deleted successfully');
+                        } catch (error) {
+                            toast.error('Error deleting promotion', {
+                                description: (error as Error).message
+                            });
+                        }
+                    } 
+                }
             />
         </div>
     );

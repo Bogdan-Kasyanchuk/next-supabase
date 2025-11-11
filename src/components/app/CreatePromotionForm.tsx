@@ -58,7 +58,6 @@ export default function CreatePromotionForm(props: Props) {
                         label="Name"
                         placeholder="Name"
                         autoComplete="off"
-                        minLength={ 3 }
                         required
                     />
 
@@ -98,7 +97,6 @@ export default function CreatePromotionForm(props: Props) {
                                 field: 'md:h-[200px]'
                             }
                         }
-                        minLength={ 3 }
                         required
                     />
                 </div>

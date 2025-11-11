@@ -69,10 +69,18 @@
         padding-inline-start: var(--f-field-height);
     }
 
+    .c-auth-form-block--error & {
+        --f-field-border-color: var(--color-danger);
+    }
+
     &:not(&--error):focus {
         --f-field-border-color: var(--color-secondary);
 
         outline-color: var(--f-field-border-color);
+    }
+
+    .c-auth-form-block--error &:focus {
+        --f-field-border-color: var(--color-danger);
     }
 
     &__wrapper {
@@ -101,5 +109,9 @@
 
     &--error {
         --f-field-border-color: var(--color-danger);
+
+        &:focus {
+            outline-color: var(--f-field-border-color);
+        }
     }
 }

@@ -5,6 +5,7 @@ import { FormEvent, useState } from 'react';
 
 import createSupabaseBrowserClient from '@/lib/supabase/client';
 import { pagesAuthLoginUrl, pagesAuthUpdatePasswordUrl } from '@/routes';
+import cn from '@/utils/cn';
 
 import Button from '../ui/buttons/Button';
 import Input from '../ui/inputs/Input';
@@ -42,7 +43,15 @@ export default function ForgotPasswordForm() {
     };
 
     return (
-        <div className="c-auth-form-block">
+        <div
+            className={
+                cn('c-auth-form-block',
+                    {
+                        'c-auth-form-block--error': error
+                    }
+                )
+            }
+        >
             {
                 isSuccess
                     ? <>
@@ -69,13 +78,19 @@ export default function ForgotPasswordForm() {
                                 label="Email"
                                 placeholder="email@example.com"
                                 required
-                                error={ error }
                                 onChange={ 
                                     e => {
                                         setEmail(e.target.value.trim());
                                     } 
                                 }
                             />
+
+                            {
+                                error &&
+                                <div className="c-auth-form-block__error">
+                                    { error }
+                                </div>
+                            }
 
                             <Button
                                 type="submit"

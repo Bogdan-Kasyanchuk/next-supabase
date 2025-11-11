@@ -41,7 +41,5 @@
 @import '../parts/sidebar/sidebar.css' layer(base);
 @import '../parts/toolbar/toolbar.css' layer(base);
 
-/* @import '../parts/footer/footer.css' layer(base); */
-
 /* Layouts */
 @import '../layouts/container.css' layer(base);

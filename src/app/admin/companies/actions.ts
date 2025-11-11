@@ -45,10 +45,7 @@ export async function deleteCompany(id: string) {
         .eq('id', id);
 
     if (error) {
-        // eslint-disable-next-line no-console
-        console.error('Error deleting company:', error.message);
-
-        return;
+        throw new Error(error.message);
     }
 
     revalidatePath('/admin');

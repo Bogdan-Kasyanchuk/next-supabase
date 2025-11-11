@@ -7,6 +7,7 @@ import { FormEvent, useState } from 'react';
 import { PARAMETERS } from '@/helpers/parameters';
 import createSupabaseBrowserClient from '@/lib/supabase/client';
 import { pagesAuthLoginUrl, pagesAuthSignUpSuccessUrl, pagesDashboardUrl } from '@/routes';
+import cn from '@/utils/cn';
 import normalizeUrl from '@/utils/normalizeUrl';
 
 import Button from '../ui/buttons/Button';
@@ -39,6 +40,19 @@ export default function SignUpForm() {
         setPasswordMatchError(undefined);
 
         try {
+            const { data: existsData, error: existsErr } = await supabase.rpc(
+                'user_email_exists',
+                { check_email: email }
+            );
+
+            if (existsErr) {
+                throw existsErr;
+            }
+
+            if (existsData) {
+                throw new Error('User with this email already exists');
+            }
+    
             const { error } = await supabase.auth.signUp({
                 email,
                 password,
@@ -67,7 +81,15 @@ export default function SignUpForm() {
     };
 
     return (
-        <div className="c-auth-form-block">
+        <div
+            className={
+                cn('c-auth-form-block',
+                    {
+                        'c-auth-form-block--error': error
+                    }
+                )
+            }
+        >
             <h2 className="c-auth-form-block__title">Sign up</h2>
   
             <form
@@ -81,10 +103,10 @@ export default function SignUpForm() {
                         label="First name"
                         placeholder="John"
                         required
-                        error={ error }
                         onChange={ 
                             e => {
                                 setFirstName(e.target.value.trim());
+                                setError(undefined);
                             } 
                         }
                     />
@@ -94,10 +116,10 @@ export default function SignUpForm() {
                         value={ lastName }
                         label="Last name"
                         placeholder="Doe"
-                        error={ error }
                         onChange={ 
                             e => {
                                 setLastName(e.target.value.trim());
+                                setError(undefined);
                             } 
                         }
                     />
@@ -109,10 +131,10 @@ export default function SignUpForm() {
                     label="Email"
                     placeholder="email@example.com"
                     required
-                    error={ error }
                     onChange={ 
                         e => {
                             setEmail(e.target.value.trim());
+                            setError(undefined);
                         } 
                     }
                 />
@@ -123,11 +145,12 @@ export default function SignUpForm() {
                     label="Password"
                     placeholder="Password"
                     required
-                    error={ passwordMatchError || error }
+                    error={ passwordMatchError }
                     onChange={ 
                         e => {
                             setPassword(e.target.value.trim());
                             setPasswordMatchError(undefined);
+                            setError(undefined);
                         } 
                     }
                 />
@@ -143,9 +166,17 @@ export default function SignUpForm() {
                         e => {
                             setRepeatPassword(e.target.value.trim());
                             setPasswordMatchError(undefined);
+                            setError(undefined);
                         } 
                     }
                 />
+
+                {
+                    error &&
+                    <div className="c-auth-form-block__error">
+                        { error }
+                    </div>
+                }
                 
                 <Button
                     type="submit"

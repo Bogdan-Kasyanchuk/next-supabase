@@ -61,7 +61,6 @@ export default function UpdateCompanyForm(props: Props) {
                         placeholder="Name"
                         defaultValue={ props.initialValues.name }
                         autoComplete="off"
-                        minLength={ 3 }
                         required
                     />
 
@@ -124,7 +123,6 @@ export default function UpdateCompanyForm(props: Props) {
                         label="Description"
                         placeholder="Description"
                         defaultValue={ props.initialValues.description ?? undefined }
-                        minLength={ 3 }
                     />
                 </div>
             </div>

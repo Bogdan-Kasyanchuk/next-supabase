@@ -53,7 +53,6 @@ export default function CreateCompanyForm() {
                         label="Name"
                         placeholder="Name"
                         autoComplete="off"
-                        minLength={ 3 }
                         required
                     />
 
@@ -109,7 +108,6 @@ export default function CreateCompanyForm() {
                         name="description"
                         label="Description"
                         placeholder="Description"
-                        minLength={ 3 }
                     />
                 </div>
             </div>
