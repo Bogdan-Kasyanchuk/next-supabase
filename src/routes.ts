@@ -1,7 +1,6 @@
 export const pagesHomeUrl = () => '/';
 
-// ---------
-
+// Auth
 export const pagesAuthLoginUrl = () => '/auth/login';
 
 export const pagesAuthSignUpUrl = () => '/auth/sign-up';
@@ -14,8 +13,7 @@ export const pagesAuthForgotPasswordUrl = () => '/auth/forgot-password';
 
 export const pagesAuthSignUpSuccessUrl = () => '/auth/sign-up-success';
 
-// ---------
-
+// Admin
 export const pagesDashboardUrl = () => '/admin/dashboard';
 
 export const pagesCompaniesUrl = () => '/admin/companies';

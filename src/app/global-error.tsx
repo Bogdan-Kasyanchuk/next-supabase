@@ -1,17 +1,15 @@
 'use client';
 
-import Container from '@/components/ui/layouts/Container';
-
 export default function Error() {
     return (
         <html lang="en">
             <body>
                 <main>
-                    <Container className="flex-center">
+                    <div className="flex items-center justify-center w-full">
                         <p className="text-5xl font-bold leading-[1.2]">
                             Something globally went wrong
                         </p>
-                    </Container>
+                    </div>
                 </main>
             </body>
         </html>
