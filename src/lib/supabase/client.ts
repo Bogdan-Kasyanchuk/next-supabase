@@ -1,8 +1,8 @@
 import { createBrowserClient } from '@supabase/ssr';
 
-import { PARAMETERS } from '@/helpers/parameters';
+import { CONSTANTS } from '@/datasets/constants';
 import { Database } from '@/shemas';
 
 export default function createSupabaseBrowserClient() {
-    return createBrowserClient<Database>(PARAMETERS.SUPABASE_URL, PARAMETERS.SUPABASE_KEY);
+    return createBrowserClient<Database>(CONSTANTS.SUPABASE_URL, CONSTANTS.SUPABASE_KEY);
 }

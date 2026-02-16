@@ -1,7 +1,7 @@
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 
-import { PARAMETERS } from '@/helpers/parameters';
+import { CONSTANTS } from '@/datasets/constants';
 import { Database } from '@/shemas';
 
 /**
@@ -13,8 +13,8 @@ export default async function createSupabaseServerClient() {
     const cookieStore = await cookies();
 
     return createServerClient<Database>(
-        PARAMETERS.SUPABASE_URL,
-        PARAMETERS.SUPABASE_KEY,
+        CONSTANTS.SUPABASE_URL,
+        CONSTANTS.SUPABASE_KEY,
         {
             cookies: {
                 getAll() {

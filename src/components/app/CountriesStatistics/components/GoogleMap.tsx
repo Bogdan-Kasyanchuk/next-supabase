@@ -2,7 +2,7 @@
 
 import { APIProvider, AdvancedMarker, Map } from '@vis.gl/react-google-maps';
 
-import { PARAMETERS } from '@/helpers/parameters';
+import { CONSTANTS } from '@/datasets/constants';
 import { StatisticsMapper } from '@/types';
 
 type Props = {
@@ -12,9 +12,9 @@ type Props = {
 export default function GoogleMap(props: Props) {
     return (
         <APIProvider
-            apiKey={ PARAMETERS.GOOGLE_MAPS_API_KEY }
-            region={ PARAMETERS.REGION }
-            language={ PARAMETERS.LOCALE }
+            apiKey={ CONSTANTS.GOOGLE_MAPS_KEY }
+            region={ CONSTANTS.LOCALE.region }
+            language={ CONSTANTS.LOCALE.code }
         >
             <Map
                 className="c-countries-statistics__map-inner"

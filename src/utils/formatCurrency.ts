@@ -1,4 +1,4 @@
-import { PARAMETERS } from '../helpers/parameters';
+import { CONSTANTS } from '../datasets/constants';
 
 export default (value: number, options?: Intl.NumberFormatOptions) =>
-    new Intl.NumberFormat(PARAMETERS.LOCALE, options).format(value);
+    new Intl.NumberFormat(CONSTANTS.LOCALE.code, options).format(value);

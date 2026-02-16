@@ -5,43 +5,43 @@
 /* Base */
 @import '../base/reset.css' layer(base);
 
-/* Layouts */
-@import '../layouts/container.css' layer(base);
-
 /* Parts */
 @import '../parts/header/header.css' layer(base);
 @import '../parts/sidebar/sidebar.css' layer(base);
 @import '../parts/toolbar/toolbar.css' layer(base);
 
-/* Components */
-@import '../components/logo.css' layer(base);
-@import '../components/loader.css' layer(base);
-@import '../components/button.css' layer(base);
-@import '../components/error-404.css' layer(base);
-@import '../components/data-not-found' layer(base);
-@import '../components/forms/base.css' layer(base);
-@import '../components/forms/field.css' layer(base);
-@import '../components/forms/select.css' layer(base);
-@import '../components/forms/date-picker.css' layer(base);
-@import '../components/auth-form-block.css' layer(base);
-@import '../components/company-form-block.css' layer(base);
-@import '../components/promotion-form-block.css' layer(base);
-@import '../components/badge.css' layer(base);
-@import '../components/companies-table.css' layer(base);
-@import '../components/promotions-list.css' layer(base);
-@import '../components/general-statistics.css' layer(base);
-@import '../components/categories-statistics.css' layer(base);
-@import '../components/countries-statistics.css' layer(base);
-@import '../components/summary-table.css' layer(base);
-@import '../components/modal.css' layer(base);
+/* Layouts */
+@import '../layouts/container.css' layer(utilities);
 
-/* Cards */
-@import '../components/cards/dashboard-card.css' layer(base);
-@import '../components/cards/company-details-card.css' layer(base);
-@import '../components/cards/promotion-card.css' layer(base);
-@import '../components/cards/promotion-details-card.css' layer(base);
-@import '../components/cards/general-statistics-card.css' layer(base);
-@import '../components/cards/category-statistics-card.css' layer(base);
+/* Components */
+@import '../components/logo.css' layer(components);
+@import '../components/loader.css' layer(components);
+@import '../components/button.css' layer(components);
+@import '../components/error-404.css' layer(components);
+@import '../components/data-not-found.css' layer(components);
+@import '../components/forms/base.css' layer(components);
+@import '../components/forms/field.css' layer(components);
+@import '../components/forms/select.css' layer(components);
+@import '../components/forms/date-picker.css' layer(components);
+@import '../components/auth-form-block.css' layer(components);
+@import '../components/company-form-block.css' layer(components);
+@import '../components/promotion-form-block.css' layer(components);
+@import '../components/badge.css' layer(components);
+@import '../components/companies-table.css' layer(components);
+@import '../components/promotions-list.css' layer(components);
+@import '../components/general-statistics.css' layer(components);
+@import '../components/categories-statistics.css' layer(components);
+@import '../components/countries-statistics.css' layer(components);
+@import '../components/summary-table.css' layer(components);
+@import '../components/modal.css' layer(components);
+
+/* Components */
+@import '../components/cards/dashboard-card.css' layer(components);
+@import '../components/cards/company-details-card.css' layer(components);
+@import '../components/cards/promotion-card.css' layer(components);
+@import '../components/cards/promotion-details-card.css' layer(components);
+@import '../components/cards/general-statistics-card.css' layer(components);
+@import '../components/cards/category-statistics-card.css' layer(components);
 
 /* Utilities */
 @import '../utilities/base.css';

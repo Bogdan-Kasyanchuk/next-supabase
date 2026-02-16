@@ -5,15 +5,12 @@ import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
 
 import 'dayjs/locale/en';
-import { PARAMETERS } from '@/helpers/parameters';
+import { CONSTANTS } from '@/datasets/constants';
 
 dayjs.extend(utc);
 dayjs.extend(relativeTime);
 dayjs.extend(timezone);
 dayjs.extend(localizedFormat);
-
-const locale = PARAMETERS.LOCALE;
-const zone = PARAMETERS.ZONE;
 
 export default (date: string | number | Date, format?: string) => {
     const parsed = dayjs(date);
@@ -21,6 +18,6 @@ export default (date: string | number | Date, format?: string) => {
     if (!parsed.isValid()) {
         return '';
     }
-  
-    return dayjs(date).locale(locale).tz(zone).format(format ?? 'lll');
+
+    return dayjs(date).locale(CONSTANTS.LOCALE.code).tz(CONSTANTS.ZONE).format(format ?? 'lll');
 };

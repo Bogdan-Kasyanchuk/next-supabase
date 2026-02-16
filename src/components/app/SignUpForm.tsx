@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 
-import { PARAMETERS } from '@/helpers/parameters';
+import { CONSTANTS } from '@/datasets/constants';
 import createSupabaseBrowserClient from '@/lib/supabase/client';
 import { pagesAuthLoginUrl, pagesAuthSignUpSuccessUrl, pagesDashboardUrl } from '@/routes';
 import cn from '@/utils/cn';
@@ -32,7 +32,7 @@ export default function SignUpForm() {
 
             return;
         }
-        
+
         const supabase = createSupabaseBrowserClient();
 
         setIsLoading(true);
@@ -52,7 +52,7 @@ export default function SignUpForm() {
             if (existsData) {
                 throw new Error('User with this email already exists');
             }
-    
+
             const { error } = await supabase.auth.signUp({
                 email,
                 password,
@@ -63,7 +63,7 @@ export default function SignUpForm() {
                     data: {
                         first_name: firstName,
                         last_name: lastName || undefined,
-                        avatar_url: normalizeUrl(`${ PARAMETERS.AVATAR_URL }/?background=d8fa99&color=222&bold=true&font-size=0.5&name=${ firstName + '+' + lastName }`)
+                        avatar_url: normalizeUrl(`${ CONSTANTS.AVATAR_URL }/?background=d8fa99&color=222&bold=true&font-size=0.5&name=${ firstName + '+' + lastName }`)
                     }
                 }
             });
@@ -91,7 +91,7 @@ export default function SignUpForm() {
             }
         >
             <h2 className="c-auth-form-block__title">Sign up</h2>
-  
+
             <form
                 onSubmit={ handleSignUp }
                 className="c-auth-form-block__form"
@@ -103,11 +103,11 @@ export default function SignUpForm() {
                         label="First name"
                         placeholder="John"
                         required
-                        onChange={ 
+                        onChange={
                             e => {
                                 setFirstName(e.target.value.trim());
                                 setError(undefined);
-                            } 
+                            }
                         }
                     />
 
@@ -116,26 +116,26 @@ export default function SignUpForm() {
                         value={ lastName }
                         label="Last name"
                         placeholder="Doe"
-                        onChange={ 
+                        onChange={
                             e => {
                                 setLastName(e.target.value.trim());
                                 setError(undefined);
-                            } 
+                            }
                         }
                     />
                 </div>
-                
+
                 <Input
                     type="email"
                     value={ email }
                     label="Email"
                     placeholder="email@example.com"
                     required
-                    onChange={ 
+                    onChange={
                         e => {
                             setEmail(e.target.value.trim());
                             setError(undefined);
-                        } 
+                        }
                     }
                 />
 
@@ -146,12 +146,12 @@ export default function SignUpForm() {
                     placeholder="Password"
                     required
                     error={ passwordMatchError }
-                    onChange={ 
+                    onChange={
                         e => {
                             setPassword(e.target.value.trim());
                             setPasswordMatchError(undefined);
                             setError(undefined);
-                        } 
+                        }
                     }
                 />
 
@@ -162,12 +162,12 @@ export default function SignUpForm() {
                     placeholder="Password"
                     required
                     error={ passwordMatchError }
-                    onChange={ 
+                    onChange={
                         e => {
                             setRepeatPassword(e.target.value.trim());
                             setPasswordMatchError(undefined);
                             setError(undefined);
-                        } 
+                        }
                     }
                 />
 
@@ -177,7 +177,7 @@ export default function SignUpForm() {
                         { error }
                     </div>
                 }
-                
+
                 <Button
                     type="submit"
                     size="large"

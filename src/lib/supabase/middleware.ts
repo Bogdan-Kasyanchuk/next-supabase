@@ -1,7 +1,7 @@
 import { createServerClient } from '@supabase/ssr';
 import { type NextRequest, NextResponse } from 'next/server';
 
-import { PARAMETERS } from '@/helpers/parameters';
+import { CONSTANTS } from '@/datasets/constants';
 import { pagesAuthLoginUrl } from '@/routes';
 import { Database } from '@/shemas';
 
@@ -13,8 +13,8 @@ export async function updateSession(request: NextRequest) {
     // With Fluid compute, don't put this client in a global environment
     // variable. Always create a new one on each request.
     const supabase = createServerClient<Database>(
-        PARAMETERS.SUPABASE_URL,
-        PARAMETERS.SUPABASE_KEY,
+        CONSTANTS.SUPABASE_URL,
+        CONSTANTS.SUPABASE_KEY,
         {
             cookies: {
                 getAll() {
@@ -50,10 +50,10 @@ export async function updateSession(request: NextRequest) {
         !request.nextUrl.pathname.startsWith('/login') &&
         !request.nextUrl.pathname.startsWith('/auth')
     ) {
-    // no user, potentially respond by redirecting the user to the login page
+        // no user, potentially respond by redirecting the user to the login page
         const url = request.nextUrl.clone();
         url.pathname = pagesAuthLoginUrl();
-        
+
         return NextResponse.redirect(url);
     }
 
