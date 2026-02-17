@@ -2,7 +2,7 @@ import { createServerClient } from '@supabase/ssr';
 import { type NextRequest, NextResponse } from 'next/server';
 
 import { CONSTANTS } from '@/datasets/constants';
-import { pagesAuthLoginUrl } from '@/routes';
+import { pagesAuthLoginUrl, pagesAuthSignUpUrl, pagesDashboardUrl } from '@/routes';
 import { Database } from '@/shemas';
 
 export async function updateSession(request: NextRequest) {
@@ -44,15 +44,20 @@ export async function updateSession(request: NextRequest) {
     const { data } = await supabase.auth.getClaims();
     const user = data?.claims;
 
+    const url = request.nextUrl.clone();
+
     if (
-        request.nextUrl.pathname !== '/' &&
         !user &&
-        !request.nextUrl.pathname.startsWith('/login') &&
-        !request.nextUrl.pathname.startsWith('/auth')
+        !request.nextUrl.pathname.startsWith(pagesAuthLoginUrl()) &&
+        !request.nextUrl.pathname.startsWith(pagesAuthSignUpUrl())
     ) {
-        // no user, potentially respond by redirecting the user to the login page
-        const url = request.nextUrl.clone();
         url.pathname = pagesAuthLoginUrl();
+
+        return NextResponse.redirect(url);
+    }
+
+    if (user && request.nextUrl.pathname.startsWith('/auth')) {
+        url.pathname = pagesDashboardUrl();
 
         return NextResponse.redirect(url);
     }
