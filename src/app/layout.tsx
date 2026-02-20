@@ -12,8 +12,8 @@ const font = Plus_Jakarta_Sans({ subsets: [ 'latin' ] });
 
 export const metadata: Metadata = {
     title: {
-        template: 'TrueScape | %s',
-        default: 'TrueScape'
+        default: 'TrueScape',
+        template: 'TrueScape | %s'
     },
     description: 'The fastest way to build apps with Next.js and Supabase',
     keywords: 'CRM'

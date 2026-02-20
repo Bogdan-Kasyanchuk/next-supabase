@@ -46,11 +46,7 @@ export async function updateSession(request: NextRequest) {
 
     const url = request.nextUrl.clone();
 
-    if (
-        !user &&
-        !request.nextUrl.pathname.startsWith(pagesAuthLoginUrl()) &&
-        !request.nextUrl.pathname.startsWith(pagesAuthSignUpUrl())
-    ) {
+    if (!user && !request.nextUrl.pathname.startsWith('/auth')) {
         url.pathname = pagesAuthLoginUrl();
 
         return NextResponse.redirect(url);
