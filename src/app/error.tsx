@@ -1,6 +1,7 @@
 'use client';
 
 import Button from '@/components/ui/buttons/Button';
+import Container from '@/components/ui/layouts/Container';
 
 type Props = {
     error: Error,
@@ -9,25 +10,27 @@ type Props = {
 
 export default function Error(props: Props) {
     return (
-        <div className="flex-center flex-col gap-5 w-full">
-            <p className="text-5xl font-bold leading-[1.2]">
-                Sorry, something went wrong
-            </p>
+        <Container>   
+            <div className="flex items-center justify-center size-full px-5 flex-col gap-5 text-secondary text-center">
+                <p className="text-5xl font-bold leading-[1.2]">
+                    Sorry, something went wrong
+                </p>
 
-            <p className="text-md leading-[1.2]">
-                { props.error.message }
-            </p>
+                <p className="text-md leading-[1.2]">
+                    { props.error.message }
+                </p>
 
-            <Button
-                type="button"
-                onClick={
-                    () => {
-                        props.reset();
+                <Button
+                    type="button"
+                    onClick={
+                        () => {
+                            props.reset();
+                        }
                     }
-                }
-            >
-                Try again
-            </Button>
-        </div>
+                >
+                    Try again
+                </Button>
+            </div>
+        </Container>
     );
 }

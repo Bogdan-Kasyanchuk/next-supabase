@@ -3,6 +3,9 @@
 import { Plus_Jakarta_Sans } from 'next/font/google';
 
 import Button from '@/components/ui/buttons/Button';
+import Container from '@/components/ui/layouts/Container';
+
+import '@/styles/app/base.css';
 
 const font = Plus_Jakarta_Sans({ subsets: [ 'latin' ] });
 
@@ -16,26 +19,28 @@ export default function GlobalError(props: Props) {
         <html lang="en">
             <body className={ font.className }>
                 <main>
-                    <div className="flex items-center justify-center size-full px-5 flex-col">
-                        <p className="text-5xl text-primary font-bold leading-[1.2] text-center">
-                            Something globally went wrong
-                        </p>
+                    <Container>   
+                        <div className="flex items-center justify-center size-full px-5 flex-col gap-5 text-secondary text-center">
+                            <p className="text-5xl font-bold leading-[1.2]">
+                                Something globally went wrong
+                            </p>
 
-                        <p className="text-md leading-[1.2]">
-                            { props.error.message }
-                        </p>
+                            <p className="text-md leading-[1.2]">
+                                { props.error.message }
+                            </p>
 
-                        <Button
-                            type="button"
-                            onClick={
-                                () => {
-                                    props.reset();
+                            <Button
+                                type="button"
+                                onClick={
+                                    () => {
+                                        props.reset();
+                                    }
                                 }
-                            }
-                        >
-                            Try again
-                        </Button>
-                    </div>
+                            >
+                                Try again
+                            </Button>
+                        </div>
+                    </Container>
                 </main>
             </body>
         </html>
