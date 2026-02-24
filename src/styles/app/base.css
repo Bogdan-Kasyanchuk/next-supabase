@@ -34,8 +34,6 @@
 @import '../components/countries-statistics.css' layer(components);
 @import '../components/summary-table.css' layer(components);
 @import '../components/modal.css' layer(components);
-
-/* Components */
 @import '../components/cards/dashboard-card.css' layer(components);
 @import '../components/cards/company-details-card.css' layer(components);
 @import '../components/cards/promotion-card.css' layer(components);

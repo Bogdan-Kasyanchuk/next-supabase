@@ -4,11 +4,6 @@ import { cookies } from 'next/headers';
 import { CONSTANTS } from '@/datasets/constants';
 import { Database } from '@/shemas';
 
-/**
- * Especially important if using Fluid compute: Don't put this client in a
- * global variable. Always create a new client within each function when using
- * it.
- */
 export default async function createSupabaseServerClient() {
     const cookieStore = await cookies();
 
