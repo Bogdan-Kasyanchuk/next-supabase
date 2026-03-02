@@ -1,4 +1,4 @@
-.c-error-404 {
+.c-error {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -11,13 +11,13 @@
     text-align: center;
 
     &__title {
+        margin-bottom: 20px;
         font-size: 128px;
         font-weight: 700;
         line-height: 1;
     }
 
     &__subtitle {
-        margin-top: 20px;
         font-size: var(--text-5xl);
         font-weight: 700;
         line-height: 1.2;

@@ -10,13 +10,13 @@ type Props = {
 
 export default function Error(props: Props) {
     return (
-        <Container>   
-            <div className="flex items-center justify-center size-full px-5 flex-col gap-5 text-secondary text-center">
-                <p className="text-5xl font-bold leading-[1.2]">
+        <Container className="flex-center">
+            <div className="c-error">
+                <p className="c-error__subtitle">
                     Sorry, something went wrong
                 </p>
 
-                <p className="text-md leading-[1.2]">
+                <p className="c-error__text">
                     { props.error.message }
                 </p>
 

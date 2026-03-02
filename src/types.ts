@@ -27,10 +27,7 @@ export type StatisticsMapper = {
     sales: Array<Pick<CompanyShema, 'id' | 'logo_url' | 'name' | 'sold' | 'income'>>,
     categories: StatisticsItem[],
     countries: Array<StatisticsItem & { lat: number, lng: number }>,
-    promotions: Array<{
-        id: PromotionShema['id'],
-        name: PromotionShema['name'],
-        discount: PromotionShema['discount'],
+    promotions: Array<Pick<PromotionShema, 'id' | 'name' | 'discount'> & {
         company: Pick<CompanyShema, 'id' | 'logo_url' | 'name'>
     }>
 };

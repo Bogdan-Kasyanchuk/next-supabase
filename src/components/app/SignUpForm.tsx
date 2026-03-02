@@ -24,6 +24,8 @@ export default function SignUpForm() {
     const [ passwordMatchError, setPasswordMatchError ] = useState<string | undefined>(undefined);
     const [ isLoading, setIsLoading ] = useState(false);
 
+    const isFormDisabled = isLoading || !firstName || !email || !password || !repeatPassword;
+
     const handleSignUp = async (e: FormEvent) => {
         e.preventDefault();
 
@@ -182,7 +184,7 @@ export default function SignUpForm() {
                     type="submit"
                     size="large"
                     className="w-full mt-2.5"
-                    disabled={ isLoading || !firstName || !email || !password }
+                    disabled={ isFormDisabled }
                     loading={ isLoading }
                 >
                     Sign up

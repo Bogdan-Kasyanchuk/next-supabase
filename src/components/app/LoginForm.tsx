@@ -19,6 +19,8 @@ export default function LoginForm() {
     const [ error, setError ] = useState<string | undefined>(undefined);
     const [ isLoading, setIsLoading ] = useState(false);
 
+    const isFormDisabled = isLoading || !email || !password; 
+
     const handleLogin = async (e: FormEvent) => {
         e.preventDefault();
 
@@ -107,7 +109,7 @@ export default function LoginForm() {
                     type="submit"
                     size="large"
                     className="w-full mt-2.5"
-                    disabled={ isLoading || !email || !password }
+                    disabled={ isFormDisabled }
                     loading={ isLoading }
                 >
                     Login
