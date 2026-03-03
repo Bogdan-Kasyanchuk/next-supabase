@@ -36,7 +36,7 @@
         line-height: 1.2;
         text-align: center;
 
-        & > p:not(:first-child) {
+        &>p:not(:first-child) {
             margin-top: 10px;
         }
 
@@ -54,5 +54,6 @@
         font-size: var(--text-xs);
         line-height: 1.2;
         color: var(--color-danger);
+        white-space: pre-line;
     }
 }

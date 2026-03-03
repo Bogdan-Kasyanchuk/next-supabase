@@ -4,11 +4,17 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
+import z from 'zod';
 
 import Button from '@/components/ui/buttons/Button';
 import Input from '@/components/ui/inputs/Input';
 import createSupabaseClient from '@/lib/supabase/client';
 import { pagesAuthForgotPasswordUrl, pagesAuthSignUpUrl, pagesDashboardUrl } from '@/routes';
+
+const LoginFormSchema = z.object({
+    email: z.email('Please enter a valid email.'),
+    password: z.string().min(6, 'Password should be at least 6 characters.')
+});
 
 export default function LoginForm() {
     const router = useRouter();
@@ -22,6 +28,18 @@ export default function LoginForm() {
 
     const handleLogin = async (e: FormEvent) => {
         e.preventDefault();
+
+        const validatedFields = LoginFormSchema.safeParse({ email, password });
+
+        if (!validatedFields.success) {
+            const properties = z.treeifyError(validatedFields.error).properties!;
+
+            const errors = Object.values(properties).map(({ errors }) => errors[ 0 ]).join('\n');
+
+            setError(errors);
+
+            return;
+        }
 
         const supabase = createSupabaseClient();
 

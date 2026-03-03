@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
+import z from 'zod';
 
 import Button from '@/components/ui/buttons/Button';
 import Input from '@/components/ui/inputs/Input';
@@ -11,6 +12,13 @@ import { CONSTANTS } from '@/datasets/constants';
 import createSupabaseClient from '@/lib/supabase/client';
 import { pagesAuthLoginUrl, pagesDashboardUrl } from '@/routes';
 import normalizeUrl from '@/utils/normalizeUrl';
+
+const SignUpFormSchema = z.object({
+    firstName: z.string().min(3, 'First name should be at least 3 characters.'),
+    lastName: z.string().optional(),
+    email: z.email('Please enter a valid email.'),
+    password: z.string().min(6, 'Password should be at least 6 characters.')
+});
 
 export default function SignUpForm() {
     const router = useRouter();
@@ -32,6 +40,23 @@ export default function SignUpForm() {
         if (password !== repeatPassword) {
             setPasswordMatchError('Passwords do not match');
 
+            return;
+        }
+
+        const validatedFields = SignUpFormSchema.safeParse({
+            firstName,
+            lastName,
+            email,
+            password
+        });
+        
+        if (!validatedFields.success) {
+            const properties = z.treeifyError(validatedFields.error).properties!;
+        
+            const errors = Object.values(properties).map(({ errors }) => errors[ 0 ]).join('\n');
+        
+            setError(errors);
+        
             return;
         }
 
