@@ -4,6 +4,7 @@
     gap: 20px;
     align-items: center;
     justify-content: center;
+    height: 100%;
 
     margin-inline: auto;
 
@@ -11,7 +12,6 @@
     text-align: center;
 
     &__title {
-        margin-bottom: 20px;
         font-size: 128px;
         font-weight: 700;
         line-height: 1;

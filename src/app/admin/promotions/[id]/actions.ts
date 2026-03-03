@@ -1,10 +1,10 @@
 'use server';
 
-import createSupabaseServerClient from '@/lib/supabase/server';
+import createSupabaseServer from '@/lib/supabase/server';
 import { PromotionDetailsMapper } from '@/types';
 
 export async function getPromotionById(id: string) {
-    const supabase = await createSupabaseServerClient();
+    const supabase = await createSupabaseServer();
     
     const { data, error } = await supabase
         .from('promotions')

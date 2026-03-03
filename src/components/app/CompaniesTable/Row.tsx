@@ -1,5 +1,6 @@
 'use client';
 
+import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 import { toast } from 'sonner';
@@ -9,7 +10,6 @@ import Badge from '@/components/ui/data-display/Badge';
 import { BadgeStatusType, CompanyStatusType } from '@/enums';
 import { pagesCompanyUrl } from '@/routes';
 import { CompanyMapper } from '@/types';
-import cn from '@/utils/cn';
 import formateDate from '@/utils/formateDate';
 
 import DeleteButton from '../DeleteButton';
@@ -46,7 +46,7 @@ export default function Row(props: Props) {
 
     return (
         <tr>
-            <td className={ cn('c-companies-table__name', status.class) }>
+            <td className={ clsx('c-companies-table__name', status.class) }>
                 <div className="c-companies-table__name-inner">
                     <Image
                         width={ 32 }

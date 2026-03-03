@@ -1,11 +1,11 @@
 'use server';
 
-import createSupabaseServerClient from '@/lib/supabase/server';
+import createSupabaseServer from '@/lib/supabase/server';
 import { generalStatisticsLabel } from '@/mock/data';
 import { StatisticsMapper } from '@/types';
 
 export async function getGeneralStatistics() {
-    const supabase = await createSupabaseServerClient();
+    const supabase = await createSupabaseServer();
 
     const { data, error } = await supabase
         .from('general_statistics')
@@ -46,7 +46,7 @@ export async function getGeneralStatistics() {
 }
 
 export async function getTradeStatistics() {
-    const supabase = await createSupabaseServerClient();
+    const supabase = await createSupabaseServer();
     
     const { data, error } = await supabase
         .from('companies')
@@ -63,7 +63,7 @@ export async function getTradeStatistics() {
 }
 
 export async function getCategoriesStatistics() {
-    const supabase = await createSupabaseServerClient();
+    const supabase = await createSupabaseServer();
 
     const { data, error } = await supabase
         .from('companies_by_category')
@@ -80,7 +80,7 @@ export async function getCategoriesStatistics() {
 }
 
 export async function getCountriesStatistics() {
-    const supabase = await createSupabaseServerClient();
+    const supabase = await createSupabaseServer();
 
     const { data, error } = await supabase
         .from('companies_by_country')
@@ -97,7 +97,7 @@ export async function getCountriesStatistics() {
 }
 
 export async function getPromotionsStatistics() {
-    const supabase = await createSupabaseServerClient();
+    const supabase = await createSupabaseServer();
 
     const { data, error } = await supabase
         .from('promotions')

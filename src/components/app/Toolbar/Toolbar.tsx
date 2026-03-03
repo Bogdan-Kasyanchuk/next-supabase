@@ -1,6 +1,5 @@
+import clsx from 'clsx';
 import { ReactNode } from 'react';
-
-import cn from '@/utils/cn';
 
 import Search from './components/Search';
 
@@ -17,7 +16,7 @@ type Props = {
 
 export default function Toolbar(props: Props) {
     return (
-        <div className={ cn('c-toolbar', props.className) }>
+        <div className={ clsx('c-toolbar', props.className) }>
             {
                 props.hasSearch &&
                 <Search { ...props.searchProps } />

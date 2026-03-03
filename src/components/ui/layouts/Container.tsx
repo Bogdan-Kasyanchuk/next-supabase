@@ -1,20 +1,19 @@
+import clsx from 'clsx';
 import { PropsWithChildren } from 'react';
 
-import cn from '@/utils/cn';
-
 type Props = {
-    size?: 'small' | 'medium' | 'large' | 'full',
-    className?: string
+    className?: string,
+    full?: boolean
 };
 
 export default function Container(props: PropsWithChildren<Props>) {
     return (
         <div
             className={
-                cn([
+                clsx([
                     'l-container',
                     {
-                        [ `l-container--${ props.size }` ]: props.size
+                        'l-container--full': props.full
                     },
                     props.className
                 ])

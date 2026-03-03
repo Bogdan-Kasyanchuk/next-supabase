@@ -1,11 +1,11 @@
 'use client';
 
+import clsx from 'clsx';
 import { BadgePercent, BriefcaseBusiness, LayoutGrid } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { pagesCompaniesUrl, pagesDashboardUrl, pagesPromotionsUrl } from '@/routes';
-import cn from '@/utils/cn';
 
 const links = [
     {
@@ -37,7 +37,7 @@ export default function Navigation() {
                             <li
                                 key={ link.name }
                                 className={
-                                    cn('c-sidebar__navigation-item', {
+                                    clsx('c-sidebar__navigation-item', {
                                         'c-sidebar__navigation-item--active': pathname === link.href
                                     })
                                 }

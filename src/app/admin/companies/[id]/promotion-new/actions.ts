@@ -2,14 +2,14 @@
 
 import { redirect } from 'next/navigation';
 
-import createSupabaseServerClient from '@/lib/supabase/server';
+import createSupabaseServer from '@/lib/supabase/server';
 import { pagesCompanyUrl } from '@/routes';
 import { PromotionInsertShema } from '@/shemas';
 
 type Key = keyof PromotionInsertShema;
 
 export async function createPromotion(companyId: string, formData: FormData) {
-    const supabase = await createSupabaseServerClient();
+    const supabase = await createSupabaseServer();
 
     const newPromotion: Partial<Record<Key, any>> = {};
 

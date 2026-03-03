@@ -1,5 +1,6 @@
 'use client';
 
+import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 import { toast } from 'sonner';
@@ -8,7 +9,6 @@ import { deletePromotion } from '@/app/admin/promotions/actions';
 import DeleteButton from '@/components/app/DeleteButton';
 import { pagesPromotionUrl } from '@/routes';
 import { PromotionMapper } from '@/types';
-import cn from '@/utils/cn';
 import formateDate from '@/utils/formateDate';
 
 type Props = {
@@ -18,7 +18,7 @@ type Props = {
 
 export default function PromotionCard(props: Props) {
     return (
-        <div className={ cn('c-promotion-card', props.className) }>
+        <div className={ clsx('c-promotion-card', props.className) }>
             <div className="c-promotion-card__inner">
                 <div className="c-promotion-card__cover">
                     <Image

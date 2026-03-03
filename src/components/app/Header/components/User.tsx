@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import Image from 'next/image';
 
-import createSupabaseServerClient from '@/lib/supabase/server';
+import createSupabaseServer from '@/lib/supabase/server';
 import { ProfileMapper } from '@/types';
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 };
 
 export default async function User(props: Props) {
-    const supabase = await createSupabaseServerClient();
+    const supabase = await createSupabaseServer();
 
     const { data, error } = await supabase
         .from('profiles')

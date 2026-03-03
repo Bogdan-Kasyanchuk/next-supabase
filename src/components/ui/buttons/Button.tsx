@@ -1,9 +1,8 @@
 import { createPolymorphicComponent } from '@mantine/utils';
 import { VariantProps, cva } from 'class-variance-authority';
+import clsx from 'clsx';
 import Link from 'next/link';
 import { ComponentPropsWithRef } from 'react';
-
-import cn from '@/utils/cn';
 
 const buttonVariants = cva('c-button', {
     variants: {
@@ -47,7 +46,7 @@ function Button(props: Props) {
     return (
         <Component
             className={
-                cn([
+                clsx([
                     buttonVariants({ variant, size }),
                     { 
                         'c-button--loading': isLoading,

@@ -1,6 +1,5 @@
+import clsx from 'clsx';
 import { ComponentPropsWithoutRef, useId } from 'react';
-
-import cn from '@/utils/cn';
 
 type Props = Omit<ComponentPropsWithoutRef<'textarea'>, 'className'> & {
     label?: string,
@@ -22,7 +21,7 @@ export default function TextArea(props: Props) {
     return (
         <div
             className={
-                cn([
+                clsx([
                     'f-group',
                     classNames?.group,
                     {
@@ -35,7 +34,7 @@ export default function TextArea(props: Props) {
                 label &&
                 <label
                     htmlFor={ props.id || defaultId }
-                    className={ cn('f-label', classNames?.label) }
+                    className={ clsx('f-label', classNames?.label) }
                 >
                     { label }
                     
@@ -46,13 +45,13 @@ export default function TextArea(props: Props) {
                 </label>
             }
 
-            <div className={ cn('f-field__wrapper', classNames?.wrapper ) }>
+            <div className={ clsx('f-field__wrapper', classNames?.wrapper ) }>
                 <textarea
                     { ...rest }
                     id={ props.id || defaultId }
                     value={ props.value }
                     className={
-                        cn([
+                        clsx([
                             'f-field f-field--textarea',
                             {
                                 'f-field--error': error
@@ -66,7 +65,7 @@ export default function TextArea(props: Props) {
 
             {
                 error &&
-                <div className={ cn('f-error', classNames?.error) }>
+                <div className={ clsx('f-error', classNames?.error) }>
                     { error }
                 </div>
             }

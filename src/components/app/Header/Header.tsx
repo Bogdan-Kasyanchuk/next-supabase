@@ -2,22 +2,22 @@ import { PropsWithChildren } from 'react';
 
 import Logo from '@/components/ui/data-display/Logo';
 import Container from '@/components/ui/layouts/Container';
-import createSupabaseServerClient from '@/lib/supabase/server';
+import createSupabaseServer from '@/lib/supabase/server';
 
 import AuthButtons from './components/AuthButtons';
 import LogoutButton from './components/LogoutButton';
 import User from './components/User';
 
 export default async function Header(props: PropsWithChildren) {
-    const supabase = await createSupabaseServerClient();
+    const supabase = await createSupabaseServer();
     
     const { data } = await supabase.auth.getUser();
 
     return (
         <header className="c-header">
             <Container
-                size="full"
                 className="c-header__container"
+                full
             >
                 <Logo />
 

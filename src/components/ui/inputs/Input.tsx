@@ -1,6 +1,5 @@
+import clsx from 'clsx';
 import { ComponentPropsWithoutRef, ReactNode, useId } from 'react';
-
-import cn from '@/utils/cn';
 
 type Props = Omit<ComponentPropsWithoutRef<'input'>, 'className'> & {
     startSection?: ReactNode,
@@ -25,7 +24,7 @@ export default function Input(props: Props) {
     return (
         <div
             className={
-                cn([
+                clsx([
                     'f-group',
                     classNames?.group,
                     {
@@ -38,7 +37,7 @@ export default function Input(props: Props) {
                 label &&
                 <label
                     htmlFor={ props.id || defaultId }
-                    className={ cn('f-label', classNames?.label) }
+                    className={ clsx('f-label', classNames?.label) }
                 >
                     { label }
                     
@@ -49,10 +48,10 @@ export default function Input(props: Props) {
                 </label>
             }
 
-            <div className={ cn('f-field__wrapper', classNames?.wrapper ) }>
+            <div className={ clsx('f-field__wrapper', classNames?.wrapper ) }>
                 {
                     startSection &&
-                    <div className={ cn('f-field__section', classNames?.section) }>
+                    <div className={ clsx('f-field__section', classNames?.section) }>
                         { startSection }
                     </div>
                 }
@@ -61,7 +60,7 @@ export default function Input(props: Props) {
                     { ...rest }
                     id={ props.id || defaultId }
                     className={
-                        cn([
+                        clsx([
                             'f-field f-field--input',
                             classNames?.field,
                             {
@@ -74,7 +73,7 @@ export default function Input(props: Props) {
 
                 {
                     endSection &&
-                    <div className={ cn('f-field__section', classNames?.section) }>
+                    <div className={ clsx('f-field__section', classNames?.section) }>
                         { endSection }
                     </div>
                 }
@@ -82,7 +81,7 @@ export default function Input(props: Props) {
 
             {
                 error &&
-                <div className={ cn('f-error', classNames?.error) }>
+                <div className={ clsx('f-error', classNames?.error) }>
                     { error }
                 </div>
             }

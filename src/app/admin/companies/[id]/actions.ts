@@ -1,10 +1,10 @@
 'use server';
 
-import createSupabaseServerClient from '@/lib/supabase/server';
+import createSupabaseServer from '@/lib/supabase/server';
 import { CompanyDetailsMapper, PromotionMapper } from '@/types';
 
 export async function getCompanyById(id: string) {
-    const supabase = await createSupabaseServerClient();
+    const supabase = await createSupabaseServer();
     
     const { data, error } = await supabase
         .from('companies')
@@ -31,7 +31,7 @@ export async function getCompanyById(id: string) {
 }
 
 export async function getPromotionsByCompany(id: string, query: string) {
-    const supabase = await createSupabaseServerClient();
+    const supabase = await createSupabaseServer();
     
     let request = supabase
         .from('promotions')

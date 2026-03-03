@@ -2,14 +2,14 @@
 
 import { revalidatePath } from 'next/cache';
 
-import createSupabaseServerClient from '@/lib/supabase/server';
+import createSupabaseServer from '@/lib/supabase/server';
 import { PromotionMapper } from '@/types';
 
 export async function getPromotions(page: number, limit: number, query: string) {
     const from = 0;
     const to = (page - 1) * limit + limit - 1;
     
-    const supabase = await createSupabaseServerClient();
+    const supabase = await createSupabaseServer();
     
     let request = supabase
         .from('promotions')
@@ -37,7 +37,7 @@ export async function getPromotions(page: number, limit: number, query: string) 
 }
 
 export async function deletePromotion(id: string) {
-    const supabase = await createSupabaseServerClient();
+    const supabase = await createSupabaseServer();
 
     const { error } = await supabase
         .from('promotions')

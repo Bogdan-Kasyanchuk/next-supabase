@@ -1,8 +1,7 @@
 import { Modal as MantineModal } from '@mantine/core';
+import clsx from 'clsx';
 import { X } from 'lucide-react';
 import { ReactNode } from 'react';
-
-import cn from '@/utils/cn';
 
 type Props = {
     title: string,
@@ -19,7 +18,7 @@ export default function Modal(props: Props) {
             title={ props.title }
             opened={ props.opened }
             onClose={ props.onClose }
-            className={ cn('c-modal', props.className) }
+            className={ clsx('c-modal', props.className) }
             closeButtonProps={
                 {
                     icon: <X />

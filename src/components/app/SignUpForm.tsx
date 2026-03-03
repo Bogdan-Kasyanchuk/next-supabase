@@ -1,20 +1,20 @@
 'use client';
 
+import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 
+import Button from '@/components/ui/buttons/Button';
+import Input from '@/components/ui/inputs/Input';
 import { CONSTANTS } from '@/datasets/constants';
-import createSupabaseBrowserClient from '@/lib/supabase/client';
-import { pagesAuthLoginUrl, pagesAuthSignUpSuccessUrl, pagesDashboardUrl } from '@/routes';
-import cn from '@/utils/cn';
+import createSupabaseClient from '@/lib/supabase/client';
+import { pagesAuthLoginUrl, pagesDashboardUrl } from '@/routes';
 import normalizeUrl from '@/utils/normalizeUrl';
-
-import Button from '../ui/buttons/Button';
-import Input from '../ui/inputs/Input';
 
 export default function SignUpForm() {
     const router = useRouter();
+    
     const [ email, setEmail ] = useState('');
     const [ firstName, setFirstName ] = useState('');
     const [ lastName, setLastName ] = useState('');
@@ -35,7 +35,7 @@ export default function SignUpForm() {
             return;
         }
 
-        const supabase = createSupabaseBrowserClient();
+        const supabase = createSupabaseClient();
 
         setIsLoading(true);
         setError(undefined);
@@ -59,9 +59,6 @@ export default function SignUpForm() {
                 email,
                 password,
                 options: {
-                    emailRedirectTo: normalizeUrl(
-                        `${ window.location.origin }/${ pagesDashboardUrl() }`
-                    ),
                     data: {
                         first_name: firstName,
                         last_name: lastName || undefined,
@@ -74,7 +71,8 @@ export default function SignUpForm() {
                 throw error;
             }
 
-            router.push(pagesAuthSignUpSuccessUrl());
+            router.push(pagesDashboardUrl());
+            router.refresh();
         } catch (error: unknown) {
             setError(error instanceof Error ? error.message : 'An error occurred');
         } finally {
@@ -85,7 +83,7 @@ export default function SignUpForm() {
     return (
         <div
             className={
-                cn('c-auth-form-block',
+                clsx('c-auth-form-block',
                     {
                         'c-auth-form-block--error': error
                     }

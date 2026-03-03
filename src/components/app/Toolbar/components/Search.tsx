@@ -1,10 +1,9 @@
 'use client';
 
 import { useDebouncedCallback } from '@mantine/hooks';
+import clsx from 'clsx';
 import { Search as SearchIcon } from 'lucide-react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-
-import cn from '@/utils/cn';
 
 type Props = {
     placeholder?: string,
@@ -33,7 +32,7 @@ export default function Search(props: Props) {
     return (
         <div
             className={
-                cn('c-toolbar__search', {
+                clsx('c-toolbar__search', {
                     'c-toolbar__search--disabled': props.disabled
                 })
             }

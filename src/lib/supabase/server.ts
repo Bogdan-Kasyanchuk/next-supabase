@@ -4,7 +4,7 @@ import { cookies } from 'next/headers';
 import { CONSTANTS } from '@/datasets/constants';
 import { Database } from '@/shemas';
 
-export default async function createSupabaseServerClient() {
+export default async function createSupabaseServer() {
     const cookieStore = await cookies();
 
     return createServerClient<Database>(

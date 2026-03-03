@@ -1,7 +1,6 @@
 import { ComboboxData, Select as MantineSelect } from '@mantine/core';
+import clsx from 'clsx';
 import { ChevronDown } from 'lucide-react';
-
-import cn from '@/utils/cn';
 
 type Props = {
     options: ComboboxData,
@@ -51,24 +50,24 @@ export default function Select(props: Props) {
             }
             classNames={
                 {
-                    root: cn([
+                    root: clsx([
                         'f-group',
                         props.classNames?.group,
                         {
                             'f-group--disabled': props.disabled
                         }
                     ]),
-                    label: cn('f-label', props.classNames?.label),
-                    input: cn([
+                    label: clsx('f-label', props.classNames?.label),
+                    input: clsx([
                         'f-select',
                         props.classNames?.field,
                         {
                             'f-select--error': props.error
                         }
                     ]),
-                    wrapper: cn('f-select__wrapper', props.classNames?.wrapper),
-                    section: cn('f-select__section', props.classNames?.section),
-                    error: cn('f-error', props.classNames?.error),
+                    wrapper: clsx('f-select__wrapper', props.classNames?.wrapper),
+                    section: clsx('f-select__section', props.classNames?.section),
+                    error: clsx('f-error', props.classNames?.error),
                     required: 'f-label__asterix'
                 }
             }

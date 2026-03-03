@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation';
 
-import createSupabaseServerClient from '@/lib/supabase/server';
+import createSupabaseServer from '@/lib/supabase/server';
 import { categories, countries } from '@/mock/data';
 import { pagesAuthLoginUrl, pagesCompaniesUrl } from '@/routes';
 import { CompanyInsertShema } from '@/shemas';
@@ -10,7 +10,7 @@ import { CompanyInsertShema } from '@/shemas';
 type Key = keyof CompanyInsertShema;
 
 export async function createCompany(formData: FormData) {
-    const supabase = await createSupabaseServerClient();
+    const supabase = await createSupabaseServer();
     
     const { data: { user }, error: userError } = await supabase.auth.getUser();
     

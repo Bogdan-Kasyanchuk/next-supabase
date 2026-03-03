@@ -6,7 +6,9 @@ import { pagesAuthLoginUrl, pagesDashboardUrl } from '@/routes';
 import { Database } from '@/shemas';
 
 export async function updateSession(request: NextRequest) {
-    const supabaseResponse = NextResponse.next();
+    let supabaseResponse = NextResponse.next({
+        request
+    });
 
     const supabase = createServerClient<Database>(
         CONSTANTS.SUPABASE_URL,
@@ -17,26 +19,37 @@ export async function updateSession(request: NextRequest) {
                     return request.cookies.getAll();
                 },
                 setAll(cookiesToSet) {
-                    cookiesToSet.forEach(({ name, value, options }) =>
-                        supabaseResponse.cookies.set(name, value, options)
+                    cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
+
+                    supabaseResponse = NextResponse.next({
+                        request
+                    });
+
+                    cookiesToSet.forEach(
+                        ({ name, value, options }) => supabaseResponse.cookies.set(name, value, options)
                     );
                 }
             }
         }
     );
 
-    const { data: { user } } = await supabase.auth.getUser();
+    const { data } = await supabase.auth.getClaims();
+    const user = data?.claims;
 
-    const pathname = request.nextUrl.pathname;
+    const isAuthRoute = request.nextUrl.pathname.startsWith('/auth');
 
-    const isAuthRoute = pathname.startsWith('/auth');
+    const url = request.nextUrl.clone();
 
     if (!user && !isAuthRoute) {
-        return NextResponse.redirect(new URL(pagesAuthLoginUrl(), request.url));
+        url.pathname = pagesAuthLoginUrl();
+
+        return NextResponse.redirect(url);
     }
 
     if (user && isAuthRoute) {
-        return NextResponse.redirect(new URL(pagesDashboardUrl(), request.url));
+        url.pathname = pagesDashboardUrl();
+
+        return NextResponse.redirect(url);
     }
 
     return supabaseResponse;

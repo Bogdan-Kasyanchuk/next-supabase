@@ -1,7 +1,7 @@
+import clsx from 'clsx';
 import { PropsWithChildren } from 'react';
 
 import { BadgeStatusType } from '@/enums';
-import cn from '@/utils/cn';
 
 const typeClasses = {
     [ BadgeStatusType.SUCCESS ]: 'text-success bg-success/10',
@@ -18,7 +18,7 @@ export default function Badge(props: PropsWithChildren<Props>) {
     return (
         <div
             className={
-                cn(
+                clsx(
                     'c-badge',
                     typeClasses[ props.type ]
                 )

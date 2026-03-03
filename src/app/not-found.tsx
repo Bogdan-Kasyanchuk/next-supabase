@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
     return (
-        <Container className="flex-center">
+        <Container>
             <div className="c-error">
                 <h2 className="c-error__title">
                     <span className="sr-only">Error</span>404
@@ -26,6 +26,7 @@ export default function NotFound() {
                 </p>
 
                 <Button
+                    size="large"
                     component={ Link }
                     href={ pagesHomeUrl() }
                 >

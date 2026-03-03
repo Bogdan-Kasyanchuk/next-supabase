@@ -1,7 +1,6 @@
 import { DateInput, DateValue } from '@mantine/dates';
+import clsx from 'clsx';
 import { CalendarDays } from 'lucide-react';
-
-import cn from '@/utils/cn';
 
 type Props = {
     value?: DateValue,
@@ -49,24 +48,24 @@ export default function DatePicker(props: Props) {
             leftSection={ <CalendarDays /> }
             classNames={
                 {
-                    root: cn([
+                    root: clsx([
                         'f-group',
                         props.classNames?.group,
                         {
                             'f-group--disabled': props.disabled
                         }
                     ]),
-                    label: cn('f-label', props.classNames?.label),
-                    input: cn([
+                    label: clsx('f-label', props.classNames?.label),
+                    input: clsx([
                         'f-date-picker',
                         props.classNames?.field,
                         {
                             'f-date-picker--error': props.error
                         }
                     ]),
-                    wrapper: cn('f-date-picker__wrapper', props.classNames?.wrapper),
-                    section: cn('f-date-picker__section', props.classNames?.section),
-                    error: cn('f-error', props.classNames?.error),
+                    wrapper: clsx('f-date-picker__wrapper', props.classNames?.wrapper),
+                    section: clsx('f-date-picker__section', props.classNames?.section),
+                    error: clsx('f-error', props.classNames?.error),
                     required: 'f-label__asterix',
                     calendarHeader: 'f-date-picker__dropdown-header',
                     calendarHeaderControl: 'f-date-picker__dropdown-header-control',

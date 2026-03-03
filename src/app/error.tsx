@@ -10,7 +10,7 @@ type Props = {
 
 export default function Error(props: Props) {
     return (
-        <Container className="flex-center">
+        <Container>
             <div className="c-error">
                 <p className="c-error__subtitle">
                     Sorry, something went wrong
@@ -22,6 +22,7 @@ export default function Error(props: Props) {
 
                 <Button
                     type="button"
+                    size="large"
                     onClick={
                         () => {
                             props.reset();

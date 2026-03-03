@@ -1,14 +1,13 @@
 'use client';
 
+import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 
-import createSupabaseBrowserClient from '@/lib/supabase/client';
+import Button from '@/components/ui/buttons/Button';
+import Input from '@/components/ui/inputs/Input';
+import createSupabaseClient from '@/lib/supabase/client';
 import { pagesDashboardUrl } from '@/routes';
-import cn from '@/utils/cn';
-
-import Button from '../ui/buttons/Button';
-import Input from '../ui/inputs/Input';
 
 export default function UpdatePasswordForm() {
     const router = useRouter();
@@ -20,7 +19,7 @@ export default function UpdatePasswordForm() {
     const handleForgotPassword = async (e: FormEvent) => {
         e.preventDefault();
 
-        const supabase = createSupabaseBrowserClient();
+        const supabase = createSupabaseClient();
 
         setIsLoading(true);
         setError(undefined);
@@ -44,7 +43,7 @@ export default function UpdatePasswordForm() {
     return (
         <div
             className={
-                cn('c-auth-form-block',
+                clsx('c-auth-form-block',
                     {
                         'c-auth-form-block--error': error
                     }

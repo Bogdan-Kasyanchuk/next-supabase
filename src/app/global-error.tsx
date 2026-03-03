@@ -19,8 +19,8 @@ export default function GlobalError(props: Props) {
         <html lang="en">
             <body className={ font.className }>
                 <main>
-                    <Container className="flex-center">
-                        <div className="flex-center flex-col gap-5 text-secondary text-center mx-auto">
+                    <Container>
+                        <div className="flex-center flex-col gap-5 text-secondary text-center mx-auto h-full">
                             <p className="text-5xl font-bold leading-[1.2]">
                                  Sorry, something globally went wrong
                             </p>
@@ -31,6 +31,7 @@ export default function GlobalError(props: Props) {
 
                             <Button
                                 type="button"
+                                size="large"
                                 onClick={
                                     () => {
                                         props.reset();

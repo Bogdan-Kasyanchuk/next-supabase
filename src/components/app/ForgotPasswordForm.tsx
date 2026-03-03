@@ -1,14 +1,14 @@
 'use client';
 
+import clsx from 'clsx';
 import Link from 'next/link';
 import { FormEvent, useState } from 'react';
 
-import createSupabaseBrowserClient from '@/lib/supabase/client';
+import Button from '@/components/ui/buttons/Button';
+import Input from '@/components/ui/inputs/Input';
+import createSupabaseClient from '@/lib/supabase/client';
 import { pagesAuthLoginUrl, pagesAuthUpdatePasswordUrl } from '@/routes';
-import cn from '@/utils/cn';
-
-import Button from '../ui/buttons/Button';
-import Input from '../ui/inputs/Input';
+import normalizeUrl from '@/utils/normalizeUrl';
 
 export default function ForgotPasswordForm() {
     const [ email, setEmail ] = useState('');
@@ -19,15 +19,16 @@ export default function ForgotPasswordForm() {
     const handleForgotPassword = async (e: FormEvent) => {
         e.preventDefault();
 
-        const supabase = createSupabaseBrowserClient();
+        const supabase = createSupabaseClient();
 
         setIsLoading(true);
         setError(undefined);
 
         try {
-            // The url which will be included in the email. This URL needs to be configured in your redirect URLs in the Supabase dashboard at https://supabase.com/dashboard/project/_/auth/url-configuration
             const { error } = await supabase.auth.resetPasswordForEmail(email, {
-                redirectTo: `${ window.location.origin }${ pagesAuthUpdatePasswordUrl() }`
+                redirectTo: normalizeUrl(
+                    `${ window.location.origin }/${ pagesAuthUpdatePasswordUrl() }`
+                )
             });
 
             if (error) {
@@ -45,7 +46,7 @@ export default function ForgotPasswordForm() {
     return (
         <div
             className={
-                cn('c-auth-form-block',
+                clsx('c-auth-form-block',
                     {
                         'c-auth-form-block--error': error
                     }
