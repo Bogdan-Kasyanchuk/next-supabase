@@ -1,6 +1,7 @@
-import UpdatePromotionForm from '@/components/app/UpdatePromotionForm';
+import { notFound } from 'next/navigation';
 
-import { getPromotionById } from '../actions';
+import UpdatePromotionForm from '@/components/app/UpdatePromotionForm';
+import { getPromotionById } from '@/services/promotionsApi';
 
 type Props = {
     params: Promise<{ id: string }>
@@ -10,6 +11,10 @@ export default async function Page(props: Props) {
     const params = await props.params;
 
     const promotion = await getPromotionById(params.id);
+
+    if (!promotion) {
+        notFound();
+    }
 
     return (
         <div className="flex flex-col w-full justify-center-safe overflow-y-auto">

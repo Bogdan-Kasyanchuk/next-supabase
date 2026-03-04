@@ -1,15 +1,15 @@
 import Form from 'next/form';
 import Image from 'next/image';
 
-import { updateCompany } from '@/app/admin/companies/[id]/company-update/actions';
+import { updateCompanyAction } from '@/actions/companies';
+import DatePicker from '@/components/ui/inputs/DatePicker';
+import Input from '@/components/ui/inputs/Input';
+import Select from '@/components/ui/inputs/Select';
+import TextArea from '@/components/ui/inputs/TextArea';
 import { CompanyStatusType } from '@/enums';
 import { categories, countries, statuses } from '@/mock/data';
 
 import SubmitButton from './SubmitButton';
-import DatePicker from '../ui/inputs/DatePicker';
-import Input from '../ui/inputs/Input';
-import Select from '../ui/inputs/Select';
-import TextArea from '../ui/inputs/TextArea';
 
 type Props = {
     id: string,
@@ -26,12 +26,12 @@ type Props = {
     }
 };
 
-export default function UpdateCompanyForm(props: Props) {
-    const updateCompanyWithId = updateCompany.bind(null, props.id);
+export default async function UpdateCompanyForm(props: Props) {
+    const updateCompany = updateCompanyAction.bind(null, props.id);
 
     return (
         <Form
-            action={ updateCompanyWithId }
+            action={ updateCompany }
             className="c-company-form-block"
         >
             <div className="c-company-form-block__form">

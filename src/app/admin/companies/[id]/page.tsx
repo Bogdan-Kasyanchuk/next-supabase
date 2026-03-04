@@ -1,20 +1,24 @@
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 
+import CompanyPromotions from '@/components/app/CompanyPromotions';
 import Toolbar from '@/components/app/Toolbar';
 import ActionButton from '@/components/app/Toolbar/components/ActionButton';
 import CompanyDetailsCard from '@/components/ui/cards/CompanyDetailsCard';
 import DataNotFound from '@/components/ui/data-display/DataNotFound';
 import Loader from '@/components/ui/data-display/Loader';
 import { pagesCompanyUpdateUrl, pagesPromotionNewUrl } from '@/routes';
-
-import { getCompanyById } from './actions';
-import CompanyPromotions from '../../../../components/app/CompanyPromotions';
+import { getCompanyById } from '@/services/companiesApi';
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
     const params = await props.params;
 
     const company = await getCompanyById(params.id);
+
+    if (!company) {
+        notFound();
+    }
 
     return {
         title: company.name
@@ -33,6 +37,10 @@ export default async function Page(props: Props) {
     const query = searchParams.query ?? '';
 
     const company = await getCompanyById(params.id);
+
+    if (!company) {
+        notFound();
+    }
 
     return (
         <div className="p-company flex flex-col w-full">

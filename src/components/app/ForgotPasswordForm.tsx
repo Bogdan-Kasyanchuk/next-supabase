@@ -3,12 +3,17 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 import { FormEvent, useState } from 'react';
+import z from 'zod';
 
 import Button from '@/components/ui/buttons/Button';
 import Input from '@/components/ui/inputs/Input';
 import createSupabaseClient from '@/lib/supabase/client';
 import { pagesAuthLoginUrl, pagesAuthUpdatePasswordUrl } from '@/routes';
 import normalizeUrl from '@/utils/normalizeUrl';
+
+const ForgotPasswordFormSchema = z.object({
+    email: z.email('Please enter a valid email.')
+});
 
 export default function ForgotPasswordForm() {
     const [ email, setEmail ] = useState('');
@@ -18,6 +23,18 @@ export default function ForgotPasswordForm() {
 
     const handleForgotPassword = async (e: FormEvent) => {
         e.preventDefault();
+
+        const validatedFields = ForgotPasswordFormSchema.safeParse({ email });
+        
+        if (!validatedFields.success) {
+            const properties = z.treeifyError(validatedFields.error).properties!;
+        
+            const errors = Object.values(properties).map(({ errors }) => errors[ 0 ]).join('\n');
+        
+            setError(errors);
+        
+            return;
+        }
 
         const supabase = createSupabaseClient();
 

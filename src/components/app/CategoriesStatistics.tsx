@@ -1,6 +1,5 @@
-import { getCategoriesStatistics } from '@/app/admin/dashboard/actions';
-
-import CategoryStatisticsCard from '../ui/cards/CategoryStatisticsCard';
+import CategoryStatisticsCard from '@/components/ui/cards/CategoryStatisticsCard';
+import { getCategoriesStatistics } from '@/services/dashboardApi';
 
 export default async function CategoriesStatistics() {
     const statistics = await getCategoriesStatistics();

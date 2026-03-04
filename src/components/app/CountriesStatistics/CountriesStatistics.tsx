@@ -1,7 +1,7 @@
-import { getCountriesStatistics } from '@/app/admin/dashboard/actions';
+import DashboardCard from '@/components/ui/cards/DashboardCard';
+import { getCountriesStatistics } from '@/services/dashboardApi';
 
 import GoogleMap from './components/GoogleMap';
-import DashboardCard from '../../ui/cards/DashboardCard';
 
 export default async function CountriesStatistics() {
     const statistics = await getCountriesStatistics();

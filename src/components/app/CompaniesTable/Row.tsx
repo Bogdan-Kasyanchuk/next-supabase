@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { toast } from 'sonner';
 
-import { deleteCompany } from '@/app/admin/companies/actions';
+import { deleteCompanyAction } from '@/actions/companies';
 import Badge from '@/components/ui/data-display/Badge';
 import { BadgeStatusType, CompanyStatusType } from '@/enums';
 import { pagesCompanyUrl } from '@/routes';
@@ -98,7 +98,7 @@ export default function Row(props: Props) {
                     action={
                         async () => {
                             try {
-                                await deleteCompany(props.company.id);
+                                await deleteCompanyAction(props.company.id);
 
                                 toast.success('Company deleted successfully');
                             } catch (error) {

@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { toast } from 'sonner';
 
-import { deletePromotion } from '@/app/admin/promotions/actions';
+import { deletePromotionAction } from '@/actions/promotions';
 import DeleteButton from '@/components/app/DeleteButton';
 import { pagesPromotionUrl } from '@/routes';
 import { PromotionMapper } from '@/types';
@@ -56,7 +56,7 @@ export default function PromotionCard(props: Props) {
                 action={
                     async () => {
                         try {
-                            await deletePromotion( props.promotion.id);
+                            await deletePromotionAction( props.promotion.id);
 
                             toast.success('Promotion deleted successfully');
                         } catch (error) {

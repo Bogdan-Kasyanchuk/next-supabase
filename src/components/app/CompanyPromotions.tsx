@@ -1,7 +1,6 @@
 import PromotionsList from '@/components/app/PromotionsList';
 import DataNotFound from '@/components/ui/data-display/DataNotFound';
-
-import { getPromotionsByCompany } from '../../app/admin/companies/[id]/actions';
+import { getPromotionsByCompany } from '@/services/promotionsApi';
 
 type Props = {
     companyId: string,

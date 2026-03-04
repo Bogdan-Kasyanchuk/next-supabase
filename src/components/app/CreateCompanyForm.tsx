@@ -1,22 +1,22 @@
 import Form from 'next/form';
 import Image from 'next/image';
 
-import { createCompany } from '@/app/admin/companies/company-new/actions';
+import { createCompanyAction } from '@/actions/companies';
+import DatePicker from '@/components/ui/inputs/DatePicker';
+import Input from '@/components/ui/inputs/Input';
+import Select from '@/components/ui/inputs/Select';
+import TextArea from '@/components/ui/inputs/TextArea';
 import { categories, countries, statuses } from '@/mock/data';
 import { randomImage } from '@/mock/randomImage';
 
 import SubmitButton from './SubmitButton';
-import DatePicker from '../ui/inputs/DatePicker';
-import Input from '../ui/inputs/Input';
-import Select from '../ui/inputs/Select';
-import TextArea from '../ui/inputs/TextArea';
 
-export default function CreateCompanyForm() {
+export default async function CreateCompanyForm() {
     const logo = randomImage(200, 200);
 
     return (
         <Form
-            action={ createCompany }
+            action={ createCompanyAction }
             className="c-company-form-block"
         >
             <div className="c-company-form-block__form">

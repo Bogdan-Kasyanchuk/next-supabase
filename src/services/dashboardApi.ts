@@ -1,5 +1,3 @@
-'use server';
-
 import createSupabaseServer from '@/lib/supabase/server';
 import { generalStatisticsLabel } from '@/mock/data';
 import { StatisticsMapper } from '@/types';
@@ -12,10 +10,11 @@ export async function getGeneralStatistics() {
         .select('*')
         .single();
 
-    if (error || !data) {
-        // eslint-disable-next-line no-console
-        console.error(`Error loading general statistics: ${ error.message }`);
+    if (error) {
+        throw new Error(`Error loading general statistics: ${ error.message }`);
+    }
 
+    if (!data) {
         return [];
     }
 
@@ -52,10 +51,11 @@ export async function getTradeStatistics() {
         .from('companies')
         .select( 'id, name, logo_url, sold, income');
 
-    if (error || !data) {
-        // eslint-disable-next-line no-console
-        console.error(`Error loading trade statistics: ${ error.message }`);
+    if (error) {
+        throw new Error(`Error loading trade statistics: ${ error.message }`);
+    }
 
+    if (!data) {
         return [];
     }
 
@@ -69,10 +69,11 @@ export async function getCategoriesStatistics() {
         .from('companies_by_category')
         .select('*');
 
-    if (error || !data) {
-        // eslint-disable-next-line no-console
-        console.error(`Error loading categories statistics: ${ error.message }`);
+    if (error) {
+        throw new Error(`Error loading categories statistics: ${ error.message }`);
+    }
 
+    if (!data) {
         return [];
     }
 
@@ -86,10 +87,11 @@ export async function getCountriesStatistics() {
         .from('companies_by_country')
         .select('*');
 
-    if (error || !data) {
-        // eslint-disable-next-line no-console
-        console.error(`Error loading countries statistics: ${ error.message }`);
+    if (error) {
+        throw new Error(`Error loading countries statistics: ${ error.message }`);
+    }
 
+    if (!data) {
         return [];
     }
 
@@ -103,10 +105,11 @@ export async function getPromotionsStatistics() {
         .from('promotions')
         .select('id, name, discount, company:companies (id, name, logo_url)');
 
-    if (error || !data) {
-        // eslint-disable-next-line no-console
-        console.error(`Error loading promotions statistics: ${ error.message }`);
+    if (error) {
+        throw new Error(`Error loading promotions statistics: ${ error.message }`);
+    }
 
+    if (!data) {
         return [];
     }
 

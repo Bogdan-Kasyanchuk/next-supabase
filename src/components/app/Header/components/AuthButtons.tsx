@@ -4,17 +4,14 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import Button from '@/components/ui/buttons/Button';
-import {
-    pagesAuthForgotPasswordUrl,
-    pagesAuthLoginUrl,
-    pagesAuthSignUpUrl,
-    pagesHomeUrl
-} from '@/routes';
+import { pagesAuthLoginUrl, pagesAuthSignUpUrl } from '@/routes';
 
 export default function AuthButtons() {
     const pathname = usePathname();
 
-    if (pathname !== pagesHomeUrl() && pathname !== pagesAuthLoginUrl() && pathname !== pagesAuthSignUpUrl() && pathname !== pagesAuthForgotPasswordUrl()) {
+    const isAuthRoute = pathname.startsWith('/auth');
+
+    if (!isAuthRoute) {
         return null;
     }
 

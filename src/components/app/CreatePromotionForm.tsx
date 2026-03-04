@@ -1,13 +1,13 @@
 import Form from 'next/form';
 import Image from 'next/image';
 
-import { createPromotion } from '@/app/admin/companies/[id]/promotion-new/actions';
+import { createPromotionAction } from '@/actions/promotions';
+import DatePicker from '@/components/ui/inputs/DatePicker';
+import Input from '@/components/ui/inputs/Input';
+import TextArea from '@/components/ui/inputs/TextArea';
 import { randomImage } from '@/mock/randomImage';
 
 import SubmitButton from './SubmitButton';
-import DatePicker from '../ui/inputs/DatePicker';
-import Input from '../ui/inputs/Input';
-import TextArea from '../ui/inputs/TextArea';
 
 type Props = {
     companyId: string
@@ -16,11 +16,11 @@ type Props = {
 export default function CreatePromotionForm(props: Props) {
     const cover = randomImage(400, 200);
 
-    const createPromotionWithCompanyId = createPromotion.bind(null, props.companyId);
+    const createPromotion = createPromotionAction.bind(null, props.companyId);
 
     return (
         <Form
-            action={ createPromotionWithCompanyId }
+            action={ createPromotion }
             className="c-promotion-form-block"
         >
             <div className="c-promotion-form-block__form">

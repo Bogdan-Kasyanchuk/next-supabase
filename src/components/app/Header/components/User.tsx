@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import Image from 'next/image';
 
 import createSupabaseServer from '@/lib/supabase/server';
@@ -17,8 +16,11 @@ export default async function User(props: Props) {
         .eq('id', props.id)
         .single();
 
-    if (error || !data) {
-        console.error('Failed to load user', error);
+    if (error) {
+        window.console.error(`Failed to load user: ${ error.message }`);
+    }
+
+    if (!data) {
         return null;
     }
 

@@ -1,6 +1,7 @@
-import UpdateCompanyForm from '@/components/app/UpdateCompanyForm';
+import { notFound } from 'next/navigation';
 
-import { getCompanyById } from '../actions';
+import UpdateCompanyForm from '@/components/app/UpdateCompanyForm';
+import { getCompanyById } from '@/services/companiesApi';
 
 type Props = {
     params: Promise<{ id: string }>
@@ -10,6 +11,10 @@ export default async function Page(props: Props) {
     const params = await props.params;
 
     const company = await getCompanyById(params.id);
+
+    if (!company) {
+        notFound();
+    }
 
     return (
         <div className="flex flex-col w-full justify-center-safe overflow-y-auto">

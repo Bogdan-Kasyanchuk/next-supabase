@@ -1,11 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { getPromotionsStatistics } from '@/app/admin/dashboard/actions';
+import DashboardCard from '@/components/ui/cards/DashboardCard';
+import SummaryTable from '@/components/ui/data-display/SummaryTable';
 import { pagesCompanyUrl, pagesPromotionUrl } from '@/routes';
-
-import DashboardCard from '../ui/cards/DashboardCard';
-import SummaryTable from '../ui/data-display/SummaryTable';
+import { getPromotionsStatistics } from '@/services/dashboardApi';
 
 export default async function PromotionsStatistics() {
     const statistics = await getPromotionsStatistics();

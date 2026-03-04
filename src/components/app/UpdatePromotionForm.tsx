@@ -1,25 +1,25 @@
 import Form from 'next/form';
 import Image from 'next/image';
 
-import { updatePromotion } from '@/app/admin/promotions/[id]/promotion-update/actions';
+import { updatePromotionAction } from '@/actions/promotions';
+import DatePicker from '@/components/ui/inputs/DatePicker';
+import Input from '@/components/ui/inputs/Input';
+import TextArea from '@/components/ui/inputs/TextArea';
 import { PromotionDetailsMapper } from '@/types';
 
 import SubmitButton from './SubmitButton';
-import DatePicker from '../ui/inputs/DatePicker';
-import Input from '../ui/inputs/Input';
-import TextArea from '../ui/inputs/TextArea';
 
 type Props = {
     id: string,
     initialValues: PromotionDetailsMapper
 };
 
-export default function UpdatePromotionForm(props: Props) {
-    const updatePromotionWithId = updatePromotion.bind(null, props.id);
+export default async function UpdatePromotionForm(props: Props) {
+    const updatePromotion = updatePromotionAction.bind(null, props.id);
 
     return (
         <Form
-            action={ updatePromotionWithId }
+            action={ updatePromotion }
             className="c-promotion-form-block"
         >
             <div className="c-promotion-form-block__form">

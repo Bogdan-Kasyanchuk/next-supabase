@@ -1,12 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { getTradeStatistics } from '@/app/admin/dashboard/actions';
+import DashboardCard from '@/components/ui/cards/DashboardCard';
+import SummaryTable from '@/components/ui/data-display/SummaryTable';
 import { pagesCompanyUrl } from '@/routes';
+import { getTradeStatistics } from '@/services/dashboardApi';
 import formatCurrency from '@/utils/formatCurrency';
-
-import DashboardCard from '../ui/cards/DashboardCard';
-import SummaryTable from '../ui/data-display/SummaryTable';
 
 export default async function TradeStatistics() {
     const statistics = await getTradeStatistics();

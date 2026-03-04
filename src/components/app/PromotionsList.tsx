@@ -1,6 +1,5 @@
+import PromotionCard from '@/components/ui/cards/PromotionCard';
 import { PromotionMapper } from '@/types';
-
-import PromotionCard from '../ui/cards/PromotionCard';
 
 type Props = {
     promotions: PromotionMapper[]
