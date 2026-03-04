@@ -15,33 +15,24 @@ export async function getCompanies(query: string) {
 
     let request = supabase
         .from('companies')
-        .select(
-            'category, country, has_promotions, id, joined_at, logo_url, name, status',
-            { count: 'exact' }
-        )
+        .select('category, country, has_promotions, id, joined_at, logo_url, name, status')
         .order('joined_at', { ascending: false });
 
     if (query.trim()) {
         request = request.ilike('name', `%${ query }%`);
     }
 
-    const { data, count, error } = await request;
+    const { data, error } = await request;
 
     if (error) {
         throw new Error(`Error loading companies: ${ error.message }`);
     }
 
     if (!data) {
-        return {
-            companies: [],
-            count: 0
-        };
+        return [];
     }
 
-    return {
-        companies: data as CompanyMapper[],
-        count
-    };
+    return data as CompanyMapper[];
 }
 
 export const getCompanyById = cache(
@@ -51,17 +42,17 @@ export const getCompanyById = cache(
         const { data, error } = await supabase
             .from('companies')
             .select(`
-        category,
-        country,
-        description,
-        has_promotions,
-        income,
-        joined_at,
-        logo_url,
-        name,
-        sold,
-        status
-        `)
+                category,
+                country,
+                description,
+                has_promotions,
+                income,
+                joined_at,
+                logo_url,
+                name,
+                sold,
+                status
+            `)
             .eq('id', id)
             .single();
 

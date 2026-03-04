@@ -18,7 +18,7 @@ export default async function Page(props: Props) {
 
     const query = searchParams.query ?? '';
 
-    const data = await getPromotions(query);
+    const promotions = await getPromotions(query);
 
     return (
         <div className="p-promotions flex flex-col w-full">
@@ -33,8 +33,8 @@ export default async function Page(props: Props) {
 
             <div className="p-5 grow overflow-y-auto">
                 {
-                    data.promotions.length
-                        ? <PromotionsList promotions={ data.promotions } />
+                    promotions.length
+                        ? <PromotionsList promotions={ promotions } />
                         : <DataNotFound />
                 }
             </div>

@@ -1,4 +1,5 @@
 import GeneralStatisticsCard from '@/components/ui/cards/GeneralStatisticsCard';
+import DataNotFound from '@/components/ui/data-display/DataNotFound';
 import { getGeneralStatistics } from '@/services/dashboardApi';
 
 export default async function GeneralStatistics() {
@@ -20,9 +21,7 @@ export default async function GeneralStatistics() {
                             )
                         }
                     </ul>
-                    : <div className="border border-gray-300 rounded flex-center size-full">
-                        <p className="text-5xl">General statistics not found</p>
-                    </div>
+                    : <DataNotFound className="bg-gray-200 rounded" />
             }
         </>
     );

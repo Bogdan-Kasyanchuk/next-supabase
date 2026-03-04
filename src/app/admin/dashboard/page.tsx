@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 
 import CategoriesStatistics from '@/components/app/CategoriesStatistics';
 import CountriesStatistics from '@/components/app/CountriesStatistics';
+import CustomErrorBoundary from '@/components/app/CustomErrorBoundary';
 import GeneralStatistics from '@/components/app/GeneralStatistics';
 import PromotionsStatistics from '@/components/app/PromotionsStatistics';
 import TradeStatistics from '@/components/app/TradeStatistics';
@@ -14,11 +15,13 @@ export const metadata: Metadata = {
 
 export default function Page() {
     return (
-        <div className="flex flex-col gap-5 w-full overflow-y-auto p-5">
-            <div className="relative">
-                <Suspense fallback={ <Loader /> }>
-                    <GeneralStatistics />
-                </Suspense>
+        <div className="p-dashboard flex flex-col gap-5 w-full overflow-y-auto p-5">
+            <div className="relative min-h-[370px] lg:min-h-[240px] xl:min-h-[110px]">
+                <CustomErrorBoundary>
+                    <Suspense fallback={ <Loader /> }>
+                        <GeneralStatistics />
+                    </Suspense>
+                </CustomErrorBoundary>
             </div>
 
             <div className="flex flex-col gap-5 lg:flex-row">

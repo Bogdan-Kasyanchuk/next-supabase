@@ -20,15 +20,15 @@ export async function getGeneralStatistics() {
 
     const statistics: StatisticsMapper['general'] = [
         {
-            label: generalStatisticsLabel.totalCompanies,
+            label: generalStatisticsLabel.companies,
             count: data.total_companies
         },
         {
-            label: generalStatisticsLabel.totalPromotions,
+            label: generalStatisticsLabel.promotions,
             count: data.total_promotions
         },
         {
-            label: generalStatisticsLabel.totalCategories,
+            label: generalStatisticsLabel.categories,
             count: data.total_categories
         },
         {
@@ -36,7 +36,7 @@ export async function getGeneralStatistics() {
             count: data.new_companies
         },
         {
-            label: generalStatisticsLabel.totalActiveCompanies,
+            label: generalStatisticsLabel.activeCompanies,
             count: data.total_active_companies
         }
     ];

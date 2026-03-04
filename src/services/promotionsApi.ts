@@ -14,33 +14,24 @@ export async function getPromotions(query: string) {
 
     let request = supabase
         .from('promotions')
-        .select(
-            'cover_url, start_at, end_at, discount, id, name',
-            { count: 'exact' }
-        )
+        .select('cover_url, start_at, end_at, discount, id, name')
         .order('start_at', { ascending: false });
 
     if (query.trim()) {
         request = request.ilike('name', `%${ query }%`);
     }
 
-    const { data, count, error } = await request;
+    const { data, error } = await request;
 
     if (error) {
         throw new Error(`Error loading promotions: ${ error.message }`);
     }
 
     if (!data) {
-        return {
-            promotions: [],
-            count: 0
-        };
+        return [];
     }
 
-    return {
-        promotions: data as PromotionMapper[],
-        count
-    };
+    return data as PromotionMapper[];
 }
 
 export const getPromotionById = cache(

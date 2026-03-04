@@ -831,9 +831,9 @@ export const statuses: SelectOption<CompanyStatusType>[] = [
 ];
 
 export const generalStatisticsLabel = {
-    totalCompanies: 'Total companies',
-    totalPromotions: 'Total promotions',
-    totalCategories: 'Total categories',
+    companies: 'Companies',
+    promotions: 'Promotions',
+    categories: 'Categories',
     newCompanies: 'New companies',
-    totalActiveCompanies: 'Total active companies'
+    activeCompanies: 'Active companies'
 };

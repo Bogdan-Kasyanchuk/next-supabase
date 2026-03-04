@@ -4,12 +4,18 @@
     gap: 20px;
     align-items: center;
     justify-content: center;
-    height: 100%;
 
+    height: 100%;
     margin-inline: auto;
 
     color: var(--color-secondary);
     text-align: center;
+
+    .p-company &,
+    .p-dashboard & {
+        border-radius: 4px;
+        background-color: var(--color-gray-200);
+    }
 
     &__title {
         font-size: 128px;

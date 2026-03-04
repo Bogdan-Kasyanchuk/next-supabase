@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 
 import CompanyPromotions from '@/components/app/CompanyPromotions';
+import CustomErrorBoundary from '@/components/app/CustomErrorBoundary';
 import Toolbar from '@/components/app/Toolbar';
 import ActionButton from '@/components/app/Toolbar/components/ActionButton';
 import CompanyDetailsCard from '@/components/ui/cards/CompanyDetailsCard';
@@ -72,12 +73,14 @@ export default async function Page(props: Props) {
                 <div className="ms-5 overflow-y-auto relative grow shrink-0">
                     {
                         company.has_promotions
-                            ? <Suspense fallback={ <Loader /> }>
-                                <CompanyPromotions
-                                    companyId={ params.id }
-                                    query={ query }
-                                />
-                            </Suspense>
+                            ? <CustomErrorBoundary>
+                                <Suspense fallback={ <Loader /> }>
+                                    <CompanyPromotions
+                                        companyId={ params.id }
+                                        query={ query }
+                                    />
+                                </Suspense>
+                            </CustomErrorBoundary>
                             : <DataNotFound className="bg-gray-200 rounded" />
                     }
                 </div>
