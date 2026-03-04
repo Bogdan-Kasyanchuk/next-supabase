@@ -6,15 +6,21 @@
     justify-content: center;
 
     height: 100%;
+    padding: 20px;
 
     font-size: var(--text-9xl);
     line-height: 1.2;
     color: var(--color-secondary);
     text-align: center;
 
+    svg {
+        flex-shrink: 0;
+    }
+
     &__title {
         font-size: var(--text-5xl);
         font-weight: 700;
+        line-height: 1;
     }
 
     &__text {

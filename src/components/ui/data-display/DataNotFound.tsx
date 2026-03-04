@@ -8,7 +8,10 @@ type Props = {
 export default function DataNotFound(props: Props) {
     return (
         <div className={ clsx('c-data-not-found', props.className) }>
-            <Database size={ 80 } />
+            <Database
+                width={ 80 }
+                height={ 80 }
+            />
 
             <p className="c-data-not-found__title">
                 Data not found

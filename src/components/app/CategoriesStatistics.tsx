@@ -1,4 +1,5 @@
 import CategoryStatisticsCard from '@/components/ui/cards/CategoryStatisticsCard';
+import DataNotFound from '@/components/ui/data-display/DataNotFound';
 import { getCategoriesStatistics } from '@/services/dashboardApi';
 
 export default async function CategoriesStatistics() {
@@ -20,9 +21,7 @@ export default async function CategoriesStatistics() {
                             )
                         }
                     </ul>
-                    : <div className="border border-gray-300 rounded flex-center size-full">
-                        <p className="text-5xl">Categories statistics not found</p>
-                    </div>
+                    : <DataNotFound className="bg-gray-200 rounded" />
             }
         </>
     );

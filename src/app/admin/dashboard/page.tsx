@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function Page() {
     return (
         <div className="p-dashboard flex flex-col gap-5 w-full overflow-y-auto p-5">
-            <div className="relative min-h-[370px] lg:min-h-[240px] xl:min-h-[110px]">
+            <div className="relative h-[370px] lg:h-[240px] xl:h-[110px] lg:min-h-fit shrink-0">
                 <CustomErrorBoundary>
                     <Suspense fallback={ <Loader /> }>
                         <GeneralStatistics />
@@ -25,30 +25,38 @@ export default function Page() {
             </div>
 
             <div className="flex flex-col gap-5 lg:flex-row">
-                <div className="max-h-[398px] grow relative">
-                    <Suspense fallback={ <Loader /> }>
-                        <PromotionsStatistics />
-                    </Suspense>
+                <div className="relative h-[398px] lg:min-h-fit grow">
+                    <CustomErrorBoundary>
+                        <Suspense fallback={ <Loader /> }>
+                            <PromotionsStatistics />
+                        </Suspense>
+                    </CustomErrorBoundary>
                 </div>
 
-                <div className="relative">
-                    <Suspense fallback={ <Loader /> }>
-                        <CategoriesStatistics />
-                    </Suspense>
+                <div className="relative h-[296px] lg:h-[398px] lg:min-h-fit lg:min-w-[255px] xl:min-w-[387px] shrink-0">
+                    <CustomErrorBoundary>
+                        <Suspense fallback={ <Loader /> }>
+                            <CategoriesStatistics />
+                        </Suspense>
+                    </CustomErrorBoundary>
                 </div>
             </div>
 
             <div className="flex flex-col gap-5 xl:flex-row">
-                <div className="xl:w-1/2 relative">
-                    <Suspense fallback={ <Loader /> }>
-                        <CountriesStatistics />
-                    </Suspense>
+                <div className="xl:w-1/2 relative h-[398px] xl:min-h-fit shrink-0">
+                    <CustomErrorBoundary>
+                        <Suspense fallback={ <Loader /> }>
+                            <CountriesStatistics />
+                        </Suspense>
+                    </CustomErrorBoundary>
                 </div>
 
-                <div className="max-h-[398px] grow relative">
-                    <Suspense fallback={ <Loader /> }>
-                        <TradeStatistics />
-                    </Suspense>
+                <div className="grow relative h-[398px] xl:min-h-fit">
+                    <CustomErrorBoundary>
+                        <Suspense fallback={ <Loader /> }>
+                            <TradeStatistics />
+                        </Suspense>
+                    </CustomErrorBoundary>
                 </div>
             </div>
         </div>

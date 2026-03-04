@@ -1,4 +1,5 @@
 import DashboardCard from '@/components/ui/cards/DashboardCard';
+import DataNotFound from '@/components/ui/data-display/DataNotFound';
 import { getCountriesStatistics } from '@/services/dashboardApi';
 
 import GoogleMap from './components/GoogleMap';
@@ -34,9 +35,7 @@ export default async function CountriesStatistics() {
                             </div>
                         </div>
                     </DashboardCard>
-                    : <div className="border border-gray-300 rounded flex-center size-full">
-                        <p className="text-5xl">Countries statistics not found</p>
-                    </div>
+                    : <DataNotFound className="bg-gray-200 rounded" />
             }
         </>
     );

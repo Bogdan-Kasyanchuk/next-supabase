@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import DashboardCard from '@/components/ui/cards/DashboardCard';
+import DataNotFound from '@/components/ui/data-display/DataNotFound';
 import SummaryTable from '@/components/ui/data-display/SummaryTable';
 import { pagesCompanyUrl, pagesPromotionUrl } from '@/routes';
 import { getPromotionsStatistics } from '@/services/dashboardApi';
@@ -60,9 +61,7 @@ export default async function PromotionsStatistics() {
                             }
                         </SummaryTable.Root>
                     </DashboardCard>
-                    : <div className="border border-gray-300 rounded flex-center size-full">
-                        <p className="text-5xl">Promotions statistics not found</p>
-                    </div>
+                    : <DataNotFound className="bg-gray-200 rounded" />
             }
         </>
     );
