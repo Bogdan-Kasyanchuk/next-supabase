@@ -3,16 +3,11 @@
 import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
-import z from 'zod';
 
 import Button from '@/components/ui/buttons/Button';
 import Input from '@/components/ui/inputs/Input';
-import createSupabaseClient from '@/lib/supabase/client';
 import { pagesDashboardUrl } from '@/routes';
-
-const UpdatePasswordFormSchema = z.object({
-    password: z.string().min(6, 'Password should be at least 6 characters.')
-});
+import { updatePassword } from '@/services/auth/api';
 
 export default function UpdatePasswordForm() {
     const router = useRouter();
@@ -23,29 +18,17 @@ export default function UpdatePasswordForm() {
 
     const isFormDisabled = isLoading || !password; 
 
-    const supabase = createSupabaseClient();
-
     const handleForgotPassword = async (e: FormEvent) => {
         e.preventDefault();
-
-        const validatedFields = UpdatePasswordFormSchema.safeParse({ password });
-
-        if (!validatedFields.success) {
-            setError(validatedFields.error.issues[ 0 ].message);
-        
-            return;
-        }
 
         setIsLoading(true);
         setError(null);
 
         try {
-            const { error } = await supabase.auth.updateUser({
-                password: validatedFields.data.password
-            });
-
-            if (error) {
-                throw error;
+            const result = await updatePassword( password );
+            
+            if (!result.success && result.error) {
+                throw new Error(result.error);
             }
 
             router.push(pagesDashboardUrl());

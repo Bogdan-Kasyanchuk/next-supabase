@@ -3,17 +3,11 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 import { FormEvent, useState } from 'react';
-import z from 'zod';
 
 import Button from '@/components/ui/buttons/Button';
 import Input from '@/components/ui/inputs/Input';
-import createSupabaseClient from '@/lib/supabase/client';
-import { pagesAuthLoginUrl, pagesAuthUpdatePasswordUrl } from '@/routes';
-import normalizeUrl from '@/utils/normalizeUrl';
-
-const ForgotPasswordFormSchema = z.object({
-    email: z.email('Please enter a valid email.')
-});
+import { pagesAuthLoginUrl } from '@/routes';
+import { forgotPassword } from '@/services/auth/api';
 
 export default function ForgotPasswordForm() {
     const [ email, setEmail ] = useState('');
@@ -23,32 +17,17 @@ export default function ForgotPasswordForm() {
 
     const isFormDisabled = isLoading || !email.trim(); 
 
-    const supabase = createSupabaseClient();
-
     const handleForgotPassword = async (e: FormEvent) => {
         e.preventDefault();
-
-        const validatedFields = ForgotPasswordFormSchema.safeParse({ email: email.trim() });
-
-        if (!validatedFields.success) {
-            setError(validatedFields.error.issues[ 0 ].message);
-        
-            return;
-        }
 
         setIsLoading(true);
         setError(null);
 
         try {
-            const { error } = await supabase.auth.resetPasswordForEmail(
-                validatedFields.data.email, {
-                    redirectTo: normalizeUrl(
-                        `${ window.location.origin }/${ pagesAuthUpdatePasswordUrl() }`
-                    )
-                });
+            const result = await forgotPassword( email );
 
-            if (error) {
-                throw error;
+            if (!result.success && result.error) {
+                throw new Error(result.error);
             }
 
             setIsSuccess(true);

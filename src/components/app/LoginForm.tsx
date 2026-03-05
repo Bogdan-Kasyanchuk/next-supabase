@@ -4,17 +4,11 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
-import z from 'zod';
 
 import Button from '@/components/ui/buttons/Button';
 import Input from '@/components/ui/inputs/Input';
-import createSupabaseClient from '@/lib/supabase/client';
 import { pagesAuthForgotPasswordUrl, pagesAuthSignUpUrl, pagesDashboardUrl } from '@/routes';
-
-const LoginFormSchema = z.object({
-    email: z.email('Please enter a valid email.'),
-    password: z.string().min(6, 'Password should be at least 6 characters.')
-});
+import { login } from '@/services/auth/api';
 
 export default function LoginForm() {
     const router = useRouter();
@@ -26,37 +20,17 @@ export default function LoginForm() {
 
     const isFormDisabled = isLoading || !email.trim() || !password; 
 
-    const supabase = createSupabaseClient();
-
     const handleLogin = async (e: FormEvent) => {
         e.preventDefault();
-
-        const validatedFields = LoginFormSchema.safeParse({
-            email: email.trim(),
-            password
-        });
-
-        if (!validatedFields.success) {
-            const errors = validatedFields.error.issues
-                .map(issue => issue.message)
-                .join('\n');
-        
-            setError(errors);
-        
-            return;
-        }
 
         setIsLoading(true);
         setError(null);
 
         try {
-            const { error } = await supabase.auth.signInWithPassword({
-                email: validatedFields.data.email,
-                password: validatedFields.data.password
-            });
+            const result = await login( email, password );
             
-            if (error) {
-                throw error;
+            if (!result.success && result.error) {
+                throw new Error(result.error);
             }
 
             router.push(pagesDashboardUrl());
