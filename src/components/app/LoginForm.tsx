@@ -21,35 +21,38 @@ export default function LoginForm() {
 
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
-    const [ error, setError ] = useState<string | undefined>(undefined);
+    const [ error, setError ] = useState<string | null>(null);
     const [ isLoading, setIsLoading ] = useState(false);
 
-    const isFormDisabled = isLoading || !email || !password; 
+    const isFormDisabled = isLoading || !email.trim() || !password; 
+
+    const supabase = createSupabaseClient();
 
     const handleLogin = async (e: FormEvent) => {
         e.preventDefault();
 
-        const validatedFields = LoginFormSchema.safeParse({ email, password });
+        const validatedFields = LoginFormSchema.safeParse({
+            email: email.trim(),
+            password
+        });
 
         if (!validatedFields.success) {
-            const properties = z.treeifyError(validatedFields.error).properties!;
-
-            const errors = Object.values(properties).map(({ errors }) => errors[ 0 ]).join('\n');
-
+            const errors = validatedFields.error.issues
+                .map(issue => issue.message)
+                .join('\n');
+        
             setError(errors);
-
+        
             return;
         }
 
-        const supabase = createSupabaseClient();
-
         setIsLoading(true);
-        setError(undefined);
+        setError(null);
 
         try {
             const { error } = await supabase.auth.signInWithPassword({
-                email,
-                password
+                email: validatedFields.data.email,
+                password: validatedFields.data.password
             });
             
             if (error) {
@@ -89,8 +92,8 @@ export default function LoginForm() {
                     required
                     onChange={ 
                         e => {
-                            setEmail(e.target.value.trim());
-                            setError(undefined);
+                            setEmail(e.target.value);
+                            setError(null);
                         } 
                     }
                 />
@@ -103,8 +106,8 @@ export default function LoginForm() {
                     required
                     onChange={ 
                         e => {
-                            setPassword(e.target.value.trim());
-                            setError(undefined);
+                            setPassword(e.target.value);
+                            setError(null);
                         } 
                     }
                 />

@@ -17,36 +17,35 @@ const ForgotPasswordFormSchema = z.object({
 
 export default function ForgotPasswordForm() {
     const [ email, setEmail ] = useState('');
-    const [ error, setError ] = useState<string | undefined>(undefined);
+    const [ error, setError ] = useState<string | null>(null);
     const [ isSuccess, setIsSuccess ] = useState(false);
     const [ isLoading, setIsLoading ] = useState(false);
+
+    const isFormDisabled = isLoading || !email.trim(); 
+
+    const supabase = createSupabaseClient();
 
     const handleForgotPassword = async (e: FormEvent) => {
         e.preventDefault();
 
-        const validatedFields = ForgotPasswordFormSchema.safeParse({ email });
-        
+        const validatedFields = ForgotPasswordFormSchema.safeParse({ email: email.trim() });
+
         if (!validatedFields.success) {
-            const properties = z.treeifyError(validatedFields.error).properties!;
-        
-            const errors = Object.values(properties).map(({ errors }) => errors[ 0 ]).join('\n');
-        
-            setError(errors);
+            setError(validatedFields.error.issues[ 0 ].message);
         
             return;
         }
 
-        const supabase = createSupabaseClient();
-
         setIsLoading(true);
-        setError(undefined);
+        setError(null);
 
         try {
-            const { error } = await supabase.auth.resetPasswordForEmail(email, {
-                redirectTo: normalizeUrl(
-                    `${ window.location.origin }/${ pagesAuthUpdatePasswordUrl() }`
-                )
-            });
+            const { error } = await supabase.auth.resetPasswordForEmail(
+                validatedFields.data.email, {
+                    redirectTo: normalizeUrl(
+                        `${ window.location.origin }/${ pagesAuthUpdatePasswordUrl() }`
+                    )
+                });
 
             if (error) {
                 throw error;
@@ -98,7 +97,8 @@ export default function ForgotPasswordForm() {
                                 required
                                 onChange={ 
                                     e => {
-                                        setEmail(e.target.value.trim());
+                                        setEmail(e.target.value);
+                                        setError(null);
                                     } 
                                 }
                             />
@@ -114,7 +114,7 @@ export default function ForgotPasswordForm() {
                                 type="submit"
                                 size="large"
                                 className="w-full mt-2.5"
-                                disabled={ isLoading || !email }
+                                disabled={ isFormDisabled }
                                 loading={ isLoading }
                             >
                                 Send reset email

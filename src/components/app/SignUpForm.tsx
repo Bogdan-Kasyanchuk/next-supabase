@@ -17,7 +17,16 @@ const SignUpFormSchema = z.object({
     firstName: z.string().min(3, 'First name should be at least 3 characters.'),
     lastName: z.string().optional(),
     email: z.email('Please enter a valid email.'),
-    password: z.string().min(6, 'Password should be at least 6 characters.')
+    password: z.string().min(6, 'Password should be at least 6 characters.'),
+    repeatPassword: z.string()
+}).superRefine((data, ctx) => {
+    if (data.password !== data.repeatPassword) {
+        ctx.addIssue({
+            code: 'custom',
+            message: 'Passwords do not match',
+            path: [ 'repeatPassword' ]
+        });
+    }
 });
 
 export default function SignUpForm() {
@@ -28,48 +37,46 @@ export default function SignUpForm() {
     const [ lastName, setLastName ] = useState('');
     const [ password, setPassword ] = useState('');
     const [ repeatPassword, setRepeatPassword ] = useState('');
-    const [ error, setError ] = useState<string | undefined>(undefined);
-    const [ passwordMatchError, setPasswordMatchError ] = useState<string | undefined>(undefined);
+    const [ error, setError ] = useState<string | null>(null);
     const [ isLoading, setIsLoading ] = useState(false);
 
-    const isFormDisabled = isLoading || !firstName || !email || !password || !repeatPassword;
+    const isFormDisabled =
+        isLoading ||
+        !firstName.trim() ||
+        !email.trim() ||
+        !password ||
+        !repeatPassword;
+
+    const supabase = createSupabaseClient();
 
     const handleSignUp = async (e: FormEvent) => {
         e.preventDefault();
 
-        if (password !== repeatPassword) {
-            setPasswordMatchError('Passwords do not match');
-
-            return;
-        }
-
         const validatedFields = SignUpFormSchema.safeParse({
-            firstName,
-            lastName,
-            email,
-            password
+            firstName: firstName.trim(),
+            lastName: lastName.trim() || undefined,
+            email: email.trim(),
+            password,
+            repeatPassword
         });
         
         if (!validatedFields.success) {
-            const properties = z.treeifyError(validatedFields.error).properties!;
-        
-            const errors = Object.values(properties).map(({ errors }) => errors[ 0 ]).join('\n');
+            const errors = validatedFields.error.issues
+                .map(issue => issue.message)
+                .join('\n');
         
             setError(errors);
         
             return;
         }
 
-        const supabase = createSupabaseClient();
-
         setIsLoading(true);
-        setError(undefined);
-        setPasswordMatchError(undefined);
+        setError(null);
 
         try {
             const { data: existsData, error: existsErr } = await supabase.rpc(
                 'user_email_exists',
-                { check_email: email }
+                { check_email: validatedFields.data.email }
             );
 
             if (existsErr) {
@@ -80,14 +87,19 @@ export default function SignUpForm() {
                 throw new Error('User with this email already exists');
             }
 
+            const avatarName = [
+                validatedFields.data.firstName,
+                validatedFields.data.lastName
+            ].filter(Boolean).join('+');
+
             const { error } = await supabase.auth.signUp({
-                email,
-                password,
+                email: validatedFields.data.email,
+                password: validatedFields.data.password,
                 options: {
                     data: {
-                        first_name: firstName,
-                        last_name: lastName || undefined,
-                        avatar_url: normalizeUrl(`${ CONSTANTS.AVATAR_URL }/?background=d8fa99&color=222&bold=true&font-size=0.5&name=${ firstName + '+' + lastName }`)
+                        first_name: validatedFields.data.firstName,
+                        last_name: validatedFields.data.lastName || undefined,
+                        avatar_url: normalizeUrl(`${ CONSTANTS.AVATAR_URL }/?background=d8fa99&color=222&bold=true&font-size=0.5&name=${ avatarName }`)
                     }
                 }
             });
@@ -130,8 +142,8 @@ export default function SignUpForm() {
                         required
                         onChange={
                             e => {
-                                setFirstName(e.target.value.trim());
-                                setError(undefined);
+                                setFirstName(e.target.value);
+                                setError(null);
                             }
                         }
                     />
@@ -143,8 +155,8 @@ export default function SignUpForm() {
                         placeholder="Doe"
                         onChange={
                             e => {
-                                setLastName(e.target.value.trim());
-                                setError(undefined);
+                                setLastName(e.target.value);
+                                setError(null);
                             }
                         }
                     />
@@ -158,8 +170,8 @@ export default function SignUpForm() {
                     required
                     onChange={
                         e => {
-                            setEmail(e.target.value.trim());
-                            setError(undefined);
+                            setEmail(e.target.value);
+                            setError(null);
                         }
                     }
                 />
@@ -170,12 +182,10 @@ export default function SignUpForm() {
                     label="Password"
                     placeholder="Password"
                     required
-                    error={ passwordMatchError }
                     onChange={
                         e => {
-                            setPassword(e.target.value.trim());
-                            setPasswordMatchError(undefined);
-                            setError(undefined);
+                            setPassword(e.target.value);
+                            setError(null);
                         }
                     }
                 />
@@ -186,12 +196,10 @@ export default function SignUpForm() {
                     label="Repeat password"
                     placeholder="Password"
                     required
-                    error={ passwordMatchError }
                     onChange={
                         e => {
-                            setRepeatPassword(e.target.value.trim());
-                            setPasswordMatchError(undefined);
-                            setError(undefined);
+                            setRepeatPassword(e.target.value);
+                            setError(null);
                         }
                     }
                 />

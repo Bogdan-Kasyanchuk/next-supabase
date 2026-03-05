@@ -18,31 +18,31 @@ export default function UpdatePasswordForm() {
     const router = useRouter();
     
     const [ password, setPassword ] = useState('');
-    const [ error, setError ] = useState<string | undefined>(undefined);
+    const [ error, setError ] = useState<string | null>(null);
     const [ isLoading, setIsLoading ] = useState(false);
+
+    const isFormDisabled = isLoading || !password; 
+
+    const supabase = createSupabaseClient();
 
     const handleForgotPassword = async (e: FormEvent) => {
         e.preventDefault();
 
         const validatedFields = UpdatePasswordFormSchema.safeParse({ password });
-        
+
         if (!validatedFields.success) {
-            const properties = z.treeifyError(validatedFields.error).properties!;
-        
-            const errors = Object.values(properties).map(({ errors }) => errors[ 0 ]).join('\n');
-        
-            setError(errors);
+            setError(validatedFields.error.issues[ 0 ].message);
         
             return;
         }
 
-        const supabase = createSupabaseClient();
-
         setIsLoading(true);
-        setError(undefined);
+        setError(null);
 
         try {
-            const { error } = await supabase.auth.updateUser({ password });
+            const { error } = await supabase.auth.updateUser({
+                password: validatedFields.data.password
+            });
 
             if (error) {
                 throw error;
@@ -81,7 +81,8 @@ export default function UpdatePasswordForm() {
                     required
                     onChange={ 
                         e => {
-                            setPassword(e.target.value.trim());
+                            setPassword(e.target.value);
+                            setError(null);
                         } 
                     }
                 />
@@ -97,7 +98,7 @@ export default function UpdatePasswordForm() {
                     type="submit"
                     size="large"
                     className="w-full mt-2.5"
-                    disabled={ isLoading || !password }
+                    disabled={ isFormDisabled }
                     loading={ isLoading }
                 >
                     Save new password
