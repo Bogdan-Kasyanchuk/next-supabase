@@ -65,8 +65,8 @@ export default function ForgotPasswordForm() {
                         <h2 className="c-auth-form-block__title">Reset your password</h2>
 
                         <form
-                            onSubmit={ handleForgotPassword }
                             className="c-auth-form-block__form"
+                            onSubmit={ handleForgotPassword }
                         >
                             <Input
                                 type="email"

@@ -55,8 +55,8 @@ export default function LoginForm() {
             <h2 className="c-auth-form-block__title">Login</h2>
 
             <form
-                onSubmit={ handleLogin }
                 className="c-auth-form-block__form"
+                onSubmit={ handleLogin }
             >
                 <Input
                     type="email"

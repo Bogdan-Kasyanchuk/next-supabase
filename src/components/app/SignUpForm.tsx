@@ -69,8 +69,8 @@ export default function SignUpForm() {
             <h2 className="c-auth-form-block__title">Sign up</h2>
 
             <form
-                onSubmit={ handleSignUp }
                 className="c-auth-form-block__form"
+                onSubmit={ handleSignUp }
             >
                 <div className="c-auth-form-block__col-2">
                     <Input
