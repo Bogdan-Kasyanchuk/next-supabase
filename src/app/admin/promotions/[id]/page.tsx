@@ -5,7 +5,7 @@ import Toolbar from '@/components/app/Toolbar';
 import ActionButton from '@/components/app/Toolbar/components/ActionButton';
 import PromotionDetailsCard from '@/components/ui/cards/PromotionDetailsCard';
 import { pagesPromotionUpdateUrl } from '@/routes';
-import { getPromotionById } from '@/services/promotionsApi';
+import { getPromotionById } from '@/services/admin/promotionsApi';
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
     const params = await props.params;

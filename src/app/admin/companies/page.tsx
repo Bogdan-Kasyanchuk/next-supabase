@@ -5,7 +5,7 @@ import Toolbar from '@/components/app/Toolbar';
 import ActionButton from '@/components/app/Toolbar/components/ActionButton';
 import DataNotFound from '@/components/ui/data-display/DataNotFound';
 import { pagesCompanyNewUrl } from '@/routes';
-import { getCompanies } from '@/services/companiesApi';
+import { getCompanies } from '@/services/admin/companiesApi';
 
 export const metadata: Metadata = {
     title: 'Companies'

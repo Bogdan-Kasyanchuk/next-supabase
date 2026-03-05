@@ -8,7 +8,7 @@ import { pagesAuthLoginUrl, pagesCompaniesUrl, pagesCompanyUrl } from '@/routes'
 import { CompanyInsertShema } from '@/shemas';
 import { CompanyDetailsMapper, CompanyMapper } from '@/types';
 
-type Key = keyof CompanyInsertShema;
+import { CompanyFieldKey } from './types';
 
 export async function getCompanies(query: string) { 
     const supabase = await createSupabaseServer();
@@ -81,7 +81,7 @@ export async function createCompany(formData: FormData) {
         redirect(pagesAuthLoginUrl());
     }
     
-    const newCompany: Partial<Record<Key, any>> = {};
+    const newCompany: Partial<Record<CompanyFieldKey, any>> = {};
 
     for (const [ key, value ] of formData.entries()) {
         if (!value) {
@@ -96,7 +96,7 @@ export async function createCompany(formData: FormData) {
                 value
             };
         } else {
-            newCompany[ key as Key ] = value;
+            newCompany[ key as CompanyFieldKey ] = value;
         }
     }
     
@@ -116,7 +116,7 @@ export async function createCompany(formData: FormData) {
 export async function updateCompany(id: string, formData: FormData) {
     const supabase = await createSupabaseServer();
    
-    const newCompany: Partial<Record<Key, any>> = {};
+    const newCompany: Partial<Record<CompanyFieldKey, any>> = {};
 
     for (const [ key, value ] of formData.entries()) {
         if (!value) {
@@ -131,7 +131,7 @@ export async function updateCompany(id: string, formData: FormData) {
                 value
             };
         } else {
-            newCompany[ key as Key ] = value;
+            newCompany[ key as CompanyFieldKey ] = value;
         }
     }
     

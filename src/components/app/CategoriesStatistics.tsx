@@ -1,6 +1,6 @@
 import CategoryStatisticsCard from '@/components/ui/cards/CategoryStatisticsCard';
 import DataNotFound from '@/components/ui/data-display/DataNotFound';
-import { getCategoriesStatistics } from '@/services/dashboardApi';
+import { getCategoriesStatistics } from '@/services/admin/dashboardApi';
 
 export default async function CategoriesStatistics() {
     const statistics = await getCategoriesStatistics();

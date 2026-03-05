@@ -53,6 +53,7 @@ export default async function CreateCompanyForm() {
                         label="Name"
                         placeholder="Name"
                         autoComplete="off"
+                        minLength={ 3 }
                         required
                     />
 

@@ -50,6 +50,7 @@ export default async function UpdatePromotionForm(props: Props) {
                         placeholder="Name"
                         defaultValue={ props.initialValues.name }
                         autoComplete="off"
+                        minLength={ 3 }
                         required
                     />
 
@@ -59,8 +60,8 @@ export default async function UpdatePromotionForm(props: Props) {
                         label="Discount"
                         placeholder="Discount"
                         defaultValue={ props.initialValues.discount }
-                        min={ 0 }
-                        max={ 100 }
+                        min={ 1 }
+                        max={ 99 }
                         required
                     />
                 </div>

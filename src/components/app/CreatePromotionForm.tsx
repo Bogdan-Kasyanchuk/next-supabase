@@ -58,6 +58,7 @@ export default function CreatePromotionForm(props: Props) {
                         label="Name"
                         placeholder="Name"
                         autoComplete="off"
+                        minLength={ 3 }
                         required
                     />
 
@@ -66,8 +67,8 @@ export default function CreatePromotionForm(props: Props) {
                         name="discount"
                         label="Discount"
                         placeholder="Discount"
-                        min={ 0 }
-                        max={ 100 }
+                        min={ 1 }
+                        max={ 99 }
                         required
                     />
                 </div>

@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import PromotionsList from '@/components/app/PromotionsList';
 import Toolbar from '@/components/app/Toolbar';
 import DataNotFound from '@/components/ui/data-display/DataNotFound';
-import { getPromotions } from '@/services/promotionsApi';
+import { getPromotions } from '@/services/admin/promotionsApi';
 
 export const metadata: Metadata = {
     title: 'Promotions'

@@ -5,7 +5,7 @@ import DashboardCard from '@/components/ui/cards/DashboardCard';
 import DataNotFound from '@/components/ui/data-display/DataNotFound';
 import SummaryTable from '@/components/ui/data-display/SummaryTable';
 import { pagesCompanyUrl, pagesPromotionUrl } from '@/routes';
-import { getPromotionsStatistics } from '@/services/dashboardApi';
+import { getPromotionsStatistics } from '@/services/admin/dashboardApi';
 
 export default async function PromotionsStatistics() {
     const statistics = await getPromotionsStatistics();

@@ -61,6 +61,7 @@ export default async function UpdateCompanyForm(props: Props) {
                         placeholder="Name"
                         defaultValue={ props.initialValues.name }
                         autoComplete="off"
+                        minLength={ 3 }
                         required
                     />
 

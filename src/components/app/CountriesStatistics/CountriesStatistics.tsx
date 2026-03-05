@@ -1,6 +1,6 @@
 import DashboardCard from '@/components/ui/cards/DashboardCard';
 import DataNotFound from '@/components/ui/data-display/DataNotFound';
-import { getCountriesStatistics } from '@/services/dashboardApi';
+import { getCountriesStatistics } from '@/services/admin/dashboardApi';
 
 import GoogleMap from './components/GoogleMap';
 

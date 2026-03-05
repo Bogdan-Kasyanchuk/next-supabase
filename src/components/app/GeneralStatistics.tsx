@@ -1,6 +1,6 @@
 import GeneralStatisticsCard from '@/components/ui/cards/GeneralStatisticsCard';
 import DataNotFound from '@/components/ui/data-display/DataNotFound';
-import { getGeneralStatistics } from '@/services/dashboardApi';
+import { getGeneralStatistics } from '@/services/admin/dashboardApi';
 
 export default async function GeneralStatistics() {
     const statistics = await getGeneralStatistics();

@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 
 import UpdatePromotionForm from '@/components/app/UpdatePromotionForm';
-import { getPromotionById } from '@/services/promotionsApi';
+import { getPromotionById } from '@/services/admin/promotionsApi';
 
 type Props = {
     params: Promise<{ id: string }>

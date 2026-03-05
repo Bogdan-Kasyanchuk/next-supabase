@@ -5,7 +5,7 @@ import DashboardCard from '@/components/ui/cards/DashboardCard';
 import DataNotFound from '@/components/ui/data-display/DataNotFound';
 import SummaryTable from '@/components/ui/data-display/SummaryTable';
 import { pagesCompanyUrl } from '@/routes';
-import { getTradeStatistics } from '@/services/dashboardApi';
+import { getTradeStatistics } from '@/services/admin/dashboardApi';
 import formatCurrency from '@/utils/formatCurrency';
 
 export default async function TradeStatistics() {

@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 
 import UpdateCompanyForm from '@/components/app/UpdateCompanyForm';
-import { getCompanyById } from '@/services/companiesApi';
+import { getCompanyById } from '@/services/admin/companiesApi';
 
 type Props = {
     params: Promise<{ id: string }>

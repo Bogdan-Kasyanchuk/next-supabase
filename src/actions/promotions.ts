@@ -1,6 +1,6 @@
 'use server';
 
-import { createPromotion, deletePromotion, updatePromotion } from '@/services/promotionsApi';
+import { createPromotion, deletePromotion, updatePromotion } from '@/services/admin/promotionsApi';
 
 export async function createPromotionAction(companyId: string, formData: FormData) {
     return await createPromotion(companyId, formData);

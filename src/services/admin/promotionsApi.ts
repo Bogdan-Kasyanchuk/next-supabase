@@ -7,7 +7,7 @@ import { pagesCompanyUrl, pagesPromotionUrl } from '@/routes';
 import { PromotionInsertShema } from '@/shemas';
 import { PromotionDetailsMapper, PromotionMapper } from '@/types';
 
-type Key = keyof PromotionInsertShema;
+import { PromotionFieldKey } from './types';
 
 export async function getPromotions(query: string) {   
     const supabase = await createSupabaseServer();
@@ -84,14 +84,14 @@ export async function getPromotionsByCompany(id: string, query: string) {
 export async function createPromotion(companyId: string, formData: FormData) {
     const supabase = await createSupabaseServer();
 
-    const newPromotion: Partial<Record<Key, any>> = {};
+    const newPromotion: Partial<Record<PromotionFieldKey, any>> = {};
 
     for (const [ key, value ] of formData.entries()) {
         if (!value) {
             continue;
         }
 
-        newPromotion[ key as Key ] = value;
+        newPromotion[ key as PromotionFieldKey ] = value;
     }
     
     newPromotion.company_id = companyId;
@@ -110,14 +110,14 @@ export async function createPromotion(companyId: string, formData: FormData) {
 export async function updatePromotion(id: string, formData: FormData) {
     const supabase = await createSupabaseServer();
 
-    const newPromotion: Partial<Record<Key, any>> = {};
+    const newPromotion: Partial<Record<PromotionFieldKey, any>> = {};
 
     for (const [ key, value ] of formData.entries()) {
         if (!value) {
             continue;
         }
 
-        newPromotion[ key as Key ] = value;
+        newPromotion[ key as PromotionFieldKey ] = value;
     }
 
     const { error } = await supabase

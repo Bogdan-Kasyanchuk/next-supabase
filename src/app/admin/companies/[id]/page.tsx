@@ -10,7 +10,7 @@ import CompanyDetailsCard from '@/components/ui/cards/CompanyDetailsCard';
 import DataNotFound from '@/components/ui/data-display/DataNotFound';
 import Loader from '@/components/ui/data-display/Loader';
 import { pagesCompanyUpdateUrl, pagesPromotionNewUrl } from '@/routes';
-import { getCompanyById } from '@/services/companiesApi';
+import { getCompanyById } from '@/services/admin/companiesApi';
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
     const params = await props.params;
