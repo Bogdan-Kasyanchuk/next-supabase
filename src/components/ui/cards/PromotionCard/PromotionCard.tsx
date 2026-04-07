@@ -1,15 +1,12 @@
-'use client';
-
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
-import { toast } from 'sonner';
 
-import { deletePromotionAction } from '@/actions/promotions';
-import DeleteButton from '@/components/app/DeleteButton';
 import { pagesPromotionUrl } from '@/routes';
 import { PromotionMapper } from '@/types';
 import formateDate from '@/utils/formateDate';
+
+import DeleteButton from './DeleteButton';
 
 type Props = {
     promotion: PromotionMapper,
@@ -51,22 +48,7 @@ export default function PromotionCard(props: Props) {
                 </div>
             </div>
 
-            <DeleteButton
-                className="c-promotion-card__delete"
-                action={
-                    async () => {
-                        try {
-                            await deletePromotionAction( props.promotion.id);
-
-                            toast.success('Promotion deleted successfully');
-                        } catch (error) {
-                            toast.error('Error deleting promotion', {
-                                description: (error as Error).message
-                            });
-                        }
-                    } 
-                }
-            />
+            <DeleteButton id={ props.promotion.id } />
         </div>
     );
 }

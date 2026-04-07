@@ -1,18 +1,14 @@
-'use client';
-
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
-import { toast } from 'sonner';
 
-import { deleteCompanyAction } from '@/actions/companies';
 import Badge from '@/components/ui/data-display/Badge';
 import { BadgeStatusType, CompanyStatusType } from '@/enums';
 import { pagesCompanyUrl } from '@/routes';
 import { CompanyMapper } from '@/types';
 import formateDate from '@/utils/formateDate';
 
-import DeleteButton from '../DeleteButton';
+import DeleteButton from './DeleteButton';
 
 const statusTypes = {
     [ CompanyStatusType.ACTIVE ]: {
@@ -94,21 +90,7 @@ export default function Row(props: Props) {
             </td>
             
             <td className="c-companies-table__delete">
-                <DeleteButton
-                    action={
-                        async () => {
-                            try {
-                                await deleteCompanyAction(props.company.id);
-
-                                toast.success('Company deleted successfully');
-                            } catch (error) {
-                                toast.error('Error deleting company', {
-                                    description: (error as Error).message
-                                });
-                            }
-                        } 
-                    }
-                />
+                <DeleteButton id={ props.company.id } />
             </td>
         </tr>
     );
