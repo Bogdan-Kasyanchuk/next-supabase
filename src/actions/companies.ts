@@ -2,7 +2,7 @@
 
 import { createCompany, deleteCompany, updateCompany } from '@/services/admin/companiesApi';
 
-export async function createCompanyAction( formData: FormData) {
+export async function createCompanyAction(formData: FormData) {
     return await createCompany(formData);
 }
 
