@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { BadgeStatusType, CompanyStatusType } from '@/enums';
 import { CompanyDetailsMapper } from '@/types';
 import formatCurrency from '@/utils/formatCurrency';
-import formateDate from '@/utils/formateDate';
+import formatDate from '@/utils/formatDate';
 
 import Badge from '../data-display/Badge';
 
@@ -68,7 +68,7 @@ export default function CompanyDetailsCard(props: Props) {
 
                     <div className="c-company-details-card__content-item">
                         <dt>Joined date:</dt>
-                        <dd>{ formateDate(props.company.joined_at, 'DD.MM.YYYY') }</dd>
+                        <dd>{ formatDate(props.company.joined_at, 'DD.MM.YYYY') }</dd>
                     </div>
 
                     {

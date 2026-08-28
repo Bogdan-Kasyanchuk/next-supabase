@@ -1,25 +1,30 @@
 import Form from 'next/form';
 import Image from 'next/image';
 
-import { updatePromotionAction } from '@/actions/promotions';
+import { createPromotionAction, updatePromotionAction } from '@/actions/promotions';
 import DatePicker from '@/components/ui/inputs/DatePicker';
 import Input from '@/components/ui/inputs/Input';
 import TextArea from '@/components/ui/inputs/TextArea';
+import { randomImage } from '@/mock/randomImage';
 import { PromotionDetailsMapper } from '@/types';
 
 import SubmitButton from './SubmitButton';
 
-type Props = {
-    id: string,
-    initialValues: PromotionDetailsMapper
-};
+type Props =
+    | { mode: 'create', companyId: string }
+    | { mode: 'update', id: string, initialValues: PromotionDetailsMapper };
 
-export default async function UpdatePromotionForm(props: Props) {
-    const updatePromotion = updatePromotionAction.bind(null, props.id);
+export default async function PromotionForm(props: Props) {
+    const action = props.mode === 'create'
+        ? createPromotionAction.bind(null, props.companyId)
+        : updatePromotionAction.bind(null, props.id);
+
+    const cover = props.mode === 'create' ? randomImage(400, 200) : props.initialValues.cover_url;
+    const initialValues = props.mode === 'update' ? props.initialValues : undefined;
 
     return (
         <Form
-            action={ updatePromotion }
+            action={ action }
             className="c-promotion-form-block"
         >
             <div className="c-promotion-form-block__form">
@@ -35,12 +40,23 @@ export default async function UpdatePromotionForm(props: Props) {
 
                         <div className="h-[200px] relative">
                             <Image
-                                src={ props.initialValues.cover_url }
+                                src={ cover }
                                 alt="Image"
                                 sizes="690px"
                                 fill
                             />
                         </div>
+
+                        {
+                            props.mode === 'create' &&
+                            <input
+                                id="logo"
+                                type="text"
+                                name="cover_url"
+                                defaultValue={ cover }
+                                className="hidden"
+                            />
+                        }
                     </div>
 
                     <Input
@@ -48,7 +64,7 @@ export default async function UpdatePromotionForm(props: Props) {
                         name="name"
                         label="Name"
                         placeholder="Name"
-                        defaultValue={ props.initialValues.name }
+                        defaultValue={ initialValues?.name }
                         autoComplete="off"
                         minLength={ 3 }
                         required
@@ -59,7 +75,7 @@ export default async function UpdatePromotionForm(props: Props) {
                         name="discount"
                         label="Discount"
                         placeholder="Discount"
-                        defaultValue={ props.initialValues.discount }
+                        defaultValue={ initialValues?.discount }
                         min={ 1 }
                         max={ 99 }
                         required
@@ -71,7 +87,7 @@ export default async function UpdatePromotionForm(props: Props) {
                         name="start_at"
                         label="Start date"
                         placeholder="DD.MM.YYYY"
-                        defaultValue={ props.initialValues.start_at }
+                        defaultValue={ initialValues?.start_at }
                         minDate={ new Date() }
                     />
 
@@ -79,15 +95,16 @@ export default async function UpdatePromotionForm(props: Props) {
                         name="end_at"
                         label="End date"
                         placeholder="DD.MM.YYYY"
-                        defaultValue={ props.initialValues.end_at }
+                        defaultValue={ initialValues?.end_at }
                         minDate={ new Date() }
+                        required
                     />
 
                     <TextArea
                         name="description"
                         label="Description"
                         placeholder="Description"
-                        defaultValue={ props.initialValues.description }
+                        defaultValue={ initialValues?.description }
                         classNames={
                             {
                                 field: 'md:h-[200px]'
@@ -99,7 +116,7 @@ export default async function UpdatePromotionForm(props: Props) {
             </div>
 
             <SubmitButton>
-                Update promotion
+                { props.mode === 'create' ? 'Create promotion' : 'Update promotion' }
             </SubmitButton>
         </Form>
     );

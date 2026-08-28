@@ -1,22 +1,44 @@
 import Form from 'next/form';
 import Image from 'next/image';
 
-import { createCompanyAction } from '@/actions/companies';
+import { createCompanyAction, updateCompanyAction } from '@/actions/companies';
 import DatePicker from '@/components/ui/inputs/DatePicker';
 import Input from '@/components/ui/inputs/Input';
 import Select from '@/components/ui/inputs/Select';
 import TextArea from '@/components/ui/inputs/TextArea';
-import { categories, countries, statuses } from '@/mock/data';
+import { categories, countries, statuses } from '@/datasets/constants';
+import { CompanyStatusType } from '@/enums';
 import { randomImage } from '@/mock/randomImage';
 
 import SubmitButton from './SubmitButton';
 
-export default async function CreateCompanyForm() {
-    const logo = randomImage(200, 200);
+type CompanyFormValues = {
+    category: string,
+    country: string,
+    status: CompanyStatusType,
+    logo_url: string,
+    name: string,
+    joined_at: string,
+    income: number | null,
+    sold: number | null,
+    description: string | null
+};
+
+type Props =
+    | { mode: 'create' }
+    | { mode: 'update', id: string, initialValues: CompanyFormValues };
+
+export default async function CompanyForm(props: Props) {
+    const action = props.mode === 'create'
+        ? createCompanyAction
+        : updateCompanyAction.bind(null, props.id);
+
+    const logo = props.mode === 'create' ? randomImage(200, 200) : props.initialValues.logo_url;
+    const initialValues = props.mode === 'update' ? props.initialValues : undefined;
 
     return (
         <Form
-            action={ createCompanyAction }
+            action={ action }
             className="c-company-form-block"
         >
             <div className="c-company-form-block__form">
@@ -38,13 +60,16 @@ export default async function CreateCompanyForm() {
                             alt="Logo"
                         />
 
-                        <input
-                            id="logo"
-                            type="text"
-                            name="logo_url"
-                            defaultValue={ logo }
-                            className="hidden"
-                        />
+                        {
+                            props.mode === 'create' &&
+                            <input
+                                id="logo"
+                                type="text"
+                                name="logo_url"
+                                defaultValue={ logo }
+                                className="hidden"
+                            />
+                        }
                     </div>
 
                     <Input
@@ -52,6 +77,7 @@ export default async function CreateCompanyForm() {
                         name="name"
                         label="Name"
                         placeholder="Name"
+                        defaultValue={ initialValues?.name }
                         autoComplete="off"
                         minLength={ 3 }
                         required
@@ -61,6 +87,7 @@ export default async function CreateCompanyForm() {
                         name="status"
                         label="Status"
                         placeholder="Select status"
+                        defaultValue={ initialValues?.status }
                         options={ statuses }
                         required
                     />
@@ -69,6 +96,7 @@ export default async function CreateCompanyForm() {
                         name="country"
                         label="Country"
                         placeholder="Select country"
+                        defaultValue={ initialValues?.country }
                         options={ countries }
                         required
                     />
@@ -79,15 +107,17 @@ export default async function CreateCompanyForm() {
                         name="category"
                         label="Category"
                         placeholder="Select category"
+                        defaultValue={ initialValues?.category }
                         options={ categories }
                         required
                     />
-                    
+
                     <Input
                         type="number"
                         name="income"
                         label="Income"
                         placeholder="Income"
+                        defaultValue={ initialValues?.income ?? undefined }
                         min={ 0 }
                     />
 
@@ -96,6 +126,7 @@ export default async function CreateCompanyForm() {
                         name="sold"
                         label="Sold"
                         placeholder="Sold"
+                        defaultValue={ initialValues?.sold ?? undefined }
                         min={ 0 }
                     />
 
@@ -103,18 +134,20 @@ export default async function CreateCompanyForm() {
                         name="joined_at"
                         label="Joined date"
                         placeholder="DD.MM.YYYY"
+                        defaultValue={ initialValues?.joined_at }
                     />
 
                     <TextArea
                         name="description"
                         label="Description"
                         placeholder="Description"
+                        defaultValue={ initialValues?.description ?? undefined }
                     />
                 </div>
             </div>
 
             <SubmitButton>
-                Create company
+                { props.mode === 'create' ? 'Create company' : 'Update company' }
             </SubmitButton>
         </Form>
     );

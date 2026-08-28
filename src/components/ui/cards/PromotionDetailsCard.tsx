@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 import { PromotionDetailsMapper } from '@/types';
-import formateDate from '@/utils/formateDate';
+import formatDate from '@/utils/formatDate';
 
 type Props = {
     promotion: PromotionDetailsMapper
@@ -33,12 +33,12 @@ export default function PromotionDetailsCard(props: Props) {
                 <dl className="c-promotion-details-card__content-list">
                     <div className="c-promotion-details-card__content-item">
                         <dt>Start date:</dt>
-                        <dd>{ formateDate(props.promotion.start_at, 'DD.MM.YYYY') }</dd>
+                        <dd>{ formatDate(props.promotion.start_at, 'DD.MM.YYYY') }</dd>
                     </div>
                     
                     <div className="c-promotion-details-card__content-item">
                         <dt>End date:</dt>
-                        <dd>{ formateDate(props.promotion.end_at, 'DD.MM.YYYY') }</dd>
+                        <dd>{ formatDate(props.promotion.end_at, 'DD.MM.YYYY') }</dd>
                     </div>
                 </dl>
 

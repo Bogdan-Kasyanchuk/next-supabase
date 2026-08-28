@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 
-import UpdateCompanyForm from '@/components/app/UpdateCompanyForm';
+import CompanyForm from '@/components/app/CompanyForm';
 import { getCompanyById } from '@/services/admin/companiesApi';
 
 type Props = {
@@ -19,7 +19,8 @@ export default async function Page(props: Props) {
     return (
         <div className="flex flex-col w-full justify-center-safe overflow-y-auto">
             <div className="p-5 shadow-custom w-full mx-auto max-w-[768px]">
-                <UpdateCompanyForm
+                <CompanyForm
+                    mode="update"
                     id={ params.id }
                     initialValues={
                         {

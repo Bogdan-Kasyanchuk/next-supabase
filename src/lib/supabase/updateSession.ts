@@ -3,7 +3,7 @@ import { type NextRequest, NextResponse } from 'next/server';
 
 import { CONSTANTS } from '@/datasets/constants';
 import { pagesAuthLoginUrl, pagesDashboardUrl } from '@/routes';
-import { Database } from '@/shemas';
+import { Database } from '@/schemas';
 
 export async function updateSession(request: NextRequest) {
     let supabaseResponse = NextResponse.next({

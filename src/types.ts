@@ -1,4 +1,4 @@
-import { CompanyShema, ProfileShema, PromotionShema } from './shemas';
+import { CompanySchema, ProfileSchema, PromotionSchema } from './schemas';
 
 export type Align = 'start' | 'center' | 'end';
 
@@ -12,22 +12,22 @@ export type StatisticsItem = {
     count: number | null
 };
 
-export type ProfileMapper = Omit<ProfileShema, 'email' | 'id'>;
+export type ProfileMapper = Omit<ProfileSchema, 'email' | 'id'>;
 
-export type CompanyMapper = Omit<CompanyShema, 'description' | 'income' | 'sold' | 'user_id'>;
+export type CompanyMapper = Omit<CompanySchema, 'description' | 'income' | 'sold' | 'user_id'>;
 
-export type CompanyDetailsMapper = Omit<CompanyShema, 'id' | 'user_id'>;
+export type CompanyDetailsMapper = Omit<CompanySchema, 'id' | 'user_id'>;
 
-export type PromotionMapper = Omit<PromotionShema, 'company_id' | 'description'>;
+export type PromotionMapper = Omit<PromotionSchema, 'company_id' | 'description'>;
 
-export type PromotionDetailsMapper = Omit<PromotionShema, 'id' | 'company_id'>;
+export type PromotionDetailsMapper = Omit<PromotionSchema, 'id' | 'company_id'>;
 
 export type StatisticsMapper = {
     general: StatisticsItem[],
-    sales: Array<Pick<CompanyShema, 'id' | 'logo_url' | 'name' | 'sold' | 'income'>>,
+    sales: Array<Pick<CompanySchema, 'id' | 'logo_url' | 'name' | 'sold' | 'income'>>,
     categories: StatisticsItem[],
     countries: Array<StatisticsItem & { lat: number, lng: number }>,
-    promotions: Array<Pick<PromotionShema, 'id' | 'name' | 'discount'> & {
-        company: Pick<CompanyShema, 'id' | 'logo_url' | 'name'>
+    promotions: Array<Pick<PromotionSchema, 'id' | 'name' | 'discount'> & {
+        company: Pick<CompanySchema, 'id' | 'logo_url' | 'name'>
     }>
 };

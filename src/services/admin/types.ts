@@ -1,5 +1,5 @@
-import { CompanyInsertShema, PromotionInsertShema } from '@/shemas';
+import { CompanyInsertSchema, PromotionInsertSchema } from '@/schemas';
 
-export type CompanyFieldKey = keyof CompanyInsertShema;
+export type CompanyFieldKey = keyof CompanyInsertSchema;
 
-export type PromotionFieldKey = keyof PromotionInsertShema;
+export type PromotionFieldKey = keyof PromotionInsertSchema;

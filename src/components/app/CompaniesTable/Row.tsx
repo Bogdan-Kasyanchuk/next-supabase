@@ -6,7 +6,7 @@ import Badge from '@/components/ui/data-display/Badge';
 import { BadgeStatusType, CompanyStatusType } from '@/enums';
 import { pagesCompanyUrl } from '@/routes';
 import { CompanyMapper } from '@/types';
-import formateDate from '@/utils/formateDate';
+import formatDate from '@/utils/formatDate';
 
 import DeleteButton from './DeleteButton';
 
@@ -86,7 +86,7 @@ export default function Row(props: Props) {
             <td>{ props.company.country.label }</td>
 
             <td>
-                { formateDate(props.company.joined_at, 'DD.MM.YYYY') }
+                { formatDate(props.company.joined_at, 'DD.MM.YYYY') }
             </td>
             
             <td className="c-companies-table__delete">

@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { pagesPromotionUrl } from '@/routes';
 import { PromotionMapper } from '@/types';
-import formateDate from '@/utils/formateDate';
+import formatDate from '@/utils/formatDate';
 
 import DeleteButton from './DeleteButton';
 
@@ -41,9 +41,9 @@ export default function PromotionCard(props: Props) {
                     </Link>
 
                     <p>
-                        { formateDate(props.promotion.start_at, 'DD.MM.YYYY') }
+                        { formatDate(props.promotion.start_at, 'DD.MM.YYYY') }
                         { ' - ' }
-                        { formateDate(props.promotion.end_at, 'DD.MM.YYYY') }
+                        { formatDate(props.promotion.end_at, 'DD.MM.YYYY') }
                     </p>
                 </div>
             </div>

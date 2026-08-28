@@ -3,11 +3,68 @@ import { redirect } from 'next/navigation';
 import { cache } from 'react';
 
 import createSupabaseServer from '@/lib/supabase/server';
-import { pagesCompanyUrl, pagesPromotionUrl } from '@/routes';
-import { PromotionInsertShema } from '@/shemas';
+import { pagesAuthLoginUrl, pagesCompanyUrl, pagesPromotionUrl } from '@/routes';
+import { PromotionInsertSchema } from '@/schemas';
 import { PromotionDetailsMapper, PromotionMapper } from '@/types';
 
 import { PromotionFieldKey } from './types';
+
+type SupabaseServerClient = Awaited<ReturnType<typeof createSupabaseServer>>;
+
+async function assertCompanyOwner(supabase: SupabaseServerClient, companyId: string, userId: string) {
+    const { data, error } = await supabase
+        .from('companies')
+        .select('id')
+        .eq('id', companyId)
+        .eq('user_id', userId)
+        .maybeSingle();
+
+    if (error) {
+        throw new Error(`Error verifying company ownership: ${ error.message }`);
+    }
+
+    if (!data) {
+        throw new Error('You do not have permission to manage promotions for this company.');
+    }
+}
+
+async function assertPromotionOwner(supabase: SupabaseServerClient, promotionId: string, userId: string) {
+    const { data: promotion, error: promotionError } = await supabase
+        .from('promotions')
+        .select('company_id')
+        .eq('id', promotionId)
+        .single();
+
+    if (promotionError) {
+        throw new Error(`Error loading promotion: ${ promotionError.message }`);
+    }
+
+    await assertCompanyOwner(supabase, promotion.company_id, userId);
+}
+
+function buildPromotionFromFormData(formData: FormData) {
+    const promotion: Partial<Record<PromotionFieldKey, string | number>> = {};
+
+    for (const [ key, value ] of formData.entries()) {
+        if (!value || typeof value !== 'string') {
+            continue;
+        }
+
+        if (key === 'discount') {
+            const discount = Number(value);
+
+            if (Number.isNaN(discount)) {
+                throw new Error(`Invalid discount value: "${ value }".`);
+            }
+
+            promotion.discount = discount;
+        } else {
+            promotion[ key as PromotionFieldKey ] = value;
+        }
+    }
+
+    return promotion;
+}
 
 export async function getPromotions(query: string) {   
     const supabase = await createSupabaseServer();
@@ -84,21 +141,25 @@ export async function getPromotionsByCompany(id: string, query: string) {
 export async function createPromotion(companyId: string, formData: FormData) {
     const supabase = await createSupabaseServer();
 
-    const newPromotion: Partial<Record<PromotionFieldKey, any>> = {};
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
 
-    for (const [ key, value ] of formData.entries()) {
-        if (!value) {
-            continue;
-        }
-
-        newPromotion[ key as PromotionFieldKey ] = value;
+    if (userError) {
+        throw new Error(`Authentication failed: ${ userError.message }`);
     }
-    
+
+    if (!user) {
+        redirect(pagesAuthLoginUrl());
+    }
+
+    await assertCompanyOwner(supabase, companyId, user.id);
+
+    const newPromotion = buildPromotionFromFormData(formData);
+
     newPromotion.company_id = companyId;
 
     const { error } = await supabase
         .from('promotions')
-        .insert( newPromotion as PromotionInsertShema);
+        .insert( newPromotion as PromotionInsertSchema);
 
     if (error) {
         throw new Error(`Error creating promotion: ${ error.message }`);
@@ -110,19 +171,23 @@ export async function createPromotion(companyId: string, formData: FormData) {
 export async function updatePromotion(id: string, formData: FormData) {
     const supabase = await createSupabaseServer();
 
-    const newPromotion: Partial<Record<PromotionFieldKey, any>> = {};
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
 
-    for (const [ key, value ] of formData.entries()) {
-        if (!value) {
-            continue;
-        }
-
-        newPromotion[ key as PromotionFieldKey ] = value;
+    if (userError) {
+        throw new Error(`Authentication failed: ${ userError.message }`);
     }
+
+    if (!user) {
+        redirect(pagesAuthLoginUrl());
+    }
+
+    await assertPromotionOwner(supabase, id, user.id);
+
+    const newPromotion = buildPromotionFromFormData(formData);
 
     const { error } = await supabase
         .from('promotions')
-        .update(newPromotion as PromotionInsertShema)
+        .update(newPromotion as PromotionInsertSchema)
         .eq('id', id);
 
     if (error) {
@@ -134,6 +199,18 @@ export async function updatePromotion(id: string, formData: FormData) {
 
 export async function deletePromotion(id: string) {
     const supabase = await createSupabaseServer();
+
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
+
+    if (userError) {
+        throw new Error(`Authentication failed: ${ userError.message }`);
+    }
+
+    if (!user) {
+        redirect(pagesAuthLoginUrl());
+    }
+
+    await assertPromotionOwner(supabase, id, user.id);
 
     const { error } = await supabase
         .from('promotions')

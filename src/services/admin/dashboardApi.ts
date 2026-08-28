@@ -1,5 +1,5 @@
+import { generalStatisticsLabel } from '@/datasets/constants';
 import createSupabaseServer from '@/lib/supabase/server';
-import { generalStatisticsLabel } from '@/mock/data';
 import { StatisticsMapper } from '@/types';
 
 export async function getGeneralStatistics() {
