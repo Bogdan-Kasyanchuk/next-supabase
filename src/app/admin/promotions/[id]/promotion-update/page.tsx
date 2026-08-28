@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 
 import PromotionForm from '@/components/app/PromotionForm';
+import { isCurrentUserAdmin } from '@/services/admin/permissions';
 import { getPromotionById } from '@/services/admin/promotionsApi';
 
 type Props = {
@@ -9,6 +10,10 @@ type Props = {
 
 export default async function Page(props: Props) {
     const params = await props.params;
+
+    if (!await isCurrentUserAdmin()) {
+        notFound();
+    }
 
     const promotion = await getPromotionById(params.id);
 

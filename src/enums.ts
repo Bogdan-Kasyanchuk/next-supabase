@@ -16,3 +16,9 @@ export enum BadgeStatusType {
     DANGER = 'danger',
     INFO = 'info'
 }
+
+export enum ProfileRoleType {
+    SUPERADMIN = 'superadmin',
+    ADMIN = 'admin',
+    VIEWER = 'viewer'
+}

@@ -5,6 +5,7 @@ import Toolbar from '@/components/app/Toolbar';
 import ActionButton from '@/components/app/Toolbar/components/ActionButton';
 import PromotionDetailsCard from '@/components/ui/cards/PromotionDetailsCard';
 import { pagesPromotionUpdateUrl } from '@/routes';
+import { isCurrentUserAdmin } from '@/services/admin/permissions';
 import { getPromotionById } from '@/services/admin/promotionsApi';
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
@@ -28,7 +29,7 @@ type Props = {
 export default async function Page(props: Props) {
     const params = await props.params;
 
-    const promotion = await getPromotionById(params.id);
+    const [ promotion, canManage ] = await Promise.all([ getPromotionById(params.id), isCurrentUserAdmin() ]);
 
     if (!promotion) {
         notFound();
@@ -38,6 +39,7 @@ export default async function Page(props: Props) {
         <div className="flex flex-col w-full">
             <Toolbar
                 actions={
+                    canManage &&
                     <ActionButton
                         rout={ pagesPromotionUpdateUrl(params.id) }
                         label="Update promotion"

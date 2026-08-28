@@ -7,40 +7,8 @@ import { pagesAuthLoginUrl, pagesCompanyUrl, pagesPromotionUrl } from '@/routes'
 import { PromotionInsertSchema } from '@/schemas';
 import { PromotionDetailsMapper, PromotionMapper } from '@/types';
 
+import { assertAdmin } from './permissions';
 import { PromotionFieldKey } from './types';
-
-type SupabaseServerClient = Awaited<ReturnType<typeof createSupabaseServer>>;
-
-async function assertCompanyOwner(supabase: SupabaseServerClient, companyId: string, userId: string) {
-    const { data, error } = await supabase
-        .from('companies')
-        .select('id')
-        .eq('id', companyId)
-        .eq('user_id', userId)
-        .maybeSingle();
-
-    if (error) {
-        throw new Error(`Error verifying company ownership: ${ error.message }`);
-    }
-
-    if (!data) {
-        throw new Error('You do not have permission to manage promotions for this company.');
-    }
-}
-
-async function assertPromotionOwner(supabase: SupabaseServerClient, promotionId: string, userId: string) {
-    const { data: promotion, error: promotionError } = await supabase
-        .from('promotions')
-        .select('company_id')
-        .eq('id', promotionId)
-        .single();
-
-    if (promotionError) {
-        throw new Error(`Error loading promotion: ${ promotionError.message }`);
-    }
-
-    await assertCompanyOwner(supabase, promotion.company_id, userId);
-}
 
 function buildPromotionFromFormData(formData: FormData) {
     const promotion: Partial<Record<PromotionFieldKey, string | number>> = {};
@@ -97,7 +65,7 @@ export const getPromotionById = cache(
     
         const { data, error } = await supabase
             .from('promotions')
-            .select('cover_url, start_at, end_at, discount, description, name')
+            .select('cover_url, start_at, end_at, discount, description, name, company:companies (id, name)')
             .eq('id', id)
             .single();
 
@@ -151,7 +119,7 @@ export async function createPromotion(companyId: string, formData: FormData) {
         redirect(pagesAuthLoginUrl());
     }
 
-    await assertCompanyOwner(supabase, companyId, user.id);
+    await assertAdmin(supabase, user.id);
 
     const newPromotion = buildPromotionFromFormData(formData);
 
@@ -181,7 +149,7 @@ export async function updatePromotion(id: string, formData: FormData) {
         redirect(pagesAuthLoginUrl());
     }
 
-    await assertPromotionOwner(supabase, id, user.id);
+    await assertAdmin(supabase, user.id);
 
     const newPromotion = buildPromotionFromFormData(formData);
 
@@ -210,7 +178,7 @@ export async function deletePromotion(id: string) {
         redirect(pagesAuthLoginUrl());
     }
 
-    await assertPromotionOwner(supabase, id, user.id);
+    await assertAdmin(supabase, user.id);
 
     const { error } = await supabase
         .from('promotions')

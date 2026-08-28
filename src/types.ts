@@ -14,13 +14,17 @@ export type StatisticsItem = {
 
 export type ProfileMapper = Omit<ProfileSchema, 'email' | 'id'>;
 
+export type UserMapper = Pick<ProfileSchema, 'avatar_url' | 'email' | 'first_name' | 'id' | 'last_name' | 'role'>;
+
 export type CompanyMapper = Omit<CompanySchema, 'description' | 'income' | 'sold' | 'user_id'>;
 
 export type CompanyDetailsMapper = Omit<CompanySchema, 'id' | 'user_id'>;
 
 export type PromotionMapper = Omit<PromotionSchema, 'company_id' | 'description'>;
 
-export type PromotionDetailsMapper = Omit<PromotionSchema, 'id' | 'company_id'>;
+export type PromotionDetailsMapper = Omit<PromotionSchema, 'id' | 'company_id'> & {
+    company: Pick<CompanySchema, 'id' | 'name'>
+};
 
 export type StatisticsMapper = {
     general: StatisticsItem[],

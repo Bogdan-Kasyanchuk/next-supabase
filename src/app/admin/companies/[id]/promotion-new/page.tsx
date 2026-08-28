@@ -1,4 +1,7 @@
+import { notFound } from 'next/navigation';
+
 import PromotionForm from '@/components/app/PromotionForm';
+import { isCurrentUserAdmin } from '@/services/admin/permissions';
 
 type Props = {
     params: Promise<{ id: string }>
@@ -6,6 +9,10 @@ type Props = {
 
 export default async function Page(props: Props) {
     const params = await props.params;
+
+    if (!await isCurrentUserAdmin()) {
+        notFound();
+    }
 
     return (
         <div className="flex flex-col w-full justify-center-safe overflow-y-auto">

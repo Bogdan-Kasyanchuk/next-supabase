@@ -1,11 +1,11 @@
 'use client';
 
 import clsx from 'clsx';
-import { BadgePercent, BriefcaseBusiness, LayoutGrid } from 'lucide-react';
+import { BadgePercent, BriefcaseBusiness, LayoutGrid, Users } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { pagesCompaniesUrl, pagesDashboardUrl, pagesPromotionsUrl } from '@/routes';
+import { pagesCompaniesUrl, pagesDashboardUrl, pagesPromotionsUrl, pagesUsersUrl } from '@/routes';
 
 const links = [
     {
@@ -25,14 +25,28 @@ const links = [
     }
 ];
 
-export default function Navigation() {
+const adminLinks = [
+    {
+        name: 'Users',
+        href: pagesUsersUrl(),
+        icon: () => <Users />
+    }
+];
+
+type Props = {
+    canManageUsers: boolean
+};
+
+export default function Navigation(props: Props) {
     const pathname = usePathname();
+
+    const visibleLinks = props.canManageUsers ? [ ...links, ...adminLinks ] : links;
 
     return (
         <nav className="c-sidebar__navigation">
             <ul className="c-sidebar__navigation-list">
                 {
-                    links.map(
+                    visibleLinks.map(
                         link => (
                             <li
                                 key={ link.name }

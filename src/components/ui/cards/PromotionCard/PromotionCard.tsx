@@ -10,6 +10,7 @@ import DeleteButton from './DeleteButton';
 
 type Props = {
     promotion: PromotionMapper,
+    canManage: boolean,
     className?: string
 };
 
@@ -48,7 +49,10 @@ export default function PromotionCard(props: Props) {
                 </div>
             </div>
 
-            <DeleteButton id={ props.promotion.id } />
+            {
+                props.canManage &&
+                <DeleteButton id={ props.promotion.id } />
+            }
         </div>
     );
 }

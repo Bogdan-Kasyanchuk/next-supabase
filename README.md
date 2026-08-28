@@ -40,10 +40,14 @@ Admin CRM for managing companies and their promotions, with a statistics dashboa
    | `NEXT_PUBLIC_GOOGLE_MAPS_KEY` | Google Maps JavaScript API key |
 
 3. Set up the database schema. The app expects the following in your Supabase project's `public` schema (see the generated `src/db-types.ts`):
-   - Tables: `companies`, `promotions`, `profiles`, `categories`, `countries`
+   - Tables: `companies`, `promotions`, `profiles` (including a `role text default 'viewer' check (role in ('superadmin', 'admin', 'viewer'))` column), `categories`, `countries`
    - Views: `companies_by_category`, `companies_by_country`, `general_statistics`
    - RPC: `user_email_exists(check_email text) returns boolean` — called during sign-up to reject duplicate emails before `auth.signUp`
-   - Row Level Security policies that restrict `companies`/`promotions` writes to their owning `user_id`. The app also checks ownership itself in `src/services/admin/*Api.ts`, but RLS should be the actual source of truth.
+   - Row Level Security policies:
+     - `companies`/`promotions`: `select` open to any `authenticated` user; `insert`/`update`/`delete` restricted to `profiles.role in ('admin', 'superadmin')`.
+     - `profiles`: a `select` policy so a user can read roles (own, or everyone's — the app only ever needs to read `role` by id); an `update` policy restricted to `profiles.role = 'superadmin'` (needed for `/admin/users` to actually persist a role change — a missing `update` policy here fails silently with "User not found" rather than a permission error, since RLS just filters the row out).
+     - The app also enforces all of this itself in `src/services/admin/*Api.ts`/`permissions.ts`, but RLS should be the actual source of truth.
+   - At least one `profiles` row needs `role = 'superadmin'` to begin with — set it manually the first time (`update public.profiles set role = 'superadmin' where email = '...'`); after that, a superadmin promotes others from `/admin/users`.
 
    After changing the schema, regenerate the types:
 
@@ -82,10 +86,19 @@ Admin CRM for managing companies and their promotions, with a statistics dashboa
 - `src/lib/supabase` — Supabase client factories for the browser, server components, and middleware.
 - `src/proxy.ts` — Next.js middleware that refreshes the Supabase session and redirects unauthenticated users away from `/admin`.
 - `src/schemas.ts` — hand-written row/insert types layered on top of the generated `src/db-types.ts`.
-- `src/datasets/constants.ts` — app-wide constants and reference data (env-derived config, category/country/status option lists, statistics labels).
+- `src/datasets/constants.ts` — app-wide constants (env-derived config, company status options, statistics labels). `categories`/`countries` option lists are **not** here — they're fetched live from the `categories`/`countries` Supabase tables via `src/services/admin/referenceApi.ts`.
 - `src/routes.ts` — typed page URL builders, used instead of hardcoded route strings.
 
 ## Authentication & authorization
 
-- `src/proxy.ts` + `src/lib/supabase/updateSession.ts` gate every `/admin` route behind a Supabase session.
-- Every company/promotion mutation in `src/services/admin/*Api.ts` also checks that the resource belongs to the current user (`user_id` on `companies`, resolved through `company_id` for `promotions`). Make sure your Supabase RLS policies enforce the same rule at the database level — the app-side check is a safety net, not a substitute for it.
+`/admin` is a shared workspace, not per-user data: every signed-in user can view companies, promotions, and statistics. There are three roles (`profiles.role`, `ProfileRoleType` in `src/enums.ts`):
+
+| Role | Can view | Can create/edit/delete companies & promotions | Can manage roles (`/admin/users`) |
+|---|---|---|---|
+| `viewer` (default) | ✅ | ❌ | ❌ |
+| `admin` | ✅ | ✅ | ❌ |
+| `superadmin` | ✅ | ✅ | ✅ |
+
+- `src/proxy.ts` + `src/lib/supabase/updateSession.ts` gate every `/admin` route behind a Supabase session (view access).
+- `src/services/admin/permissions.ts` checks the current user's `profiles.role`: `assertAdmin`/`isCurrentUserAdmin` accept `admin` or `superadmin` and gate company/promotion mutations and their UI; `assertSuperAdmin`/`isCurrentUserSuperAdmin` accept only `superadmin` and gate `/admin/users` (both the page and the Sidebar nav item). Make sure your Supabase RLS policies enforce the same rules at the database level — the app-side checks are a safety net, not a substitute for it.
+- New sign-ups default to `role = 'viewer'`; there is intentionally no role picker on the sign-up form (letting anyone self-select a privileged role would defeat the whole point). A `superadmin` promotes other users from `/admin/users`.

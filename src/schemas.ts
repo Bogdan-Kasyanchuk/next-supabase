@@ -1,7 +1,7 @@
 import { MergeDeep } from 'type-fest';
 
 import { Database as DatabaseGenerated } from './db-types';
-import { CompanyStatusType } from './enums';
+import { CompanyStatusType, ProfileRoleType } from './enums';
 
 export type CompanyInsertSchema = {
     category: {
@@ -70,7 +70,8 @@ export type ProfileSchema = {
     email: string,
     first_name: string,
     id: string,
-    last_name: string | null
+    last_name: string | null,
+    role: ProfileRoleType
 };
 
 export type Database = MergeDeep<

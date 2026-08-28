@@ -1,5 +1,7 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
+import { pagesCompanyUrl } from '@/routes';
 import { PromotionDetailsMapper } from '@/types';
 import formatDate from '@/utils/formatDate';
 
@@ -39,6 +41,18 @@ export default function PromotionDetailsCard(props: Props) {
                     <div className="c-promotion-details-card__content-item">
                         <dt>End date:</dt>
                         <dd>{ formatDate(props.promotion.end_at, 'DD.MM.YYYY') }</dd>
+                    </div>
+
+                    <div className="c-promotion-details-card__content-item">
+                        <dt>Company:</dt>
+                        <dd>
+                            <Link
+                                href={ pagesCompanyUrl(props.promotion.company.id) }
+                                className="c-promotion-details-card__content-link"
+                            >
+                                { props.promotion.company.name }
+                            </Link>
+                        </dd>
                     </div>
                 </dl>
 

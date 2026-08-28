@@ -2,19 +2,22 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { cache } from 'react';
 
-import { categories, countries } from '@/datasets/constants';
 import createSupabaseServer from '@/lib/supabase/server';
 import { pagesAuthLoginUrl, pagesCompaniesUrl, pagesCompanyUrl } from '@/routes';
 import { CompanyInsertSchema } from '@/schemas';
 import { CompanyDetailsMapper, CompanyMapper } from '@/types';
 
+import { assertAdmin } from './permissions';
+import { getCategories, getCountries } from './referenceApi';
 import { CompanyFieldKey } from './types';
 
 type CompanyFieldValue = string | number | { label: string, value: string };
 
 const NUMERIC_COMPANY_FIELDS = new Set<CompanyFieldKey>([ 'income', 'sold' ]);
 
-function buildCompanyFromFormData(formData: FormData) {
+async function buildCompanyFromFormData(formData: FormData) {
+    const [ categories, countries ] = await Promise.all([ getCategories(), getCountries() ]);
+
     const company: Partial<Record<CompanyFieldKey, CompanyFieldValue>> = {};
 
     for (const [ key, value ] of formData.entries()) {
@@ -120,8 +123,10 @@ export async function createCompany(formData: FormData) {
     if (!user) {
         redirect(pagesAuthLoginUrl());
     }
-    
-    const newCompany = buildCompanyFromFormData(formData);
+
+    await assertAdmin(supabase, user.id);
+
+    const newCompany = await buildCompanyFromFormData(formData);
 
     newCompany.user_id = user.id;
 
@@ -149,13 +154,14 @@ export async function updateCompany(id: string, formData: FormData) {
         redirect(pagesAuthLoginUrl());
     }
 
-    const newCompany = buildCompanyFromFormData(formData);
+    await assertAdmin(supabase, user.id);
+
+    const newCompany = await buildCompanyFromFormData(formData);
 
     const { data, error } = await supabase
         .from('companies')
         .update(newCompany as CompanyInsertSchema)
         .eq('id', id)
-        .eq('user_id', user.id)
         .select('id');
 
     if (error) {
@@ -163,7 +169,7 @@ export async function updateCompany(id: string, formData: FormData) {
     }
 
     if (!data || data.length === 0) {
-        throw new Error('Company not found or you do not have permission to update it.');
+        throw new Error('Company not found.');
     }
 
     redirect(pagesCompanyUrl(id));
@@ -182,11 +188,12 @@ export async function deleteCompany(id: string) {
         redirect(pagesAuthLoginUrl());
     }
 
+    await assertAdmin(supabase, user.id);
+
     const { data, error } = await supabase
         .from('companies')
         .delete()
         .eq('id', id)
-        .eq('user_id', user.id)
         .select('id');
 
     if (error) {
@@ -194,7 +201,7 @@ export async function deleteCompany(id: string) {
     }
 
     if (!data || data.length === 0) {
-        throw new Error('Company not found or you do not have permission to delete it.');
+        throw new Error('Company not found.');
     }
 
     revalidatePath('/admin');

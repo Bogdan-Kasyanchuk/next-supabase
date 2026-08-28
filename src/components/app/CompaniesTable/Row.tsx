@@ -34,7 +34,8 @@ const statusTypes = {
 };
 
 type Props = {
-    company: CompanyMapper
+    company: CompanyMapper,
+    canManage: boolean
 };
 
 export default function Row(props: Props) {
@@ -89,9 +90,12 @@ export default function Row(props: Props) {
                 { formatDate(props.company.joined_at, 'DD.MM.YYYY') }
             </td>
             
-            <td className="c-companies-table__delete">
-                <DeleteButton id={ props.company.id } />
-            </td>
+            {
+                props.canManage &&
+                <td className="c-companies-table__delete">
+                    <DeleteButton id={ props.company.id } />
+                </td>
+            }
         </tr>
     );
 }

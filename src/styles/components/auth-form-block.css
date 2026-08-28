@@ -51,6 +51,7 @@
 
     &__error {
         margin-top: -16px;
+
         font-size: var(--text-xs);
         line-height: 1.2;
         color: var(--color-danger);

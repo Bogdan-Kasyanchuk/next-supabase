@@ -109,21 +109,24 @@ export type Database = {
                     email: string,
                     first_name: string,
                     id: string,
-                    last_name: string | null
+                    last_name: string | null,
+                    role: string
                 },
                 Insert: {
                     avatar_url: string,
                     email: string,
                     first_name: string,
                     id: string,
-                    last_name?: string | null
+                    last_name?: string | null,
+                    role?: string
                 },
                 Update: {
                     avatar_url?: string,
                     email?: string,
                     first_name?: string,
                     id?: string,
-                    last_name?: string | null
+                    last_name?: string | null,
+                    role?: string
                 },
                 Relationships: []
             },

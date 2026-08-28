@@ -2,7 +2,8 @@ import PromotionCard from '@/components/ui/cards/PromotionCard';
 import { PromotionMapper } from '@/types';
 
 type Props = {
-    promotions: PromotionMapper[]
+    promotions: PromotionMapper[],
+    canManage: boolean
 };
 
 export default function PromotionsList(props: Props) {
@@ -14,6 +15,7 @@ export default function PromotionsList(props: Props) {
                         <PromotionCard
                             key={ promotion.id }
                             promotion={ promotion }
+                            canManage={ props.canManage }
                         />
                     )
                 )

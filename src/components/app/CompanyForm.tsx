@@ -6,9 +6,10 @@ import DatePicker from '@/components/ui/inputs/DatePicker';
 import Input from '@/components/ui/inputs/Input';
 import Select from '@/components/ui/inputs/Select';
 import TextArea from '@/components/ui/inputs/TextArea';
-import { categories, countries, statuses } from '@/datasets/constants';
+import { statuses } from '@/datasets/constants';
 import { CompanyStatusType } from '@/enums';
 import { randomImage } from '@/mock/randomImage';
+import { getCategories, getCountries } from '@/services/admin/referenceApi';
 
 import SubmitButton from './SubmitButton';
 
@@ -35,6 +36,8 @@ export default async function CompanyForm(props: Props) {
 
     const logo = props.mode === 'create' ? randomImage(200, 200) : props.initialValues.logo_url;
     const initialValues = props.mode === 'update' ? props.initialValues : undefined;
+
+    const [ categories, countries ] = await Promise.all([ getCategories(), getCountries() ]);
 
     return (
         <Form

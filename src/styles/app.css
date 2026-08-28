@@ -27,6 +27,7 @@
 @import './components/promotion-form-block.css' layer(components);
 @import './components/badge.css' layer(components);
 @import './components/companies-table.css' layer(components);
+@import './components/users-table.css' layer(components);
 @import './components/promotions-list.css' layer(components);
 @import './components/general-statistics.css' layer(components);
 @import './components/categories-statistics.css' layer(components);

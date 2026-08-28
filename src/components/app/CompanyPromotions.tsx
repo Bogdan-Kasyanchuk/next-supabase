@@ -4,7 +4,8 @@ import { getPromotionsByCompany } from '@/services/admin/promotionsApi';
 
 type Props = {
     companyId: string,
-    query: string
+    query: string,
+    canManage: boolean
 };
 
 export default async function CompanyPromotions(props: Props) {
@@ -12,7 +13,10 @@ export default async function CompanyPromotions(props: Props) {
 
     return (
         promotions.length
-            ? <PromotionsList promotions={ promotions } />
+            ? <PromotionsList
+                promotions={ promotions }
+                canManage={ props.canManage }
+            />
             : <DataNotFound className="bg-gray-200 rounded" />
     );
 }

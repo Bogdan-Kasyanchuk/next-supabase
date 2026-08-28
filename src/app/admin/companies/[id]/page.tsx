@@ -11,6 +11,7 @@ import DataNotFound from '@/components/ui/data-display/DataNotFound';
 import Loader from '@/components/ui/data-display/Loader';
 import { pagesCompanyUpdateUrl, pagesPromotionNewUrl } from '@/routes';
 import { getCompanyById } from '@/services/admin/companiesApi';
+import { isCurrentUserAdmin } from '@/services/admin/permissions';
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
     const params = await props.params;
@@ -37,7 +38,7 @@ export default async function Page(props: Props) {
 
     const query = searchParams.query ?? '';
 
-    const company = await getCompanyById(params.id);
+    const [ company, canManage ] = await Promise.all([ getCompanyById(params.id), isCurrentUserAdmin() ]);
 
     if (!company) {
         notFound();
@@ -53,6 +54,7 @@ export default async function Page(props: Props) {
                     }
                 }
                 actions={
+                    canManage &&
                     <>
                         <ActionButton
                             rout={ pagesCompanyUpdateUrl(params.id) }
@@ -78,6 +80,7 @@ export default async function Page(props: Props) {
                                     <CompanyPromotions
                                         companyId={ params.id }
                                         query={ query }
+                                        canManage={ canManage }
                                     />
                                 </Suspense>
                             </CustomErrorBoundary>

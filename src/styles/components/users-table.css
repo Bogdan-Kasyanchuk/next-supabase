@@ -1,0 +1,75 @@
+.c-users-table {
+    table-layout: auto;
+    border-spacing: 0 8px;
+    border-collapse: separate;
+    width: 100%;
+
+    &__head tr {
+        white-space: nowrap;
+    }
+
+    &__head th {
+        padding: 14px;
+        font-size: var(--text-md);
+        font-weight: 700;
+        line-height: 22px;
+
+        &:nth-child(3n+1) {
+            color: var(--color-primary);
+            background-color: var(--color-accent-first);
+        }
+
+        &:nth-child(3n+2) {
+            color: var(--color-secondary);
+            background-color: var(--color-accent-second);
+        }
+
+        &:nth-child(3n+3) {
+            color: var(--color-secondary);
+            background-color: var(--color-accent-thirth);
+        }
+    }
+
+    &__body tr {
+        font-size: var(--text-sm);
+        color: var(--color-secondary);
+        text-align: center;
+        white-space: nowrap;
+
+        background-color: var(--color-primary);
+    }
+
+    &__body td {
+        height: 40px;
+        padding-block: 4px;
+        padding-inline: 10px;
+        line-height: 1.05;
+    }
+
+    &__email {
+        padding-inline-start: 14px;
+        font-weight: 700;
+        text-align: start;
+    }
+
+    &__name {
+        text-align: start;
+
+        &-inner {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+    }
+
+    &__avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    &__role {
+        width: 220px;
+    }
+}

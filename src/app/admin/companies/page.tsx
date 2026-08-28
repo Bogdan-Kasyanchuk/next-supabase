@@ -6,6 +6,7 @@ import ActionButton from '@/components/app/Toolbar/components/ActionButton';
 import DataNotFound from '@/components/ui/data-display/DataNotFound';
 import { pagesCompanyNewUrl } from '@/routes';
 import { getCompanies } from '@/services/admin/companiesApi';
+import { isCurrentUserAdmin } from '@/services/admin/permissions';
 
 export const metadata: Metadata = {
     title: 'Companies'
@@ -23,7 +24,7 @@ export default async function Page(props: Props) {
 
     const query = searchParams.query ?? '';
 
-    const companies = await getCompanies(query);
+    const [ companies, canManage ] = await Promise.all([ getCompanies(query), isCurrentUserAdmin() ]);
 
     return (
         <div className="flex flex-col w-full">
@@ -34,6 +35,7 @@ export default async function Page(props: Props) {
                     }
                 }
                 actions={
+                    canManage &&
                     <ActionButton
                         rout={ pagesCompanyNewUrl() }
                         label="Add company"
@@ -45,7 +47,10 @@ export default async function Page(props: Props) {
             <div className="p-5 grow overflow-auto">
                 {
                     companies.length
-                        ? <CompaniesTable companies={ companies } />
+                        ? <CompaniesTable
+                            companies={ companies }
+                            canManage={ canManage }
+                        />
                         : <DataNotFound />
                 }
             </div>

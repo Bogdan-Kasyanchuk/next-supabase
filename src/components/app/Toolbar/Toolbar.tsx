@@ -15,6 +15,10 @@ type Props = {
 };
 
 export default function Toolbar(props: Props) {
+    if (!props.actions && !props.hasSearch) {
+        return null;
+    }
+    
     return (
         <div className={ clsx('c-toolbar', props.className) }>
             {

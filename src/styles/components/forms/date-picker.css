@@ -150,10 +150,8 @@
                 }
             }
 
-            @media (any-hover: hover) {
-                &:hover {
-                    opacity: 0.75;
-                }
+            @variant hover {
+                opacity: 0.75;
             }
         }
 
@@ -280,9 +278,7 @@
         height: var(--cb-icon-size);
     }
 
-    @media (any-hover: hover) {
-        &:hover {
-            opacity: 1;
-        }
+    @variant hover {
+        opacity: 1;
     }
 }

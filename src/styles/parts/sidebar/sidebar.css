@@ -48,10 +48,8 @@
                 }
             }
 
-            @media (any-hover: hover) {
-                &:hover {
-                    opacity: 0.75;
-                }
+            @variant hover {
+                opacity: 0.75;
             }
         }
     }

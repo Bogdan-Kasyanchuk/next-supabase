@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 
 import CompanyForm from '@/components/app/CompanyForm';
 import { getCompanyById } from '@/services/admin/companiesApi';
+import { isCurrentUserAdmin } from '@/services/admin/permissions';
 
 type Props = {
     params: Promise<{ id: string }>
@@ -9,6 +10,10 @@ type Props = {
 
 export default async function Page(props: Props) {
     const params = await props.params;
+
+    if (!await isCurrentUserAdmin()) {
+        notFound();
+    }
 
     const company = await getCompanyById(params.id);
 

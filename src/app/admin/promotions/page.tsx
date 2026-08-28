@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import PromotionsList from '@/components/app/PromotionsList';
 import Toolbar from '@/components/app/Toolbar';
 import DataNotFound from '@/components/ui/data-display/DataNotFound';
+import { isCurrentUserAdmin } from '@/services/admin/permissions';
 import { getPromotions } from '@/services/admin/promotionsApi';
 
 export const metadata: Metadata = {
@@ -18,7 +19,7 @@ export default async function Page(props: Props) {
 
     const query = searchParams.query ?? '';
 
-    const promotions = await getPromotions(query);
+    const [ promotions, canManage ] = await Promise.all([ getPromotions(query), isCurrentUserAdmin() ]);
 
     return (
         <div className="p-promotions flex flex-col w-full">
@@ -34,7 +35,10 @@ export default async function Page(props: Props) {
             <div className="p-5 grow overflow-y-auto">
                 {
                     promotions.length
-                        ? <PromotionsList promotions={ promotions } />
+                        ? <PromotionsList
+                            promotions={ promotions }
+                            canManage={ canManage }
+                        />
                         : <DataNotFound />
                 }
             </div>

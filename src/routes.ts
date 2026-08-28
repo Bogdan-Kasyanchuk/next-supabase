@@ -16,6 +16,8 @@ export const pagesCompaniesUrl = () => '/admin/companies';
 
 export const pagesPromotionsUrl = () => '/admin/promotions';
 
+export const pagesUsersUrl = () => '/admin/users';
+
 export const pagesCompanyUrl = (id: string) => `/admin/companies/${ id }`;
 
 export const pagesPromotionUrl = (id: string) => `/admin/promotions/${ id }`;

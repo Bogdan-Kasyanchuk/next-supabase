@@ -12,7 +12,7 @@ import SubmitButton from './SubmitButton';
 
 type Props =
     | { mode: 'create', companyId: string }
-    | { mode: 'update', id: string, initialValues: PromotionDetailsMapper };
+    | { mode: 'update', id: string, initialValues: Omit<PromotionDetailsMapper, 'company'> };
 
 export default async function PromotionForm(props: Props) {
     const action = props.mode === 'create'
