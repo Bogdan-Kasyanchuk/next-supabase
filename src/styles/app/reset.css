@@ -21,13 +21,14 @@ body {
     padding: 0;
 
     font-size-adjust: 0.5;
-    -webkit-font-smoothing: antialiased;
     line-height: 1.4;
     color: var(--color-secondary);
     text-size-adjust: 100%;
     text-rendering: optimizelegibility !important;
 
     background-color: var(--color-primary);
+
+    -webkit-font-smoothing: antialiased;
 
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
